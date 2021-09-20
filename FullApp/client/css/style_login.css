@@ -1,0 +1,78 @@
+*{
+    margin: 0;
+    padding: 0;
+
+}
+.something{
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(pic.png);
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+} 
+
+.form-a{
+    width: 380px;
+    height: 480px;
+    position: relative;
+    margin: 6% auto;
+    background: rgb(255, 255, 255);
+    padding: 5px;
+    overflow: hidden;
+    border-radius: 25px;
+}
+
+h1{
+    text-align: center;
+    margin: 35px auto;
+    background-image: linear-gradient(315deg, #10f7ff,#06ffac);
+    color: white;
+    font-family: Copperplate;
+    position: relative;
+    border-radius: 25px;
+}
+
+
+.inputs{
+    text-align: center;
+    top: 170px;
+    position: absolute;
+    width: 350px;
+    transition: .5s;
+}
+
+.inputs1{
+    text-align: right;
+    top: 400px;
+    position: absolute;
+    width: 220px;
+    transition: .5s;
+}
+
+.input-field{
+    width: 50%;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+}
+
+.submit-btn{
+    width: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background: linear-gradient(to right, #10f7ff,#06ffac);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+    margin-top: 50px;
+
+
+}

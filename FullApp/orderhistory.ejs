@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Fuel Order History</title>
+      <link rel="stylesheet" href="client/css/fostyle.css">
+      <style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+   </head>
+   <body>
+     <div class = "background">
+       <div class = "table">
+     <h2 id = "title">Fuel Order History</h2>
+
+     <section id="table">
+      <div class="table">
+  
+          <div id="headers">
+              <span id="gallonsreq">Gallons Requested</span>
+              <span id="deliveryadr">Delivery Address</span>
+              <span id="ddate">Delivery Date</span>
+              <span id="suggestedp">Suggested Price</span>
+              <span id="totalamt">Total</span>
+          </div>
+  
+              <tr>
+                <th>Gallons Requested</th>
+                <th>Delivery Address</th>
+                <th>Delivery Date</th>
+                <th>Suggested Price</th>
+                <th>Total</th>
+               <% for (var i = 0; i < orders.rows.length; i++) {%>
+                 <tr>
+                   <th><%= orders[i].gallonsreq  %></th>
+                   <th><%= orders[i].deliveryadd %></th>
+                   <th><%= orders[i].deliverydate %></th>
+                   <th><%= orders[i].suggestedprice %></th>
+                   <th><%= orders[i].total %></th>
+                 </tr>
+                 <%>} %>
+             
+      </div>
+</div>
+</div>
+   </body>
+</html>

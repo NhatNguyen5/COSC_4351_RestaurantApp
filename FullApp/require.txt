@@ -1,0 +1,6 @@
+npm install
+npm install express --save
+npm install express-validator
+npm install --save-dev jest
+npm install cors
+npm install pg
