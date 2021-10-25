@@ -1,34 +1,29 @@
-DROP TABLE IF EXISTS UserCredentials CASCADE;
-DROP TABLE IF EXISTS ClientInformation CASCADE;
-DROP TABLE IF EXISTS FuelQuote CASCADE;
+DROP TABLE IF EXISTS userCredentials CASCADE;
+DROP TABLE IF EXISTS userInfo CASCADE;
+DROP TABLE IF EXISTS guest CASCADE;
 CREATE EXTENSION pgcrypto;
 
-
-CREATE TABLE UserCredentials(
+CREATE TABLE userCredentials(
 	userID SERIAL NOT NULL UNIQUE,
 	loginID TEXT NOT NULL UNIQUE,
 	password TEXT NOT NULL,
 	PRIMARY KEY(userID)
 );
 
-CREATE TABLE ClientInformation(
+CREATE TABLE userInfo(
 	userID SERIAL NOT NULL,
-	fullName TEXT NOT NULL,
-	address TEXT NOT NULL,
-	address2 TEXT,
-	city char(20) NOT NULL,
-	state char(20) NOT NULL,
-	zip varchar(5) NOT NULL,
-	CONSTRAINT c_userID_fk FOREIGN KEY (userID) REFERENCES UserCredentials(userID) ON DELETE CASCADE
+	fullname TEXT NOT NULL,
+	mailAddress TEXT NOT NULL,
+	billAddress TEXT,
+	point integer NOT NULL,
+	preferPayment TEXT NOT NULL,
+	CONTRAINT c_userID_fk FOREIGN KEY (userID) REFERENCES userCredentials(userID) ON DELETE CASCADE)
 );
 
-CREATE TABLE FuelQuote(
-	userID SERIAL NOT NULL,
-	orderid integer NOT NULL,
-	gallonsReq integer NOT NULL,
-	deliveryAdd TEXT NOT NULL,
-	deliveryDate DATE NOT NULL,
-	suggestedPrice float NOT NULL,
-	total float NOT NULL,
-	CONSTRAINT f_userID_fk FOREIGN KEY (userID) REFERENCES UserCredentials(userID) ON DELETE CASCADE
+CREATE TABLE guest(
+	guestName TEXT NOT NULL,
+	phone integer NOT NULL,
+	email varchar(30) NOT NULL,
+	date DATE NOT NULL,
+	guestNumber integer NOT NULL
 );
