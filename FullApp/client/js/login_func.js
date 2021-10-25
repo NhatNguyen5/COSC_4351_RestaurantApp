@@ -46,6 +46,11 @@ async function success_login(){
     }
 }
 
+async function reserveTable()
+{
+    location.href = "reserve_table.html";
+}
+
 async function insertUserCred() {
     // const result = await findUID()
     if(uid == null){

@@ -13,7 +13,7 @@
 } 
 
 .form-a{
-    width: 380px;
+    width: 800px;
     height: 480px;
     position: relative;
     margin: 6% auto;
@@ -23,7 +23,7 @@
     border-radius: 25px;
 }
 
-h1{
+h1.login_page{
     text-align: center;
     margin: 35px auto;
     background-image: linear-gradient(315deg, #10f7ff,#06ffac);
@@ -31,6 +31,17 @@ h1{
     font-family: Copperplate;
     position: relative;
     border-radius: 25px;
+}
+
+h2.login_page{
+    text-align: center;
+    margin: 10px auto;
+    background-image: linear-gradient(0deg, #40f700,#06ffaa, transparent 90%);
+    color: black;
+    font-family: Copperplate;
+    position: relative;
+    border-radius: 25px;
+    width: 80%;
 }
 
 
@@ -46,7 +57,7 @@ h1{
     text-align: right;
     top: 400px;
     position: absolute;
-    width: 220px;
+    width: 240px;
     transition: .5s;
 }
 
@@ -73,6 +84,44 @@ h1{
     outline: none;
     border-radius: 30px;
     margin-top: 50px;
+    float: right;
 
+}
 
+button.reserve_button{
+    width: 85%;
+    font-size: 20;
+    font-family: Copperplate;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background: linear-gradient(0deg, blue,#06ffac);
+    border: 0;
+    color: white;
+    outline: none;
+    border-radius: 30px;
+    margin-top: 50px;
+}
+
+.side_by_side{
+    width: 100%;
+}
+
+.user_field{
+    float: left;
+    width: 50%;
+    border-right: 1px black;
+}
+
+.guest_field{
+    float: right;
+    width: 50%;
+}
+
+hr.vertical {
+    float: right;
+    height:70%;
+    width:0;
+    border:1px solid black;
 }
