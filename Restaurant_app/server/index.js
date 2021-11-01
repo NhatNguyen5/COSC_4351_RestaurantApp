@@ -4,6 +4,8 @@ const path = require('path');
 const cors = require("cors");
 const pool = require("./db");
 const { check, validationResult } = require('express-validator');
+var table_cal = require("./table_calculations");
+const hello_test = require("./table_calculations");
 
 //middleware
 app.use(cors());
@@ -296,3 +298,5 @@ app.post("/profile", async (req, res) => {
 app.listen(5000, () => {
     console.log("server has started on port 5000");
 });
+
+console.log(hello_test());
