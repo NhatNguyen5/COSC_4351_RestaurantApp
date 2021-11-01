@@ -487,7 +487,7 @@ function validateDate(ddate){
   }
 }
 
-
+/*
 module.exports.checkGallonReq = checkGallonReq;
 module.exports.checkPwd = checkPwd;
 module.exports.testLogin = testLogin;
@@ -502,3 +502,4 @@ module.exports.checkZipcode = checkZipcode;
 module.exports.checkGalreq = checkGalreq;
 module.exports.checkDate = checkDate;
 module.exports.validateDate = validateDate;
+*/
