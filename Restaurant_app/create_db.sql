@@ -80,7 +80,7 @@ INSERT INTO tableInfo
 VALUES(
     NULL,
     'B1',
-    2,
+    4,
     'no'
 );
 
