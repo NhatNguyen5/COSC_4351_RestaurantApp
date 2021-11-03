@@ -37,105 +37,36 @@ CREATE TABLE reservation(
 );
 
 CREATE TABLE tableInfo(
-	reservationID varchar,
 	tableCode varchar NOT NULL,
 	seatNum integer NOT NULL,
 	reserved TEXT NOT NULL,
-	CONSTRAINT r_userID_fk FOREIGN KEY (userID) REFERENCES userCredentials(userID) ON DELETE CASCADE
+    reservationID varchar,
+	CONSTRAINT r_userID_fk FOREIGN KEY (reservationID) REFERENCES reservation(reservationID) ON DELETE CASCADE
 );
 
 INSERT INTO tableInfo
-VALUES(
-    NULL,
-    'A1',
-    2,
-    'no'
-);
-
-INSERT INTO tableInfo
-VALUES(
-    NULL,
-    'A2',
-    2,
-    'no'
-);
-
-INSERT INTO tableInfo
-VALUES(
-    NULL,
-    'A3',
-    2,
-    'no'
-);
-
-INSERT INTO tableInfo
-VALUES(
-    NULL,
-    'A4',
-    2,
-    'no'
-);
-
-INSERT INTO tableInfo
-VALUES(
-    NULL,
-    'B1',
-    4,
-    'no'
-);
-
-INSERT INTO tableInfo
-VALUES(
-    NULL,
-    'B2',
-    4,
-    'no'
-);
-
-INSERT INTO tableInfo
-VALUES(
-    NULL,
-    'B3',
-    4,
-    'no'
-);
-
-INSERT INTO tableInfo
-VALUES(
-    NULL,
-    'B4',
-    4,
-    'no'
-);
-
-INSERT INTO tableInfo
-VALUES(
-    NULL,
-    'C1',
-    6,
-    'no'
-);
-
-INSERT INTO tableInfo
-VALUES(
-    NULL,
-    'C2',
-    6,
-    'no'
-);
-
-INSERT INTO tableInfo
-VALUES(
-    NULL,
-    'C3',
-    6,
-    'no'
-);
-
-INSERT INTO tableInfo
-VALUES(
-    NULL,
-    'D1',
-    8,
-    'no'
-);
+VALUES
+    ('A1',2,'no',NULL
+    ),
+    ('A2',2,'no',NULL
+    ),
+    ('A3',2,'no',NULL
+    ),
+    ('A4',2,'no',NULL
+    ),
+    ('B1',4,'no',NULL
+    ),
+    ('B2',4,'no',NULL
+    ),
+    ('B3',4,'no',NULL
+    ),
+    ('B4',4,'no',NULL
+    ),
+    ('C1',6,'no',NULL
+    ),
+    ('C2',6,'no',NULL
+    ),
+    ('C3',6,'no',NULL
+    ),
+    ('D1',8,'no',NULL
+    );

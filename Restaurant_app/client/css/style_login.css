@@ -25,6 +25,19 @@
     border-radius: 25px;
 }
 
+.form-b{
+    width: 800px;
+    height: 600px;
+    position: relative;
+    margin: 6% auto;
+    background-image: linear-gradient(rgba(255,0,0,0.4),rgba(255,255,0,0.4)),url(background1.png);
+    background-position: center;
+    background-size: cover;
+    padding: 5px;
+    overflow: hidden;
+    border-radius: 25px;
+}
+
 h1.login_page{
     text-align: center;
     margin: 35px auto;
@@ -127,4 +140,34 @@ hr.vertical {
     height:70%;
     width:0;
     border:1px solid black;
+}
+
+.table_reserve {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.auto_fit_img {
+    width: 70%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: contain;
+}
+
+.map .btn {
+    position: absolute;
+    background-color: #04AA6D;
+    border: black;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 100%;
+    cursor: pointer;
 }

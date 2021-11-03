@@ -270,6 +270,17 @@ app.post('/formData',[
   })
 });
 
+app.get('/getTables', async (res) => {
+  console.log("SELECT tableCode FROM tableInfo WHERE reserved = 'yes'");
+  try {
+    const reservedTableList = await pool.query(`SELECT tableCode FROM tableInfo WHERE reserved = 'yes'`);
+    console.log(reservedTableList.rows);
+    //res.json(reservedTableList.rows);
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
 
 //ROUTES//
 app.post("/profile", async (req, res) => {
