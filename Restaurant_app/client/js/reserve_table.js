@@ -1,25 +1,28 @@
 var selectedTable = [];
-var hist = [];
+var tableList = [];
 
 async function getTableMap(){
     try {
       const response = await fetch(`http://localhost:5000/getTables`);
       const jsonData = await response.json();
       setTables(jsonData);
-      console.log(jsonData);
-      displayTables(hist);
+      //console.log(jsonData);
+      displayTables(tableList);
     } catch (err) {
       console.log(err.message);
     }
 }
 
 const setTables = (data) => {
-    hist = data;
+    tableList = data;
 }
 
 async function displayTables(tableList){
-    console.log(tableList);
-    console.log("hello")
+    tableList.forEach(element => {
+        document.getElementById(element.tablecode).style.background='darkred';
+        document.getElementById(element.tablecode).style.color='grey';
+        document.getElementById(element.tablecode).disabled = true;
+    });
 }
 
 getTableMap();

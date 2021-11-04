@@ -93,6 +93,17 @@ app.get('/orderHist/:fac', async (req, res) => {
   }
 });
 
+app.get('/getTables', async (req, res) => {
+  console.log("SELECT tableCode FROM tableInfo WHERE reserved = 'yes'");
+  try {
+    const reservedTableList = await pool.query(`SELECT tableCode FROM tableInfo WHERE reserved = 'yes'`);
+    console.log(reservedTableList.rows);
+    res.json(reservedTableList.rows)
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
 app.get('/findadd/:fac', async (req, res) => {
   const {fac} = req.params;
   try {
@@ -268,17 +279,6 @@ app.post('/formData',[
   response.status(202).json({
       success:'Ok'
   })
-});
-
-app.get('/getTables', async (res) => {
-  console.log("SELECT tableCode FROM tableInfo WHERE reserved = 'yes'");
-  try {
-    const reservedTableList = await pool.query(`SELECT tableCode FROM tableInfo WHERE reserved = 'yes'`);
-    console.log(reservedTableList.rows);
-    //res.json(reservedTableList.rows);
-  } catch (err) {
-    console.log(err.message);
-  }
 });
 
 

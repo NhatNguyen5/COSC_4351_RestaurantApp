@@ -70,3 +70,10 @@ VALUES
     ),
     ('D1',8,'no',NULL
     );
+
+/*Test data*/
+/*
+UPDATE tableInfo SET reserved = 'yes' WHERE tableCode = 'A1';
+UPDATE tableInfo SET reserved = 'yes' WHERE tableCode = 'B2';
+UPDATE tableInfo SET reserved = 'yes' WHERE tableCode = 'C3';
+*/
