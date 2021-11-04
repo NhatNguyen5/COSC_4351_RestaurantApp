@@ -28,7 +28,7 @@ CREATE TABLE reservation(
 	email varchar(30) NOT NULL,
 	date DATE NOT NULL,
 	guestNumber integer NOT NULL,
-	isTraffic TEXT NOT NULL,
+	isHoliday TEXT NOT NULL,
 	tablePicked TEXT NOT NULL,
 	reservedTime DATE NOT NULL,
 	userID SERIAL,
