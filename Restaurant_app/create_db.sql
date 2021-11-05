@@ -24,16 +24,29 @@ CREATE TABLE userInfo(
 CREATE TABLE reservation(
 	reservationID varchar NOT NULL UNIQUE,
 	guestName TEXT NOT NULL,
-	phone integer NOT NULL,
-	email varchar(30) NOT NULL,
+	phone varchar(10) NOT NULL,
+	email varchar(320) NOT NULL,
 	date DATE NOT NULL,
 	guestNumber integer NOT NULL,
-	isTraffic TEXT NOT NULL,
+	isHoliday TEXT NOT NULL,
 	tablePicked TEXT NOT NULL,
 	reservedTime DATE NOT NULL,
 	userID SERIAL,
 	PRIMARY KEY(reservationID),
 	CONSTRAINT r_userID_fk FOREIGN KEY (userID) REFERENCES userCredentials(userID) ON DELETE CASCADE
+);
+
+CREATE TABLE guestReservation(
+	gReservationID varchar NOT NULL UNIQUE,
+	guestName TEXT NOT NULL,
+	phone varchar(10) NOT NULL,
+	email varchar(320) NOT NULL,
+	date DATE NOT NULL,
+	guestNumber integer NOT NULL,
+	isTraffic TEXT NOT NULL,
+	tablePicked TEXT NOT NULL,
+	reservedTime DATE NOT NULL,
+	PRIMARY KEY(gReservationID)
 );
 
 CREATE TABLE tableInfo(
