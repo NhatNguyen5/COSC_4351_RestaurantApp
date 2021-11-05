@@ -1,5 +1,7 @@
 var selectedTable = [];
-var tableList = [];
+var fullTableList = ['A1','A2','A3','A4','B1','B2','B3','B4','C1','C2','C3','D1']
+var notAvailTableList = [];
+var availTableList = fullTableList;
 
 async function getTableMap(){
     try {
@@ -7,14 +9,14 @@ async function getTableMap(){
       const jsonData = await response.json();
       setTables(jsonData);
       //console.log(jsonData);
-      displayTables(tableList);
+      displayTables(noAvailTableList);
     } catch (err) {
       console.log(err.message);
     }
 }
 
 const setTables = (data) => {
-    tableList = data;
+    noAvailTableList = data;
 }
 
 async function displayTables(tableList){
@@ -22,10 +24,15 @@ async function displayTables(tableList){
         document.getElementById(element.tablecode).style.background='darkred';
         document.getElementById(element.tablecode).style.color='grey';
         document.getElementById(element.tablecode).disabled = true;
+        availTableList = availTableList.filter(item => item !== element.tablecode);
     });
 }
 
 getTableMap();
+
+async function updateMapToSeatNum(noOfSeats){
+    
+}
 
 async function selectedTableUpdater(clicked_id){
     if(selectedTable.includes(clicked_id)){
