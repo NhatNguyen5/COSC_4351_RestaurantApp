@@ -6,10 +6,24 @@
 .something{
     height: 100%;
     width: 100%;
+    border-style: solid;
+    box-sizing: border-box  ;
+    border-color: #DD7230;
+    padding: 0;
+    margin: 0;
+    border-width: 10px;
+    background-color: #F4C95D;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    /*
+    height: 100%;
+    width: 100%;
     background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(pic.png);
     background-position: center;
     background-size: cover;
     position: absolute;
+    */
 } 
 
 .form-a{
