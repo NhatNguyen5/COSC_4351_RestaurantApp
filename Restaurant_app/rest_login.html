@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="client/css/rest_login.css">
+</head>
+
+<body>
+    <div class = "bkg">
+        <button class = "btn-welcome" type="button" class="submit-btn" onclick = "window.location.href='welcome_page.html'">Welcome</button>
+        <button class = "btn-menu" type="button" class="submit-btn">Menu</button>
+        <button class = "btn-order" type="button" class="submit-btn">Order</button>
+        <button class = "btn-press" type="button" class="submit-btn">Press</button>
+        <button class = "btn-contacts" type="button" class="submit-btn">Contacts</button>
+        <h1 class="title_name">Name</h1>
+        <div class="form-a">
+            <div class = "side by side">
+                <div class="user_field">
+                    <hr class="vertical">
+                    <h2 class="login_page">User</h2>
+                    <form id="login" class="inputs">
+                        <input id="l_user" name="user" type="text" class="input-field" placeholder="Username" required>
+                        <input id="l_pass" name="pass" type="text" class="input-field" placeholder="Password" required>
+                        <button type="button" class="login" onclick="success_login()">Sign In</button>
+                    </form>
+
+                    <form class="inputs1">
+                        <a class = "regist" type="text" href="register_page.html">New User?</a>
+                    </form>
+                </div>
+
+                <div class="guest_field">
+                    <h2 class="login_page">Guest</h2>
+                    <button class="reserv" onclick="reserveTable()">Reserve Table</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

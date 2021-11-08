@@ -20,33 +20,6 @@
     position: absolute;
 }
 
-.title_name{
-    color: #DD7230;
-    font-family: Baskerville,Times,'Times New Roman',serif;
-    font-size: 50px;
-    font-variant:small-caps;
-    line-height: 100px;
-    font-weight: bold;
-    margin-top: -10px;
-    text-align: center;
-    text-shadow: 0 1px 1px rgb(255, 255, 255);
-}
-
-.pic_col{
-    /* width: 700px;
-    height: 680px;
-    background-image: url(pic1.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    resize: both;
-    margin-top: 50;
-    margin-left: 100; */
-    float: left;
-    padding: 20px;
-    margin-left: 140px;
-    margin-top: 20px;
-}
-
 .btn-welcome{
     padding: 0;
     border: none;
@@ -197,24 +170,111 @@
     transform-origin: bottom left;
 }
 
-.buttons{
-    background:#1AAB8A;
+.title_name{
+    color: #DD7230;
+    font-family: Baskerville,Times,'Times New Roman',serif;
+    font-size: 50px;
+    font-variant:small-caps;
+    line-height: 100px;
+    font-weight: bold;
+    margin-top: -10px;
+    text-align: center;
+    text-shadow: 0 1px 1px rgb(255, 255, 255);
+}
+
+.form-a{
+    width: 800px;
+    height: 480px;
+    position: relative;
+    margin: 6% auto;
+    /* background-image: linear-gradient(rgba(255,0,0,0.4),rgba(255,255,0,0.4)),url(background1.png);
+    background-position: center;
+    background-size: cover; */
+    padding: 5px;
+    overflow: hidden;
+    border-radius: 25px;
+}
+
+h2.login_page{
+    text-align: center;
+    text-decoration: underline;
+    margin: 10px auto;
+    color: #DD7230;
+    font-family: Copperplate;
+    position: relative;
+    border-radius: 25px;
+    width: 80%;
+}
+
+.inputs{
+    text-align: center;
+    top: 170px;
+    position: absolute;
+    width: 350px;
+    transition: .5s;
+}
+
+.inputs1{
+    text-align: right;
+    top: 400px;
+    position: absolute;
+    width: 240px;
+    transition: .5s;
+}
+
+.regist{
+    color:#DD7230;
+}
+
+.input-field{
+    width: 50%;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+    margin-top:-10px;
+}
+
+/* .login{
+    width: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background: #DD7230;
+    border: none;
+    outline: none;
+    margin-top: 80px;
+    float: right;
+    color: white;
+
+} */
+
+
+.login{
+    background:#DD7230;
     color:#fff;
     border:none;
     position:relative;
     height:35px;
-    font-size:20px;
-    padding:0 1.5em;
+    font-size:15px;
+    padding:0 110px;
     cursor:pointer;
     transition:800ms ease all;
     outline:none;
-    margin-left: 865px;
+    margin-left: 70px;
+    margin-top:70px;
+    display:block;
 }
-.buttons:hover{
+.login:hover{
     background:#fff;
     color:#DD7230;
 }
-.buttons:before,.buttons:after{
+.login:before,.login:after{
     content:'';
     position:absolute;
     top:0;
@@ -224,13 +284,100 @@
     background: #DD7230;
     transition:400ms ease all;
 }
-.buttons:after{
+.login:after{
     right:inherit;
     top:inherit;
     left:0;
     bottom:0;
 }
-.buttons:hover:before,.buttons:hover:after{
+.login:hover:before,.login:hover:after{
     width:100%;
     transition:800ms ease all;
+}
+
+
+
+/* .reserve_button{
+    width: 85%;
+    font-size: 20;
+    font-family: Copperplate;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background: #DD7230;
+    border: none;
+    color: white;
+    outline: none;
+    margin-top: 50px;
+} */
+
+.reserv{
+    background:#DD7230;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:35px;
+    font-size:15px;
+    padding:0 110px;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+    margin-left: 50px;
+    margin-top:70px;
+    display:block;
+}
+.reserv:hover{
+    background:#fff;
+    color:#DD7230;
+}
+.reserv:before,.reserv:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #DD7230;
+    transition:400ms ease all;
+}
+.reserv:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+}
+.reserv:hover:before,.reserv:hover:after{
+    width:100%;
+    transition:800ms ease all;
+}
+
+
+
+
+
+
+
+
+
+.side_by_side{
+    width: 100%;
+}
+
+.user_field{
+    float: left;
+    width: 50%;
+    border-right: 1px black;
+}
+
+.guest_field{
+    float: right;
+    width: 50%;
+}
+
+hr.vertical {
+    float: right;
+    height:90%;
+    width:0;
+    border:1px solid #DD7230;
 }

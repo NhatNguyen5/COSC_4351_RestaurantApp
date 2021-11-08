@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="client/css/register_page.css">
+</head>
+
+<body>
+    <div class = "bkg">
+        <button class = "btn-welcome" type="button" class="submit-btn" onclick = "window.location.href='welcome_page.html'">Welcome</button>
+        <button class = "btn-menu" type="button" class="submit-btn">Menu</button>
+        <button class = "btn-order" type="button" class="submit-btn">Order</button>
+        <button class = "btn-press" type="button" class="submit-btn">Press</button>
+        <button class = "btn-contacts" type="button" class="submit-btn">Contacts</button>
+        <h1 class="title_name">Name</h1>
+        <div class="form-a">
+            <p>
+                <label for="user" class="userNa">Username</label>
+                <label for="pass" class="passN" >Password</label>
+            </p>
+                <input type = "text"  class = "userN" id="gallonsreq" oninput = "change()"  required>
+                <input type = "address"  class = "pass" id="deliveryadr"  required >
+
+            <p><label for="fname" class="nameN">Full Name</label> </p>
+                <input type="text" name="ddate" class = "firstN" id="ddate" placeholder = "First Name"required />
+                <input type="text" name="ddate" class = "lastN" id="ddate" placeholder = "Last Name"required />
+
+            <p><label for="maillAdd" class="mailN">Mailing Address</label> </p>
+                <input type="text" name="suggestedp" class = "mail" id="suggestedp" placeholder = "112 Stoke Dr."  required/>
+            
+            <p><label for="billAdd" class="billN">Billing Address</label></p>
+                <input type="text" name="totalamt" class = "bill" id="totalamt" placeholder = "112 Stoke Dr."  />
+
+            <p><label for="preferPay" class="payN">Preferred Payment</label></p>
+                <input type="text" name="totalamt" class = "pay" id="totalamt" placeholder = 0  required/>
+
+            <p>
+            <button type="button" class = "submit-btn">Register</button>
+            <p>
+        </div>
+    </div>
+</body>
+
+</html>
