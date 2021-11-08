@@ -2,11 +2,7 @@ var selectedTable = [];
 var fullTableList = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'D1']
 var notAvailTableList = [];
 var availTableList = [];
-var noOfSeatReq = document.getElementById('noOfSeats').value;;
-var noOf2Left = 4;
-var noOf4Left = 4;
-var noOf6Left = 3;
-var noOf8Left = 1;
+var noOfSeatReq = document.getElementById('noOfSeats').value;
 
 window.onload = getTableMap;
 
@@ -18,7 +14,6 @@ async function getTableMap() {
         setTables(jsonData);
         //console.log(jsonData);
         displayTables();
-        updateMapToSeatNum(noOfSeatReq);
     } catch (err) {
         console.log(err.message);
     }
@@ -31,11 +26,6 @@ const setTables = (data) => {
 async function displayTables() {
     availTableList = fullTableList;
     notAvailTableList.forEach(element => {
-        noOf2Left -= (element.tablecode[0] == 'A') ? 1 : 0;
-        noOf4Left -= (element.tablecode[0] == 'B') ? 1 : 0;
-        noOf6Left -= (element.tablecode[0] == 'C') ? 1 : 0;
-        noOf8Left -= (element.tablecode[0] == 'D') ? 1 : 0;
-
         document.getElementById(element.tablecode).style.background = 'darkred';
         document.getElementById(element.tablecode).style.color = 'grey';
         document.getElementById(element.tablecode).disabled = true;
@@ -47,60 +37,49 @@ async function displayTables() {
     console.log(noOf2Left, noOf4Left, noOf6Left, noOf8Left)
 }
 
-async function updateMapToSeatNum(noOfSeats) {
+async function updateNoOSeats() {
+
+}
+
+async function updateMapToSeatNum(noOfSeats, update) {
     //not done
-    if (noOfSeats <= 8) {
-        /*
+    if(update){
+        noOfSeatReq = noOfSeats;
+        selectedTable.forEach(element => {
+            selectedTableUpdater(element);
+        });
+        enableGroup('A');
+        enableGroup('B');
+        enableGroup('C');
+        enableGroup('D');
+    }
+    if (noOfSeatReq <= 0) {
+
         disableGroup('A');
         disableGroup('B');
         disableGroup('C');
         disableGroup('D');
-        */
-        if ((noOfSeats <= 2 && noOf2Left > 0) || 
-            (noOfSeats <= 4 && noOf4Left == 0 && noOf2Left > 1) ||
-            (noOfSeats <= 6 && noOf6Left == 0 && noOf4Left == 0 && noOf2Left > 2)) {
-            enableGroup('A');
-            disableGroup('B');
-            disableGroup('C');
-            disableGroup('D');
-        } else {
-            if (noOfSeats <= 4 && noOf4Left > 0) {
-                enableGroup('B');
-                disableGroup('A');
-                disableGroup('C');
-                disableGroup('D');
+        /*
+        if (noOfSeatReq > 0) {
+            if ((noOfSeatReq > 0 && noOfSeats <= 2 && noOf2Left > 0) ||
+                (noOfSeats <= 4 && noOf4Left == 0 && noOf2Left > 1) ||
+                (noOfSeats <= 6 && noOf6Left == 0 && noOf4Left == 0 && noOf2Left > 2)) {
+                enableGroup('A');
             } else {
-                if (noOfSeats <= 6 && noOf6Left > 0) {
-                    enableGroup('C');
-                    disableGroup('B');
-                    disableGroup('A');
-                    disableGroup('D');
-                } else {
-                    if (noOfSeats <= 8 && noOf8Left > 0) {
-                        enableGroup('D');
-                        disableGroup('B');
-                        disableGroup('C');
-                        disableGroup('A');
-                    }
-                }
-            }
-        }
-    } else {
-        if (noOf8Left > 0) {
-            enableGroup('D');
-        } else {
-            if (noOf6Left > 0) {
-                enableGroup('C');
-            } else {
-                if (noOf4Left > 0) {
+                if (noOfSeats <= 4 && noOf4Left > 0) {
                     enableGroup('B');
                 } else {
-                    if (noOf2Left > 0) {
-                        enableGroup('A');
+                    if (noOfSeats <= 6 && noOf6Left > 0) {
+                        enableGroup('C');
+                    } else {
+                        if (noOfSeats <= 8 && noOf8Left > 0) {
+                            enableGroup('D');
+                        }
                     }
                 }
             }
         }
+        */
     }
 }
 
@@ -146,6 +125,7 @@ function updateMaxSeatNum() {
 
 async function selectedTableUpdater(clicked_id) {
     if (selectedTable.includes(clicked_id)) {
+        availTableList.push(clicked_id);
         selectedTable = selectedTable.filter(item => item !== clicked_id);
         document.getElementById(clicked_id).style.background = '#04aa6d';
         document.getElementById(clicked_id).style.color = 'white';
@@ -154,9 +134,11 @@ async function selectedTableUpdater(clicked_id) {
                 clicked_id[0] == 'B' ? 4 :
                     clicked_id[0] == 'C' ? 6 : 8
         );
+        updateMapToSeatNum(noOfSeatReq, false);
     }
     else {
         selectedTable.push(clicked_id);
+        availTableList = availTableList.filter(item => item !== clicked_id);
         document.getElementById(clicked_id).style.background = '#ffc445';
         document.getElementById(clicked_id).style.color = 'green';
         noOfSeatReq -= (
@@ -164,15 +146,19 @@ async function selectedTableUpdater(clicked_id) {
                 clicked_id[0] == 'B' ? 4 :
                     clicked_id[0] == 'C' ? 6 : 8
         );
+        updateMapToSeatNum(noOfSeatReq, false);
     }
 
-    if (noOfSeatReq < 6)
+    if (noOfSeatReq > 0) {
+        enableGroup('A');
+        enableGroup('B');
+        enableGroup('C');
+        enableGroup('D');
+    }
 
-        console.log(noOfSeatReq);
-    /*
-    (clicked_id[0] == 'A') ? 
-
-    alert(selectedTable);
-    */
+    console.log(noOfSeatReq);
+    
+    //alert(selectedTable);
+    
 }
 
