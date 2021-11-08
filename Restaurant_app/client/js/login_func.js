@@ -46,9 +46,9 @@ async function success_login(){
     }
 }
 
-async function reserveTable()
+async function reserveInfo()
 {
-    location.href = "reserve_table.html";
+    location.href = "reserve_info.html";
 }
 
 async function insertUserCred() {

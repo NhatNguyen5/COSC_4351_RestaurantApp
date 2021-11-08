@@ -20,7 +20,7 @@
     position: absolute;
 }
 
-.title_name{
+h1.title_name{
     color: #DD7230;
     font-family: Baskerville,Times,'Times New Roman',serif;
     font-size: 50px;
@@ -30,9 +30,17 @@
     margin-top: -10px;
     text-align: center;
     text-shadow: 0 1px 1px rgb(255, 255, 255);
+    margin: 35px auto;
 }
 
-.pic_col{
+.pic_row{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.pic_col_left{
     /* width: 700px;
     height: 680px;
     background-image: url(pic1.jpg);
@@ -42,9 +50,28 @@
     margin-top: 50;
     margin-left: 100; */
     float: left;
-    padding: 20px;
-    margin-left: 140px;
-    margin-top: 20px;
+    height: auto;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.pic_col_right{
+    /* width: 700px;
+    height: 680px;
+    background-image: url(pic1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    resize: both;
+    margin-top: 50;
+    margin-left: 100; */
+    float: right;
+    height: auto;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 
 .btn-welcome{
@@ -108,14 +135,14 @@
 }
 
 .btn-press{
+    float: right;
     padding: 0;
     border: none;
     background: none;
     margin-top: 10px;
-    margin-left: 1400px;
+    margin-right: 30px;
     color:#DD7230;
     font-size: 20px;
-    display: inline-block;
     position: relative;
 }
 
@@ -168,14 +195,14 @@
 }
 
 .btn-contacts{
+    float: right;
     padding: 0;
     border: none;
     background: none;
     margin-top: 10px;
-    margin-left: 30px;
+    margin-right: 30px;
     color:#DD7230;
     font-size: 20px;
-    display: inline-block;
     position: relative;
 }
 
@@ -208,7 +235,11 @@
     cursor:pointer;
     transition:800ms ease all;
     outline:none;
-    margin-left: 865px;
+    
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 .buttons:hover{
     background:#fff;
@@ -233,4 +264,45 @@
 .buttons:hover:before,.buttons:hover:after{
     width:100%;
     transition:800ms ease all;
+}
+
+.table_reserve {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.auto_fit_img {
+    width: 70%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: contain;
+}
+
+.map .btn {
+    position: absolute;
+    background-color: #04AA6D;
+    border: black;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.form-b{
+    width: 800px;
+    height: 600px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 70px;
+    padding: 5px;
+    transform: scale(1.2);
 }

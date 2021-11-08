@@ -2,40 +2,58 @@
 
 <head>
     <title>Reserve Table</title>
-    <link rel="stylesheet" href="client/css/style_login.css">
+
+    <link rel="stylesheet" href="client/css/welcome_page.css">
 </head>
 
 <body>
-    <div class="something">
+    <div class="bkg">
+        <!-- <button class = "btn-welcome" type="button" class="submit-btn" onclick="window.location.href='login.html'">Welcome</button> -->
+        <button class="btn-welcome" type="button" class="submit-btn">Welcome</button>
+        <button class="btn-menu" type="button" class="submit-btn">Menu</button>
+        <button class="btn-order" type="button" class="submit-btn">Order</button>
+        <button class="btn-press" type="button" class="submit-btn">Press</button>
+        <button class="btn-contacts" type="button" class="submit-btn">Contacts</button>
+        <h1 class="title_name">Le Restäuränt</h1>
         <div class="form-b">
             <div class="form-button">
-                <div id="btn"></div>
-                <h1 class="login_page">Table Selector</h1>
                 <form class="table_reserve">
-                    <label for="quantity" style="color:  white;">Number of seats</label>
-                    <input type="number" id="noOfSeats" onchange="updateMapToSeatNum(this.value, true)" onkeyup="updateMapToSeatNum(this.value, true)" name="noOfSeats" value="1" min="1" max="1">
-                    
-                    <input type="submit">
+                    <label for="quantity" style="color:  black; margin-right: 10px; margin-left: 40px;">Number of seats:</label>
+                    <input type="number" id="noOfSeats" onchange="updateMapToSeatNum(this.value, true)"
+                        onkeyup="updateMapToSeatNum(this.value, true)" name="noOfSeats" value="1" min="1" max="1">
+
+                    <input type="submit" value="Reserve">
                 </form>
-                <br>
+                <br><br>
                 <div id="tableMap">
                     <div class="map">
                         <img class="auto_fit_img" src="client/css/Restaurant_design.png" />
-                        <button class="btn" onclick="selectedTableUpdater(this.id)" style="transform: translate(345px, -55px);" id = "A1">A1</button>
-                        <button class="btn" onclick="selectedTableUpdater(this.id)" style="transform: translate(477px, -55px);" id = "A2">A2</button>
-                        <button class="btn" onclick="selectedTableUpdater(this.id)" style="transform: translate(615px, -218px);" id = "A3">A3</button>
-                        <button class="btn" onclick="selectedTableUpdater(this.id)" style="transform: translate(615px, -353px);" id = "A4">A4</button>
-                        <button class="btn" onclick="selectedTableUpdater(this.id)" style="transform: translate(329px, -138px);" id = "B1">B1</button>
-                        <button class="btn" onclick="selectedTableUpdater(this.id)" style="transform: translate(476px, -138px);" id = "B2">B2</button>
-                        <button class="btn" onclick="selectedTableUpdater(this.id)" style="transform: translate(525px, -240px);" id = "B3">B3</button>
-                        <button class="btn" onclick="selectedTableUpdater(this.id)" style="transform: translate(525px, -349px);" id = "B4">B4</button>
-                        <button class="btn" onclick="selectedTableUpdater(this.id)" style="transform: translate(271px, -305px);" id = "C1">C1</button>
-                        <button class="btn" onclick="selectedTableUpdater(this.id)" style="transform: translate(394px, -241px);" id = "C2">C2</button>
-                        <button class="btn" onclick="selectedTableUpdater(this.id)" style="transform: translate(390px, -364px);" id = "C3">C3</button>
-                        <button class="btn" onclick="selectedTableUpdater(this.id)" style="transform: translate(197px, -126px);" id = "D1">D1</button>
+                        <button class="btn" onclick="selectedTableUpdater(this.id)"
+                            style="transform: translate(345px, -55px);" id="A1">A1</button>
+                        <button class="btn" onclick="selectedTableUpdater(this.id)"
+                            style="transform: translate(477px, -55px);" id="A2">A2</button>
+                        <button class="btn" onclick="selectedTableUpdater(this.id)"
+                            style="transform: translate(615px, -218px);" id="A3">A3</button>
+                        <button class="btn" onclick="selectedTableUpdater(this.id)"
+                            style="transform: translate(615px, -353px);" id="A4">A4</button>
+                        <button class="btn" onclick="selectedTableUpdater(this.id)"
+                            style="transform: translate(329px, -138px);" id="B1">B1</button>
+                        <button class="btn" onclick="selectedTableUpdater(this.id)"
+                            style="transform: translate(476px, -138px);" id="B2">B2</button>
+                        <button class="btn" onclick="selectedTableUpdater(this.id)"
+                            style="transform: translate(525px, -240px);" id="B3">B3</button>
+                        <button class="btn" onclick="selectedTableUpdater(this.id)"
+                            style="transform: translate(525px, -349px);" id="B4">B4</button>
+                        <button class="btn" onclick="selectedTableUpdater(this.id)"
+                            style="transform: translate(271px, -305px);" id="C1">C1</button>
+                        <button class="btn" onclick="selectedTableUpdater(this.id)"
+                            style="transform: translate(394px, -241px);" id="C2">C2</button>
+                        <button class="btn" onclick="selectedTableUpdater(this.id)"
+                            style="transform: translate(390px, -364px);" id="C3">C3</button>
+                        <button class="btn" onclick="selectedTableUpdater(this.id)"
+                            style="transform: translate(197px, -126px);" id="D1">D1</button>
                     </div>
                 </div>
-                <!--<button type = "button" class = "toggle-btn" onclick = "p_register()"> Register</button> -->
             </div>
         </div>
     </div>

@@ -37,10 +37,6 @@ async function displayTables() {
     console.log(noOf2Left, noOf4Left, noOf6Left, noOf8Left)
 }
 
-async function updateNoOSeats() {
-
-}
-
 async function updateMapToSeatNum(noOfSeats, update) {
     //not done
     if(update){
@@ -162,3 +158,10 @@ async function selectedTableUpdater(clicked_id) {
     
 }
 
+async function reserveTable(){
+    location.href = "reserve_table.html";
+}
+
+async function passInfo(){
+
+}

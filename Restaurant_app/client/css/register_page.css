@@ -81,14 +81,14 @@
 }
 
 .btn-press{
+    float: right;
     padding: 0;
     border: none;
     background: none;
     margin-top: 10px;
-    margin-left: 1400px;
+    margin-right: 30px;
     color:#DD7230;
     font-size: 20px;
-    display: inline-block;
     position: relative;
 }
 
@@ -141,14 +141,14 @@
 }
 
 .btn-contacts{
+    float: right;
     padding: 0;
     border: none;
     background: none;
     margin-top: 10px;
-    margin-left: 30px;
+    margin-right: 30px;
     color:#DD7230;
     font-size: 20px;
-    display: inline-block;
     position: relative;
 }
 
@@ -170,7 +170,7 @@
     transform-origin: bottom left;
 }
 
-.title_name{
+h1.title_name{
     color: #DD7230;
     font-family: Baskerville,Times,'Times New Roman',serif;
     font-size: 50px;
@@ -180,6 +180,7 @@
     margin-top: -10px;
     text-align: center;
     text-shadow: 0 1px 1px rgb(255, 255, 255);
+    margin: 35px auto;
 }
 
 .form-a{
@@ -187,6 +188,7 @@
     height: 480px;
     position: relative;
     margin: 8% auto;
+    margin-top: -15px;
     /* background-color: #8476ff; */
     padding: 5px;
     overflow: hidden;

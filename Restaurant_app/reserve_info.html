@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="client/css/register_page.css">
+</head>
+
+<body>
+    <div class="bkg">
+        <button class="btn-welcome" type="button" class="submit-btn"
+            onclick="window.location.href='welcome_page.html'">Welcome</button>
+        <button class="btn-menu" type="button" class="submit-btn">Menu</button>
+        <button class="btn-order" type="button" class="submit-btn">Order</button>
+        <button class="btn-press" type="button" class="submit-btn">Press</button>
+        <button class="btn-contacts" type="button" class="submit-btn">Contacts</button>
+        <h1 class="title_name">Le Restäuränt</h1>
+        <form action="reserve_table.html">
+            <div class="form-a">
+                <p><label for="fname" class="nameN">Full Name</label> </p>
+                <input type="text" class="firstN" id="firstN" placeholder="First Name" required />
+                <input type="text" class="lastN" id="lastN" placeholder="Last Name" required />
+
+                <p><label for="EmailAdd" class="mailN">Email Address</label> </p>
+                <input type="email" class="mail" id="EmailAdd" size="30" placeholder="JohnSmith@mail.com" required />
+
+                <p><label for="PhoneNum" class="billN">Phone Number</label></p>
+                <input type="text" class="bill" id="PhoneNum" placeholder="xxx-xxx-xxxx" />
+
+                <p><label for="preferPay" class="payN">Preferred Payment</label></p>
+                <select class="pay" id="totalamt" required>
+                    <option value="Cash">Cash</option>
+                    <option value="Valid_Creditcard">Valid Creditcard</option>
+                    <option value="Invalid_Creditcard">Invalid Creditcard (for testing purposes)</option>
+                </select>
+
+                <p>
+                    <input type="submit" class="submit-btn" value="Select Table">
+                </p>
+            </div>
+        </form>
+    </div>
+</body>
+<script src="client/js/reserve_table.js"></script>
+
+</html>
