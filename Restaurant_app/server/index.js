@@ -10,28 +10,46 @@ var table_cal = require("./table_calculations");
 app.use(cors());
 app.use(express.json()); //req.body
 
-let urlencoded = express.urlencoded({extended: true})
+let urlencoded = express.urlencoded({ extended: true })
 app.use(express.json());
 app.use(urlencoded);
 app.use(express.static(__dirname + '/'));
 
 //Du Code
 app.post("/register", async (req, res) => {
-    userid = req.body.userid;
-    user = req.body.user;
-    pass = req.body.pass;
-    try {
-      console.log(req.body)
-      //this will encrypt the password once it is made
-      const newTodo = await pool.query(
-        `INSERT INTO UserCredentials VALUES(${userid},'${user}',crypt('${pass}',gen_salt('bf'))); `
-      );
-      res.json(newTodo.rows);
-  
-    } catch (err) {
-      alert(err);
-      console.error(err.message);
-    }
+  userid = req.body.userid;
+  user = req.body.user;
+  pass = req.body.pass;
+  try {
+    console.log(req.body)
+    //this will encrypt the password once it is made
+    const newTodo = await pool.query(
+      `INSERT INTO UserCredentials VALUES(${userid},'${user}',crypt('${pass}',gen_salt('bf'))); `
+    );
+    res.json(newTodo.rows);
+
+  } catch (err) {
+    alert(err);
+    console.error(err.message);
+  }
+});
+
+app.post("/reserveGuestTable", async (req, res) => {
+  userid = req.body.userid;
+  user = req.body.user;
+  pass = req.body.pass;
+  try {
+    console.log(req.body)
+    //this will encrypt the password once it is made
+    const newTodo = await pool.query(
+      `INSERT INTO UserCredentials VALUES(${userid},'${user}',crypt('${pass}',gen_salt('bf'))); `
+    );
+    res.json(newTodo.rows);
+
+  } catch (err) {
+    alert(err);
+    console.error(err.message);
+  }
 });
 
 app.get('/login/:fac', async (req, res) => {
@@ -66,15 +84,30 @@ app.get('/uid', async (req, res) => {
   }
 });
 
+app.get('/gresid', async (req, res) => {
+
+  try {
+    console.log(`SELECT greservationid from guestReservation order by greservationid desc limit 1;`)
+    //search for latest userID
+    const newTodo = await pool.query(
+      `SELECT greservationid from guestReservation order by greservationid desc limit 1;`
+    );
+
+    res.json(newTodo.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
 app.get('/uid1/:fac', async (req, res) => {
-  const {fac} = req.params;
+  const { fac } = req.params;
   try {
     console.log(req.body)
     //search for latest userID
     const newTodo = await pool.query(
       `select userid from usercredentials where loginid = '${fac}' order by userid desc limit 1;`
     );
-      console.log(newTodo.rows);
+    console.log(newTodo.rows);
     res.json(newTodo.rows);
   } catch (err) {
     console.error(err.message);
@@ -82,7 +115,7 @@ app.get('/uid1/:fac', async (req, res) => {
 });
 
 app.get('/orderHist/:fac', async (req, res) => {
-  const {fac} = req.params;
+  const { fac } = req.params;
   console.log("SELECT * FROM fuelquote where userid = ${fac} ORDER BY orderid");
   try {
     const allOrder = await pool.query(`SELECT * FROM fuelquote WHERE userid = ${fac} ORDER BY orderid;`);
@@ -93,10 +126,27 @@ app.get('/orderHist/:fac', async (req, res) => {
   }
 });
 
-app.get('/getTables', async (req, res) => {
-  console.log("SELECT tableCode FROM tableInfo WHERE reserved = 'yes'");
+app.get('/getTables/:fac', async (req, res) => {
+  const { fac } = req.params
+
+  const date = req.params.fac.split(",")[0];
+  const time = req.params.fac.split(",")[1] + ':00';
+  console.log(date + " " + time);
+  console.log(
+  `select reservation.tablepicked from reservation
+  where reservation.reservationdate = '${date}' and reservation.reservationtime = '${time}'
+  union
+  select guestreservation.tablepicked from guestreservation
+  where guestreservation.reservationdate = '${date}' and guestreservation.reservationtime = '${time}'`
+  );
   try {
-    const reservedTableList = await pool.query(`SELECT tableCode FROM tableInfo WHERE reserved = 'yes'`);
+    const reservedTableList = await pool.query(`
+    select reservation.tablepicked from reservation
+    where reservation.reservationdate = '${date}' and reservation.reservationtime = '${time}'
+    union
+    select guestreservation.tablepicked from guestreservation
+    where guestreservation.reservationdate = '${date}' and guestreservation.reservationtime = '${time}'
+    `);
     console.log(reservedTableList.rows);
     res.json(reservedTableList.rows)
   } catch (err) {
@@ -105,14 +155,14 @@ app.get('/getTables', async (req, res) => {
 });
 
 app.get('/findadd/:fac', async (req, res) => {
-  const {fac} = req.params;
+  const { fac } = req.params;
   try {
     console.log(req.body)
     //search for latest userID
     const newTodo = await pool.query(
       `select address from clientinformation where userid = '${fac}' order by address desc limit 1;`
     );
-      console.log(newTodo.rows);
+    console.log(newTodo.rows);
     res.json(newTodo.rows);
   } catch (err) {
     console.error(err.message);
@@ -120,14 +170,14 @@ app.get('/findadd/:fac', async (req, res) => {
 });
 
 app.get('/findgal/:fac', async (req, res) => {
-  const {fac} = req.params;
+  const { fac } = req.params;
   try {
     console.log(req.body)
     //search gallon
     const newTodo = await pool.query(
       `select count(gallonsreq) from fuelquote where userid = ${fac};`
     );
-      console.log(newTodo.rows);
+    console.log(newTodo.rows);
     res.json(newTodo.rows);
   } catch (err) {
     console.error(err.message);
@@ -135,14 +185,14 @@ app.get('/findgal/:fac', async (req, res) => {
 });
 
 app.get('/findstate/:fac', async (req, res) => {
-  const {fac} = req.params;
+  const { fac } = req.params;
   try {
     console.log(req.body)
     //search state
     const newTodo = await pool.query(
       `select state from clientinformation where userid = ${fac} limit 1;`
     );
-      console.log(newTodo.rows);
+    console.log(newTodo.rows);
     res.json(newTodo.rows);
   } catch (err) {
     console.error(err.message);
@@ -150,14 +200,14 @@ app.get('/findstate/:fac', async (req, res) => {
 });
 
 app.get('/oid/:fac', async (req, res) => {
-  const {fac} = req.params;
+  const { fac } = req.params;
   try {
     console.log(req.body)
     //search for latest orderid
     const newTodo = await pool.query(
       `select orderid from fuelquote where userid = ${fac} order by orderid desc limit 1;`
     );
-      console.log(newTodo.rows);
+    console.log(newTodo.rows);
     res.json(newTodo.rows);
   } catch (err) {
     console.error(err.message);
@@ -165,13 +215,13 @@ app.get('/oid/:fac', async (req, res) => {
 });
 
 app.get('/checkProfile/:fac', async (req, res) => {
-  const {fac} = req.params;
+  const { fac } = req.params;
   try {
     console.log(req.body)
     const newTodo = await pool.query(
       `select count(*) from clientinformation where userid = ${fac};`
     );
-      console.log(newTodo.rows);
+    console.log(newTodo.rows);
     res.json(newTodo.rows);
   } catch (err) {
     console.error(err.message);
@@ -179,35 +229,35 @@ app.get('/checkProfile/:fac', async (req, res) => {
 });
 
 //William Code
-app.get('/',(request, response) => {
+app.get('/', (request, response) => {
   response.sendFile(path.join(__dirname + '/fuelform.html'))
 })
 
-app.post('/formData',[
+app.post('/formData', [
   check('gallonsreq')
-  .not().isEmpty().withMessage('Name cannot be empty.')
-  .isLength({
-      max:50
-  }).withMessage('50 numbers max for gallons required.')
-  .trim(),
+    .not().isEmpty().withMessage('Name cannot be empty.')
+    .isLength({
+      max: 50
+    }).withMessage('50 numbers max for gallons required.')
+    .trim(),
 
   check('deliveryadr')
-  .not().isEmpty().withMessage('Delivery address cannot be empty.')
-  .isLength({
-      max:100
-  }).withMessage('100 characters max for address.'),
+    .not().isEmpty().withMessage('Delivery address cannot be empty.')
+    .isLength({
+      max: 100
+    }).withMessage('100 characters max for address.'),
 
   check('ddate')
-  .not().isEmpty().withMessage('Delivery date cannot be empty.'),
+    .not().isEmpty().withMessage('Delivery date cannot be empty.'),
 
-] ,(request, response) => {
+], (request, response) => {
   const errors = validationResult(request);
 
-  if(!errors.isEmpty()){
-      return response.status(422).json({errors: errors.array()});
+  if (!errors.isEmpty()) {
+    return response.status(422).json({ errors: errors.array() });
   }
   response.status(202).json({
-      success:'Ok'
+    success: 'Ok'
   })
 });
 
@@ -235,49 +285,49 @@ app.post("/fuelform", async (req, res) => {
 
 
 //Duy Code
-app.get('/',(request, response) => {
+app.get('/', (request, response) => {
   response.sendFile(path.join(__dirname + '/profile_dv.html'))
 });
 
-app.post('/formData',[
+app.post('/formData', [
   check('fullname')
-  .not().isEmpty().withMessage('Name cannot be empty.')
-  .isLength({
-      max:50
-  }).withMessage('50 characters max for full name.')
-  .trim(),
+    .not().isEmpty().withMessage('Name cannot be empty.')
+    .isLength({
+      max: 50
+    }).withMessage('50 characters max for full name.')
+    .trim(),
 
   check('address')
-  .not().isEmpty().withMessage('Address cannot be empty.')
-  .isLength({
-      max:100
-  }).withMessage('100 characters max for address.'),
+    .not().isEmpty().withMessage('Address cannot be empty.')
+    .isLength({
+      max: 100
+    }).withMessage('100 characters max for address.'),
 
   check('address2')
-  .isLength({
-      max:100
-  }).withMessage('100 characters max for address 2.'),
+    .isLength({
+      max: 100
+    }).withMessage('100 characters max for address 2.'),
 
   check('city')
-  .not().isEmpty().withMessage('City cannot be empty.')
-  .isLength({
-      max:100
-  }).withMessage('100 characters max for city.'),
+    .not().isEmpty().withMessage('City cannot be empty.')
+    .isLength({
+      max: 100
+    }).withMessage('100 characters max for city.'),
 
   check('zipcode')
-  .isPostalCode('US').withMessage('not a valid US Zipcode.')
-  .isLength({
-      min:5,
-      max:9
-  }).withMessage('Minimum of 5 characters and Maximum of 9 characters for Zipcode.')
-] ,(request, response) => {
+    .isPostalCode('US').withMessage('not a valid US Zipcode.')
+    .isLength({
+      min: 5,
+      max: 9
+    }).withMessage('Minimum of 5 characters and Maximum of 9 characters for Zipcode.')
+], (request, response) => {
   const errors = validationResult(request);
 
-  if(!errors.isEmpty()){
-      return response.status(422).json({errors: errors.array()});
+  if (!errors.isEmpty()) {
+    return response.status(422).json({ errors: errors.array() });
   }
   response.status(202).json({
-      success:'Ok'
+    success: 'Ok'
   })
 });
 
@@ -290,7 +340,7 @@ app.post("/profile", async (req, res) => {
   address2 = req.body.add2;
   city = req.body.city;
   state = req.body.state;
-  zipcode = req.body.zip; 
+  zipcode = req.body.zip;
   console.log("work?");
   try {
     console.log(req.body)
@@ -306,7 +356,7 @@ app.post("/profile", async (req, res) => {
 });
 
 app.listen(5000, () => {
-    console.log("server has started on port 5000");
+  console.log("server has started on port 5000");
 });
 
 console.log(table_cal());

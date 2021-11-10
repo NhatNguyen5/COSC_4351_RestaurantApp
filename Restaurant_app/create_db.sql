@@ -2,6 +2,8 @@ DROP TABLE IF EXISTS userCredentials CASCADE;
 DROP TABLE IF EXISTS userInfo CASCADE;
 DROP TABLE IF EXISTS reservation CASCADE;
 DROP TABLE IF EXISTS tableInfo CASCADE;
+DROP TABLE IF EXISTS guestreservation CASCADE;
+
 CREATE EXTENSION pgcrypto;
 
 CREATE TABLE userCredentials(
@@ -23,29 +25,27 @@ CREATE TABLE userInfo(
 
 CREATE TABLE reservation(
 	reservationID varchar NOT NULL UNIQUE,
-	guestName TEXT NOT NULL,
-	phone varchar(10) NOT NULL,
-	email varchar(320) NOT NULL,
-	date DATE NOT NULL,
+	userID SERIAL,
+	reservationDate DATE NOT NULL,
+	reservationTime TIME NOT NULL,
 	guestNumber integer NOT NULL,
 	isHoliday TEXT NOT NULL,
 	tablePicked TEXT NOT NULL,
-	reservedTime DATE NOT NULL,
-	userID SERIAL,
 	PRIMARY KEY(reservationID),
 	CONSTRAINT r_userID_fk FOREIGN KEY (userID) REFERENCES userCredentials(userID) ON DELETE CASCADE
 );
 
 CREATE TABLE guestReservation(
 	gReservationID varchar NOT NULL UNIQUE,
-	guestName TEXT NOT NULL,
+	guestFirstName TEXT NOT NULL,
+	guestLastName TEXT NOT NULL,
 	phone varchar(10) NOT NULL,
 	email varchar(320) NOT NULL,
-	date DATE NOT NULL,
+	reservationDate DATE NOT NULL,
+	reservationTime TIME NOT NULL,
 	guestNumber integer NOT NULL,
 	isTraffic TEXT NOT NULL,
 	tablePicked TEXT NOT NULL,
-	reservedTime DATE NOT NULL,
 	PRIMARY KEY(gReservationID)
 );
 
@@ -90,3 +90,25 @@ UPDATE tableInfo SET reserved = 'yes' WHERE tableCode = 'A1';
 UPDATE tableInfo SET reserved = 'yes' WHERE tableCode = 'B2';
 UPDATE tableInfo SET reserved = 'yes' WHERE tableCode = 'C3';
 */
+
+INSERT INTO userCredentials
+VALUES
+('0', 'user', 'password');
+
+INSERT INTO userInfo
+VALUES
+('0','JaneDoe','Baker St', 'Baker St', 100, 'Valid CreditCard');
+
+INSERT INTO Reservation
+VALUES 
+('0', '0', '2021-12-06', '13:00', 2, 'no', 'A2');
+
+INSERT INTO guestReservation
+VALUES 
+('0', 'John', 'Doe', '0123456789', 'JDoe@mail.com', '2021-12-06', '13:00', 12, 'no', 'A1,B2,C3');
+
+INSERT INTO guestReservation
+VALUES 
+('1', 'James', 'Doe', '0123456789', 'JaDoe@mail.com', '2021-12-07', '13:00', 12, 'no', 'A1,A2,A3,A4,B1,B2,B3,B4,C1,C2,C3,D1');
+
+/*'2021-12-06', '13:00'*/

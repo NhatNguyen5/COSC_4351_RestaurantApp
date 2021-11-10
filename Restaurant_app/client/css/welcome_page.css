@@ -266,6 +266,47 @@ h1.title_name{
     transition:800ms ease all;
 }
 
+.submit-btn{
+    background:#DD7230;
+    color:#fff;
+    border:none;
+    display: block;
+    position:relative;
+    height:25px;
+    font-size:15px;
+    padding:0 10px;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:30px;
+}
+.submit-btn:hover{
+    background:#fff;
+    color:#DD7230;
+}
+.submit-btn:before,.submit-btn:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #DD7230;
+    transition:400ms ease all;
+}
+.submit-btn:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+}
+.submit-btn:hover:before,.submit-btn:hover:after{
+    width:100%;
+    transition:800ms ease all;
+}
+
 .table_reserve {
     display: block;
     margin-left: auto;
@@ -302,7 +343,7 @@ h1.title_name{
     position: relative;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 70px;
+    margin-top: -20px;
     padding: 5px;
     transform: scale(1.2);
 }

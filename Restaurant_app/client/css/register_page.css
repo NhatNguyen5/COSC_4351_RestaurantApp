@@ -185,7 +185,7 @@ h1.title_name{
 
 .form-a{
     width: 800px;
-    height: 480px;
+    height: 600px;
     position: relative;
     margin: 8% auto;
     margin-top: -15px;
@@ -235,7 +235,7 @@ input{
     margin-bottom: 20px;
 }
 
-.submit-btn{
+.submit-btn:enabled{
     background:#DD7230;
     color:#fff;
     border:none;
@@ -247,14 +247,28 @@ input{
     transition:800ms ease all;
     outline:none;
     margin-left: 250px;
-    margin-top:50px;
+    margin-top:20px;
     display:block;
 }
-.submit-btn:hover{
+.submit-btn:disabled{
+    background:#e2a884;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:35px;
+    font-size:15px;
+    padding:0 110px;
+    transition:800ms ease all;
+    outline:none;
+    margin-left: 250px;
+    margin-top:20px;
+    display:block;
+}
+.submit-btn:enabled:hover{
     background:#fff;
     color:#DD7230;
 }
-.submit-btn:before,.submit-btn:after{
+.submit-btn:enabled:before,.submit-btn:enabled:after{
     content:'';
     position:absolute;
     top:0;
@@ -264,13 +278,13 @@ input{
     background: #DD7230;
     transition:400ms ease all;
 }
-.submit-btn:after{
+.submit-btn:enabled:after{
     right:inherit;
     top:inherit;
     left:0;
     bottom:0;
 }
-.submit-btn:hover:before,.submit-btn:hover:after{
+.submit-btn:enabled:hover:before,.submit-btn:enabled:hover:after{
     width:100%;
     transition:800ms ease all;
 }

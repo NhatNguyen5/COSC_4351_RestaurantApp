@@ -2,43 +2,130 @@ var selectedTable = [];
 var fullTableList = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'D1']
 var notAvailTableList = [];
 var availTableList = [];
-var noOfSeatReq = document.getElementById('noOfSeats').value;
+var noOfSeatReq = 0;
+var info = [];
+var guestReservationID = 0;
 
-window.onload = getTableMap;
+//info[0][0]: first name
+//info[0][1]: last name
+//info[1]: email
+//info[2]: phone
+//info[3]: date
+//info[4]: time
+//info[5]: noOfSeats
+//info[6]: prefer payment method
 
+window.onload = getInfo();
+window.onload = findLastGResID();
 
-async function getTableMap() {
+async function getInfo() {
     try {
-        const response = await fetch(`http://localhost:5000/getTables`);
-        const jsonData = await response.json();
-        setTables(jsonData);
         //console.log(jsonData);
+        if(localStorage.getItem("fname") != null && localStorage.getItem("lname") != null){
+            info.push([localStorage.getItem("fname"), localStorage.getItem("fname")]);
+        } else {
+            info.push(null);
+        }
+        if(localStorage.getItem("email") != null){
+            info.push(localStorage.getItem("email"));
+        } else {
+            info.push(null);
+        }
+        if(localStorage.getItem("phone") != null){
+            info.push(localStorage.getItem("phone"));
+        } else {
+            info.push(null);
+        }
+        if(localStorage.getItem("date") != null){
+            info.push(localStorage.getItem("date"));
+        } else {
+            info.push(null);
+        }
+        if(localStorage.getItem("time") != null){
+            info.push(localStorage.getItem("time"));
+        } else {
+            info.push(null);
+        }
+        if(localStorage.getItem("noOfSeats") != null){
+            noOfSeatReq = parseInt(localStorage.getItem("noOfSeats"));
+        } else {
+            noOfSeatReq = 0;
+        }
+        if(localStorage.getItem("notAvailTab") != null){
+            notAvailTableList = (localStorage.getItem("notAvailTab")).split(',');
+            if(notAvailTableList[0] == ''){
+                notAvailTableList = [];
+            }
+        }
+        if(localStorage.getItem("prefPay") != null){
+            info.push(localStorage.getItem("prefPay"));
+        } else {
+            info.push(null);
+        }
         displayTables();
     } catch (err) {
         console.log(err.message);
     }
 }
 
-const setTables = (data) => {
-    notAvailTableList = data;
-}
-
 async function displayTables() {
     availTableList = fullTableList;
     notAvailTableList.forEach(element => {
-        document.getElementById(element.tablecode).style.background = 'darkred';
-        document.getElementById(element.tablecode).style.color = 'grey';
-        document.getElementById(element.tablecode).disabled = true;
-        availTableList = availTableList.filter(item => item !== element.tablecode);
+        document.getElementById(element).style.background = 'darkred';
+        document.getElementById(element).style.color = 'grey';
+        document.getElementById(element).disabled = true;
+        availTableList = availTableList.filter(item => item !== element);
     });
-
-    updateMaxSeatNum();
-
-    console.log(noOf2Left, noOf4Left, noOf6Left, noOf8Left)
+}
+/*
+async function reservedTablePost(){
+    var gResID = guestReservationID;
+    var fistName = info[0][0]
+    var lastName = info[0][1]
+    var email = info[1]
+    var phone = info[2]
+    var prefPay = info[3]
+    var date = 
+    
+    try{
+        const body = {
+            userid: userid,
+            user: user, 
+            pass: pass 
+        };
+        const response = await fetch(`http://localhost:5000/reserveGuestTable`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        });
+        alert("Registration Successful!");
+        window.location.href = 'login.html';
+    }catch (err) {
+        console.log(err.message);
+    }
+}
+*/
+async function findLastGResID(){
+    try {
+        const response = await fetch(`http://localhost:5000/gresid`);
+        const jsonData = await response.json();
+        let data = [];
+        data = jsonData;
+        console.log(data);
+        if(data.length == 0 || data.length == null){
+            guestReservationID = 0;
+        }
+        else{
+            guestReservationID = parseInt(data[0].greservationid) + 1;
+        }
+        console.log(guestReservationID);
+    }catch (err) {
+      console.log(err.message);
+    }
 }
 
 async function updateMapToSeatNum(noOfSeats, update) {
-    //not done
+    console.log(info);
     if(update){
         noOfSeatReq = noOfSeats;
         selectedTable.forEach(element => {
@@ -55,27 +142,6 @@ async function updateMapToSeatNum(noOfSeats, update) {
         disableGroup('B');
         disableGroup('C');
         disableGroup('D');
-        /*
-        if (noOfSeatReq > 0) {
-            if ((noOfSeatReq > 0 && noOfSeats <= 2 && noOf2Left > 0) ||
-                (noOfSeats <= 4 && noOf4Left == 0 && noOf2Left > 1) ||
-                (noOfSeats <= 6 && noOf6Left == 0 && noOf4Left == 0 && noOf2Left > 2)) {
-                enableGroup('A');
-            } else {
-                if (noOfSeats <= 4 && noOf4Left > 0) {
-                    enableGroup('B');
-                } else {
-                    if (noOfSeats <= 6 && noOf6Left > 0) {
-                        enableGroup('C');
-                    } else {
-                        if (noOfSeats <= 8 && noOf8Left > 0) {
-                            enableGroup('D');
-                        }
-                    }
-                }
-            }
-        }
-        */
     }
 }
 
@@ -107,19 +173,8 @@ async function enableGroup(groupId) {
     });
 }
 
-function updateMaxSeatNum() {
-    var maxSeatNum = 0;
-    availTableList.forEach(element => {
-        maxSeatNum += (
-            (element[0] == 'A') ? 2 :
-                (element[0] == 'B') ? 4 :
-                    (element[0] == 'C') ? 6 : 8
-        );
-    });
-    document.getElementById('noOfSeats').max = maxSeatNum;
-}
-
 async function selectedTableUpdater(clicked_id) {
+    console.log(guestReservationID);
     if (selectedTable.includes(clicked_id)) {
         availTableList.push(clicked_id);
         selectedTable = selectedTable.filter(item => item !== clicked_id);
@@ -130,7 +185,7 @@ async function selectedTableUpdater(clicked_id) {
                 clicked_id[0] == 'B' ? 4 :
                     clicked_id[0] == 'C' ? 6 : 8
         );
-        updateMapToSeatNum(noOfSeatReq, false);
+        updateMapToSeatNum(noOfSeatReq, false)
     }
     else {
         selectedTable.push(clicked_id);
@@ -142,7 +197,7 @@ async function selectedTableUpdater(clicked_id) {
                 clicked_id[0] == 'B' ? 4 :
                     clicked_id[0] == 'C' ? 6 : 8
         );
-        updateMapToSeatNum(noOfSeatReq, false);
+        updateMapToSeatNum(noOfSeatReq, false)
     }
 
     if (noOfSeatReq > 0) {
@@ -156,12 +211,4 @@ async function selectedTableUpdater(clicked_id) {
     
     //alert(selectedTable);
     
-}
-
-async function reserveTable(){
-    location.href = "reserve_table.html";
-}
-
-async function passInfo(){
-
 }

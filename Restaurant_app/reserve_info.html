@@ -26,20 +26,32 @@
                 <p><label for="PhoneNum" class="billN">Phone Number</label></p>
                 <input type="text" class="bill" id="PhoneNum" placeholder="xxx-xxx-xxxx" />
 
+                <p><label for="date" class="date">Reservation Date</label></p>
+                <input type="date" class="bill" id="date" value="Date" onchange="getTableMap()" required/>
+
+                <p><label for="time" class="time">Reservation Time</label></p>
+                <!--<input type="time" class="bill" id="time" min="09:00" value="09:00" max= "19:00" required/>-->
+                <select name="time" id="time" value="9" class="pay" onchange="getTableMap()" required>
+                    
+                </select>
+
+                <p><label for="quantity" class="time" id="noOfSeatsLabel">Number of seats:</label></p>
+                <input class="pay" type="number" id="noOfSeats" name="noOfSeats" value="1" min="1" max="1" required>
+
                 <p><label for="preferPay" class="payN">Preferred Payment</label></p>
-                <select class="pay" id="totalamt" required>
+
+                <select class="pay" id="preferPay" required>
                     <option value="Cash">Cash</option>
                     <option value="Valid_Creditcard">Valid Creditcard</option>
                     <option value="Invalid_Creditcard">Invalid Creditcard (for testing purposes)</option>
                 </select>
-
                 <p>
-                    <input type="submit" class="submit-btn" value="Select Table">
+                    <input id="submit_info" type="submit" class="submit-btn" value="Select Table" onclick="passInfo()">
                 </p>
             </div>
         </form>
     </div>
 </body>
-<script src="client/js/reserve_table.js"></script>
+<script src="client/js/reserve_info.js"></script>
 
 </html>

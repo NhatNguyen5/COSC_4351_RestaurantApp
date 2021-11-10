@@ -8,8 +8,8 @@
 
 <body>
     <div class="bkg">
-        <!-- <button class = "btn-welcome" type="button" class="submit-btn" onclick="window.location.href='login.html'">Welcome</button> -->
-        <button class="btn-welcome" type="button" class="submit-btn">Welcome</button>
+        <button class="btn-welcome" type="button" class="submit-btn"
+            onclick="window.location.href='welcome_page.html'">Welcome</button>
         <button class="btn-menu" type="button" class="submit-btn">Menu</button>
         <button class="btn-order" type="button" class="submit-btn">Order</button>
         <button class="btn-press" type="button" class="submit-btn">Press</button>
@@ -18,13 +18,9 @@
         <div class="form-b">
             <div class="form-button">
                 <form class="table_reserve">
-                    <label for="quantity" style="color:  black; margin-right: 10px; margin-left: 40px;">Number of seats:</label>
-                    <input type="number" id="noOfSeats" onchange="updateMapToSeatNum(this.value, true)"
-                        onkeyup="updateMapToSeatNum(this.value, true)" name="noOfSeats" value="1" min="1" max="1">
-
-                    <input type="submit" value="Reserve">
+                    <input type="submit" class="submit-btn" value="Back" onclick="history.back()">
                 </form>
-                <br><br>
+                <br>
                 <div id="tableMap">
                     <div class="map">
                         <img class="auto_fit_img" src="client/css/Restaurant_design.png" />
@@ -54,6 +50,9 @@
                             style="transform: translate(197px, -126px);" id="D1">D1</button>
                     </div>
                 </div>
+                <form class="table_reserve" method="post">
+                    <input type="submit" class="submit-btn" value="Reserve" onclick="reservedTablePost()">
+                </form>
             </div>
         </div>
     </div>
