@@ -4,3 +4,5 @@ npm install express-validator
 npm install --save-dev jest
 npm install cors
 npm install pg
+npm install date-holidays
+npm audit fix

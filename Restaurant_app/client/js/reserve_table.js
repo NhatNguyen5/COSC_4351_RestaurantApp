@@ -77,6 +77,7 @@ async function displayTables() {
         availTableList = availTableList.filter(item => item !== element);
     });
 }
+
 /*
 async function reservedTablePost(){
     var gResID = guestReservationID;
@@ -84,14 +85,22 @@ async function reservedTablePost(){
     var lastName = info[0][1]
     var email = info[1]
     var phone = info[2]
-    var prefPay = info[3]
-    var date = 
+    var date = info[3]
+    var time = info[4]
+    var noOfSeats = info[5]
+    var prefPay = info[6]
     
     try{
         const body = {
-            userid: userid,
-            user: user, 
-            pass: pass 
+            var gResID = guestReservationID;
+            var fistName = info[0][0]
+            var lastName = info[0][1]
+            var email = info[1]
+            var phone = info[2]
+            var date = info[3]
+            var time = info[4]
+            var noOfSeats = info[5]
+            var prefPay = info[6]
         };
         const response = await fetch(`http://localhost:5000/reserveGuestTable`, {
             method: "POST",
@@ -105,6 +114,7 @@ async function reservedTablePost(){
     }
 }
 */
+
 async function findLastGResID(){
     try {
         const response = await fetch(`http://localhost:5000/gresid`);

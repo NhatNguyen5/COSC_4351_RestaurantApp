@@ -14,7 +14,7 @@
         <button class="btn-press" type="button" class="submit-btn">Press</button>
         <button class="btn-contacts" type="button" class="submit-btn">Contacts</button>
         <h1 class="title_name">Le Restäuränt</h1>
-        <form action="reserve_table.html">
+        <form>
             <div class="form-a">
                 <p><label for="fname" class="nameN">Full Name</label> </p>
                 <input type="text" class="firstN" id="firstN" placeholder="First Name" required />
@@ -27,7 +27,7 @@
                 <input type="text" class="bill" id="PhoneNum" placeholder="xxx-xxx-xxxx" />
 
                 <p><label for="date" class="date">Reservation Date</label></p>
-                <input type="date" class="bill" id="date" value="Date" onchange="getTableMap()" required/>
+                <input type="date" class="bill" id="date" value="Date" onchange="getTableMap(); checkHoliday();" required/>
 
                 <p><label for="time" class="time">Reservation Time</label></p>
                 <!--<input type="time" class="bill" id="time" min="09:00" value="09:00" max= "19:00" required/>-->
@@ -46,7 +46,7 @@
                     <option value="Invalid_Creditcard">Invalid Creditcard (for testing purposes)</option>
                 </select>
                 <p>
-                    <input id="submit_info" type="submit" class="submit-btn" value="Select Table" onclick="passInfo()">
+                    <input id="submit_info" type="submit" class="submit-btn" value="Select Table" onclick="checkCard()">
                 </p>
             </div>
         </form>

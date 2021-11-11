@@ -1,29 +1,17 @@
-//credit to https://stackoverflow.com/questions/32342753/calculate-holidays-in-javascript for holiday calculator
-
+/*
+Sources:
+Holiday checker: https://stackoverflow.com/questions/58511847/calculating-holidays-in-javascript
+*/
 window.onload = setInfo();
 window.onload = getTableMap();
+window.onload = checkHoliday(document.getElementById('date').value);
 
 var availableTime = Array.from(Array(10).keys())
 var fullTableList = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'D1']
 var availTableList = [];
 var notAvailTableList = [];
-
-var holidays = { // keys are formatted as month,week,day
-    "0,2,1": "Martin Luther King, Jr. Day",
-    "1,2,1": "President's Day",
-    "2,1,0": "Daylight Savings Time Begins",
-    "3,3,3": "Administrative Assistants Day",
-    "4,1,0": "Mother's Day",
-    "4,-1,1": "Memorial Day",
-    "5,2,0": "Father's Day",
-    "6,2,0": "Parents Day",
-    "8,0,1": "Labor Day",
-    "8,1,0": "Grandparents Day",
-    "8,-1,0": "Gold Star Mothers Day",
-    "9,1,1": "Columbus Day",
-    "10,0,0": "Daylight Savings Time Ends",
-    "10,3,4": "Thanksgiving Day"
-};
+var isHoliday = false;
+var whatHoliday;
 
 async function getTableMap() {
     var fac = [2];
@@ -56,6 +44,30 @@ const setTables = (data) => {
     //console.log(notAvailTableList)
 }
 
+async function checkHoliday(){
+    var fac = [2]
+    fac[0] = document.getElementById('date').value;
+    fac[1] = 'GMT-0600';
+    try {
+        const response = await fetch(`http://localhost:5000/checkHoliday/${fac}`)
+        const jsonData = await response.json();
+        isHoliday = (jsonData != false) ? true : false;
+        whatHoliday = (jsonData != false) ? `It's ${jsonData[0].name}.` : "Not a Holiday.";
+        if(!isHoliday){
+            document.getElementById('preferPay').innerHTML = `<option value="Cash">Cash</option>`
+            document.getElementById('preferPay').innerHTML += `<option value="Valid_Creditcard">Valid Creditcard</option>`
+            document.getElementById('preferPay').innerHTML += `<option value="Invalid_Creditcard">Invalid Creditcard (for testing purposes)</option>`
+        } else {
+            document.getElementById('preferPay').innerHTML = `<option value="Valid_Creditcard">Valid Creditcard</option>`
+            document.getElementById('preferPay').innerHTML += `<option value="Invalid_Creditcard">Invalid Creditcard (for testing purposes)</option>`
+        }
+    } catch (err) {
+        console.log(err.message);
+    }
+    
+    console.log(whatHoliday);
+}
+
 function updateMaxSeatNum() {
     var maxSeatNum = 0;
     availTableList = fullTableList;
@@ -86,7 +98,15 @@ function updateMaxSeatNum() {
     }
 }
 
-async function passInfo() {
+function checkCard(){
+    if(document.getElementById('preferPay').value == "Valid_Creditcard"){
+        passInfo();
+    }else{
+        alert("Card is invalid! Please try a different one!");
+    }
+}
+
+function passInfo() {
     localStorage.setItem("fname", document.getElementById('firstN').value);
     localStorage.setItem("lname", document.getElementById('lastN').value);
     localStorage.setItem("email", document.getElementById('EmailAdd').value);
@@ -96,6 +116,7 @@ async function passInfo() {
     localStorage.setItem("noOfSeats", document.getElementById('noOfSeats').value);
     localStorage.setItem("notAvailTab", notAvailTableList);
     localStorage.setItem("prefPay", document.getElementById('preferPay').value);
+    window.location.href = 'reserve_table.html';
 }
 
 async function setInfo() {
@@ -179,33 +200,7 @@ function setMinMaxDate() {
 
     limit = yyyy + '-' + mm + '-' + dd;
 
-    console.log(limit);
+    console.log("Last date: " + limit);
 
     document.getElementById('date').max = limit;
-}
-
-function getDate(year, month, week, day) {
-    var firstDay = 1;
-    if (week < 0) {
-        month++;
-        firstDay--;
-    }
-    var date = new Date(year, month, (week * 7) + firstDay);
-    if (day < date.getDay()) {
-        day += 7;
-    }
-    date.setDate(date.getDate() - date.getDay() + day);
-    return date;
-}
-function getHoliday(month, week, day) {
-    return holidays[month + "," + week + "," + day];
-}
-function getDateString(year, month, week, day) {
-    var date = getDate(year, month, week, day);
-    var holiday = getHoliday(month, week, day);
-    var dateString = date.toLocaleDateString();
-    if (holiday) {
-        dateString += " \xa0\xa0\xa0" + holiday;
-    }
-    return dateString;
 }

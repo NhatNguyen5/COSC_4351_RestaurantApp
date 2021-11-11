@@ -5,6 +5,8 @@ const cors = require("cors");
 const pool = require("./db");
 const { check, validationResult } = require('express-validator');
 var table_cal = require("./table_calculations");
+var Holidays = require('date-holidays');
+var hd = new Holidays('US');
 
 //middleware
 app.use(cors());
@@ -14,6 +16,17 @@ let urlencoded = express.urlencoded({ extended: true })
 app.use(express.json());
 app.use(urlencoded);
 app.use(express.static(__dirname + '/'));
+
+app.get('/checkHoliday/:fac', async (req, res) => {
+  const { fac } = req.params;
+  var date = fac.split(',')[0];
+  var timeZone = fac.split(',')[1];
+  hd.isHoliday(fac);
+  console.log(fac);
+  var temp = new Date(`${date} 00:00:00 ${timeZone}`);
+  console.log(hd.isHoliday(temp));
+  res.json(hd.isHoliday(temp));
+});
 
 //Du Code
 app.post("/register", async (req, res) => {

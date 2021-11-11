@@ -26,6 +26,10 @@ CREATE TABLE userInfo(
 CREATE TABLE reservation(
 	reservationID varchar NOT NULL UNIQUE,
 	userID SERIAL,
+	guestFirstName TEXT NOT NULL,
+	guestLastName TEXT NOT NULL,
+	phone varchar(10) NOT NULL,
+	email varchar(320) NOT NULL,
 	reservationDate DATE NOT NULL,
 	reservationTime TIME NOT NULL,
 	guestNumber integer NOT NULL,
