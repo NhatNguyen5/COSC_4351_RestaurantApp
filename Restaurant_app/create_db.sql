@@ -16,6 +16,8 @@ CREATE TABLE userCredentials(
 CREATE TABLE userInfo(
 	userID SERIAL NOT NULL,
 	fullname TEXT NOT NULL,
+	phone varchar(10) NOT NULL,
+	email varchar(320) NOT NULL,
 	mailAddress TEXT NOT NULL,
 	billAddress TEXT,
 	point integer NOT NULL,
@@ -25,21 +27,6 @@ CREATE TABLE userInfo(
 
 CREATE TABLE reservation(
 	reservationID varchar NOT NULL UNIQUE,
-	userID SERIAL,
-	guestFirstName TEXT NOT NULL,
-	guestLastName TEXT NOT NULL,
-	phone varchar(10) NOT NULL,
-	email varchar(320) NOT NULL,
-	reservationDate DATE NOT NULL,
-	reservationTime TIME NOT NULL,
-	guestNumber integer NOT NULL,
-	tablePicked TEXT NOT NULL,
-	PRIMARY KEY(reservationID),
-	CONSTRAINT r_userID_fk FOREIGN KEY (userID) REFERENCES userCredentials(userID) ON DELETE CASCADE
-);
-
-CREATE TABLE guestReservation(
-	gReservationID varchar NOT NULL UNIQUE,
 	guestFirstName TEXT NOT NULL,
 	guestLastName TEXT NOT NULL,
 	phone varchar(10) NOT NULL,
@@ -49,7 +36,7 @@ CREATE TABLE guestReservation(
 	guestNumber integer NOT NULL,
 	tablePicked TEXT NOT NULL,
 	preferPayment TEXT NOT NULL,
-	PRIMARY KEY(gReservationID)
+	PRIMARY KEY(reservationID)
 );
 
 CREATE TABLE tableInfo(
@@ -100,18 +87,18 @@ VALUES
 
 INSERT INTO userInfo
 VALUES
-('0','JaneDoe','Baker St', 'Baker St', 100, 'Valid CreditCard');
+('0','Jane Doe', '9876543210', 'JanDoe@mail.com', 'Baker St', 'Baker St', 100, 'Valid CreditCard');
 
 INSERT INTO Reservation
 VALUES 
-('0', '0', 'Jane', 'Doe', '9876543210', 'JanDoe@mail.com', '2021-12-06', '13:00', 2, 'A2', 'Valid_Creditcard');
+('0', 'Jane', 'Doe', '9876543210', 'JanDoe@mail.com', '2021-12-06', '13:00', 2, 'A2', 'Valid_Creditcard');
 
-INSERT INTO guestReservation
+INSERT INTO Reservation
 VALUES 
-('0', 'John', 'Doe', '0123456789', 'JDoe@mail.com', '2021-12-06', '13:00', 12, 'A1,B2,C3', 'Cash');
+('1', 'John', 'Doe', '0123456789', 'JDoe@mail.com', '2021-12-06', '13:00', 12, 'A1,B2,C3', 'Cash');
 
-INSERT INTO guestReservation
+INSERT INTO Reservation
 VALUES 
-('1', 'James', 'Doe', '0123456789', 'JaDoe@mail.com', '2021-12-07', '13:00', 50, 'A1,A2,A3,A4,B1,B2,B3,B4,C1,C2,C3,D1', 'Valid_Creditcard');
+('2', 'James', 'Doe', '0123456789', 'JaDoe@mail.com', '2021-12-07', '13:00', 50, 'A1,A2,A3,A4,B1,B2,B3,B4,C1,C2,C3,D1', 'Valid_Creditcard');
 
 /*'2021-12-06', '13:00'*/

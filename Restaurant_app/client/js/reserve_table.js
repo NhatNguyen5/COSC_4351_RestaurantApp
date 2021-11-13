@@ -4,7 +4,7 @@ var notAvailTableList = [];
 var availTableList = [];
 var noOfSeatReq = 0;
 var info = [];
-var guestReservationID = 0;
+var ReservationID = 0;
 
 //info[0][0]: first name
 //info[0][1]: last name
@@ -82,7 +82,7 @@ async function displayTables() {
 async function reservedTablePost(){
     try{
         const body = {
-            gResID: guestReservationID,
+            ResID: ReservationID,
             fistName: info[0][0],
             lastName: info[0][1],
             email: info[1],
@@ -93,7 +93,7 @@ async function reservedTablePost(){
             tablePicked: selectedTable,
             prefPay: info[6]
         };
-        const response = await fetch(`http://localhost:5000/reserveGuestTable`, {
+        const response = await fetch(`http://localhost:5000/reserveTable`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
@@ -108,18 +108,18 @@ async function reservedTablePost(){
 
 async function findLastGResID(){
     try {
-        const response = await fetch(`http://localhost:5000/gresid`);
+        const response = await fetch(`http://localhost:5000/resid`);
         const jsonData = await response.json();
         let data = [];
         data = jsonData;
         console.log(data);
         if(data.length == 0 || data.length == null){
-            guestReservationID = 0;
+            ReservationID = 0;
         }
         else{
-            guestReservationID = parseInt(data[0].greservationid) + 1;
+            ReservationID = parseInt(data[0].reservationid) + 1;
         }
-        console.log(guestReservationID);
+        console.log(ReservationID);
     }catch (err) {
       console.log(err.message);
     }
@@ -175,7 +175,7 @@ async function enableGroup(groupId) {
 }
 
 async function selectedTableUpdater(clicked_id) {
-    console.log(guestReservationID);
+    console.log(ReservationID);
     if (selectedTable.includes(clicked_id)) {
         availTableList.push(clicked_id);
         selectedTable = selectedTable.filter(item => item !== clicked_id);

@@ -48,8 +48,8 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.post("/reserveGuestTable", async (req, res) => {
-  gResID = req.body.gResID;
+app.post("/reserveTable", async (req, res) => {
+  ResID = req.body.ResID;
   fistName = req.body.fistName;
   lastName = req.body.lastName;
   email = req.body.email;
@@ -62,11 +62,11 @@ app.post("/reserveGuestTable", async (req, res) => {
   try {
     console.log(req.body)
     //this will encrypt the password once it is made
-    console.log(`INSERT INTO guestReservation VALUES(${gResID},'${fistName}','${lastName}','${phone}',
+    console.log(`INSERT INTO Reservation VALUES(${ResID},'${fistName}','${lastName}','${phone}',
                                                     '${email}','${resDate}','${resTime}:00',${noOfSeats},
                                                     '${tablePicked}','${prefPay}');`)
     const newTodo = await pool.query(
-      `INSERT INTO guestReservation VALUES(${gResID},'${fistName}','${lastName}','${phone}',
+      `INSERT INTO Reservation VALUES(${ResID},'${fistName}','${lastName}','${phone}',
                                           '${email}','${resDate}','${resTime}:00',${noOfSeats},
                                           '${tablePicked}','${prefPay}');`
     );
@@ -110,13 +110,13 @@ app.get('/uid', async (req, res) => {
   }
 });
 
-app.get('/gresid', async (req, res) => {
+app.get('/resid', async (req, res) => {
 
   try {
-    console.log(`SELECT greservationid from guestReservation order by greservationid desc limit 1;`)
+    console.log(`SELECT reservationid from Reservation order by reservationid desc limit 1;`)
     //search for latest userID
     const newTodo = await pool.query(
-      `SELECT greservationid from guestReservation order by greservationid desc limit 1;`
+      `SELECT reservationid from Reservation order by reservationid desc limit 1;`
     );
 
     res.json(newTodo.rows);
@@ -160,19 +160,13 @@ app.get('/getTables/:fac', async (req, res) => {
   console.log(date + " " + time);
   console.log(
   `select reservation.tablepicked from reservation
-  where reservation.reservationdate = '${date}' and reservation.reservationtime = '${time}'
-  union
-  select guestreservation.tablepicked from guestreservation
-  where guestreservation.reservationdate = '${date}' and guestreservation.reservationtime = '${time}'`
+  where reservation.reservationdate = '${date}' and reservation.reservationtime = '${time}'`
   );
   try {
     const reservedTableList = await pool.query(`
     select reservation.tablepicked from reservation
-    where reservation.reservationdate = '${date}' and reservation.reservationtime = '${time}'
-    union
-    select guestreservation.tablepicked from guestreservation
-    where guestreservation.reservationdate = '${date}' and guestreservation.reservationtime = '${time}'
-    `);
+    where reservation.reservationdate = '${date}' and reservation.reservationtime = '${time}'`
+    );
     console.log(reservedTableList.rows);
     res.json(reservedTableList.rows)
   } catch (err) {

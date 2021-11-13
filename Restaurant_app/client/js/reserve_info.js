@@ -29,17 +29,13 @@ async function getTableMap() {
 
 const setTables = (data) => {
     var tempTable = []
-
-    if (data[0] != null) {
-        let tempStr = data[0].tablepicked
-        tempTable = tempStr.split(',');
-    }
-    if (data[1] != null) {
-        let tempStr = data[1].tablepicked
-        tempStr.split(',').forEach(element => {
-            tempTable.push(element);
+    data.forEach(element => {
+        let tempStr = element.tablepicked.split(',');
+        tempStr.forEach(element1 => {
+            tempTable.push(element1);
         });
-    }
+    });
+    console.log(tempTable);
     notAvailTableList = tempTable;
     //console.log(notAvailTableList)
 }
