@@ -33,7 +33,6 @@ CREATE TABLE reservation(
 	reservationDate DATE NOT NULL,
 	reservationTime TIME NOT NULL,
 	guestNumber integer NOT NULL,
-	isHoliday TEXT NOT NULL,
 	tablePicked TEXT NOT NULL,
 	PRIMARY KEY(reservationID),
 	CONSTRAINT r_userID_fk FOREIGN KEY (userID) REFERENCES userCredentials(userID) ON DELETE CASCADE
@@ -48,8 +47,8 @@ CREATE TABLE guestReservation(
 	reservationDate DATE NOT NULL,
 	reservationTime TIME NOT NULL,
 	guestNumber integer NOT NULL,
-	isTraffic TEXT NOT NULL,
 	tablePicked TEXT NOT NULL,
+	preferPayment TEXT NOT NULL,
 	PRIMARY KEY(gReservationID)
 );
 
@@ -105,14 +104,14 @@ VALUES
 
 INSERT INTO Reservation
 VALUES 
-('0', '0', '2021-12-06', '13:00', 2, 'no', 'A2');
+('0', '0', 'Jane', 'Doe', '9876543210', 'JanDoe@mail.com', '2021-12-06', '13:00', 2, 'A2', 'Valid_Creditcard');
 
 INSERT INTO guestReservation
 VALUES 
-('0', 'John', 'Doe', '0123456789', 'JDoe@mail.com', '2021-12-06', '13:00', 12, 'no', 'A1,B2,C3');
+('0', 'John', 'Doe', '0123456789', 'JDoe@mail.com', '2021-12-06', '13:00', 12, 'A1,B2,C3', 'Cash');
 
 INSERT INTO guestReservation
 VALUES 
-('1', 'James', 'Doe', '0123456789', 'JaDoe@mail.com', '2021-12-07', '13:00', 12, 'no', 'A1,A2,A3,A4,B1,B2,B3,B4,C1,C2,C3,D1');
+('1', 'James', 'Doe', '0123456789', 'JaDoe@mail.com', '2021-12-07', '13:00', 50, 'A1,A2,A3,A4,B1,B2,B3,B4,C1,C2,C3,D1', 'Valid_Creditcard');
 
 /*'2021-12-06', '13:00'*/

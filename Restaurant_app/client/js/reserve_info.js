@@ -98,15 +98,23 @@ function updateMaxSeatNum() {
     }
 }
 
-function checkCard(){
-    if(document.getElementById('preferPay').value == "Valid_Creditcard"){
-        passInfo();
-    }else{
-        alert("Card is invalid! Please try a different one!");
+console.log(document.forms.namedItem("reserve_info_form").reportValidity());
+
+async function checkCard() {
+    if(document.forms.namedItem("reserve_info_form").reportValidity()){
+        if(isHoliday){
+            if(document.getElementById('preferPay').value == "Valid_Creditcard"){
+                passInfo();
+            }else{
+                alert("Card is invalid! Please try a different one!");
+            }
+        } else {
+            passInfo();
+        }
     }
 }
 
-function passInfo() {
+async function passInfo() {
     localStorage.setItem("fname", document.getElementById('firstN').value);
     localStorage.setItem("lname", document.getElementById('lastN').value);
     localStorage.setItem("email", document.getElementById('EmailAdd').value);
@@ -116,6 +124,7 @@ function passInfo() {
     localStorage.setItem("noOfSeats", document.getElementById('noOfSeats').value);
     localStorage.setItem("notAvailTab", notAvailTableList);
     localStorage.setItem("prefPay", document.getElementById('preferPay').value);
+    console.log("Go to table!");
     window.location.href = 'reserve_table.html';
 }
 

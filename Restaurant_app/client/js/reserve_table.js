@@ -18,6 +18,8 @@ var guestReservationID = 0;
 window.onload = getInfo();
 window.onload = findLastGResID();
 
+document.getElementById("submit_table").disabled = true;
+
 async function getInfo() {
     try {
         //console.log(jsonData);
@@ -47,9 +49,8 @@ async function getInfo() {
             info.push(null);
         }
         if(localStorage.getItem("noOfSeats") != null){
-            noOfSeatReq = parseInt(localStorage.getItem("noOfSeats"));
-        } else {
-            noOfSeatReq = 0;
+            info.push(parseInt(localStorage.getItem("noOfSeats")));
+            noOfSeatReq = info[5];
         }
         if(localStorage.getItem("notAvailTab") != null){
             notAvailTableList = (localStorage.getItem("notAvailTab")).split(',');
@@ -78,42 +79,32 @@ async function displayTables() {
     });
 }
 
-/*
 async function reservedTablePost(){
-    var gResID = guestReservationID;
-    var fistName = info[0][0]
-    var lastName = info[0][1]
-    var email = info[1]
-    var phone = info[2]
-    var date = info[3]
-    var time = info[4]
-    var noOfSeats = info[5]
-    var prefPay = info[6]
-    
     try{
         const body = {
-            var gResID = guestReservationID;
-            var fistName = info[0][0]
-            var lastName = info[0][1]
-            var email = info[1]
-            var phone = info[2]
-            var date = info[3]
-            var time = info[4]
-            var noOfSeats = info[5]
-            var prefPay = info[6]
+            gResID: guestReservationID,
+            fistName: info[0][0],
+            lastName: info[0][1],
+            email: info[1],
+            phone: info[2],
+            resDate: info[3],
+            resTime: info[4],
+            noOfSeats: info[5],
+            tablePicked: selectedTable,
+            prefPay: info[6]
         };
         const response = await fetch(`http://localhost:5000/reserveGuestTable`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
         });
-        alert("Registration Successful!");
-        window.location.href = 'login.html';
+        alert("Reservation Successful!");
+        window.location.href = 'welcome_page.html';
     }catch (err) {
         console.log(err.message);
     }
 }
-*/
+
 
 async function findLastGResID(){
     try {
@@ -215,6 +206,9 @@ async function selectedTableUpdater(clicked_id) {
         enableGroup('B');
         enableGroup('C');
         enableGroup('D');
+        document.getElementById("submit_table").disabled = true;
+    } else {
+        document.getElementById("submit_table").disabled = false;
     }
 
     console.log(noOfSeatReq);

@@ -266,7 +266,7 @@ h1.title_name{
     transition:800ms ease all;
 }
 
-.submit-btn{
+.submit-btn:enabled{
     background:#DD7230;
     color:#fff;
     border:none;
@@ -282,11 +282,29 @@ h1.title_name{
     margin-right: auto;
     margin-top:30px;
 }
-.submit-btn:hover{
+
+.submit-btn:disabled{
+    background:#e2a884;
+    color:#fff;
+    border:none;
+    display: block;
+    position:relative;
+    height:25px;
+    font-size:15px;
+    padding:0 10px;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:30px;
+}
+
+.submit-btn:enabled:hover{
     background:#fff;
     color:#DD7230;
 }
-.submit-btn:before,.submit-btn:after{
+.submit-btn:enabled:before,.submit-btn:enabled:after{
     content:'';
     position:absolute;
     top:0;
@@ -296,13 +314,13 @@ h1.title_name{
     background: #DD7230;
     transition:400ms ease all;
 }
-.submit-btn:after{
+.submit-btn:enabled:after{
     right:inherit;
     top:inherit;
     left:0;
     bottom:0;
 }
-.submit-btn:hover:before,.submit-btn:hover:after{
+.submit-btn:enabled:hover:before,.submit-btn:enabled:hover:after{
     width:100%;
     transition:800ms ease all;
 }

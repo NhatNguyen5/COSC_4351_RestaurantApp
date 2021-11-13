@@ -6,6 +6,7 @@ const pool = require("./db");
 const { check, validationResult } = require('express-validator');
 var table_cal = require("./table_calculations");
 var Holidays = require('date-holidays');
+const { time } = require("console");
 var hd = new Holidays('US');
 
 //middleware
@@ -48,19 +49,31 @@ app.post("/register", async (req, res) => {
 });
 
 app.post("/reserveGuestTable", async (req, res) => {
-  userid = req.body.userid;
-  user = req.body.user;
-  pass = req.body.pass;
+  gResID = req.body.gResID;
+  fistName = req.body.fistName;
+  lastName = req.body.lastName;
+  email = req.body.email;
+  phone = req.body.phone;
+  resDate = req.body.resDate;
+  resTime = req.body.resTime;
+  noOfSeats = req.body.noOfSeats;
+  tablePicked = req.body.tablePicked;
+  prefPay = req.body.prefPay;
   try {
     console.log(req.body)
     //this will encrypt the password once it is made
+    console.log(`INSERT INTO guestReservation VALUES(${gResID},'${fistName}','${lastName}','${phone}',
+                                                    '${email}','${resDate}','${resTime}:00',${noOfSeats},
+                                                    '${tablePicked}','${prefPay}');`)
     const newTodo = await pool.query(
-      `INSERT INTO UserCredentials VALUES(${userid},'${user}',crypt('${pass}',gen_salt('bf'))); `
+      `INSERT INTO guestReservation VALUES(${gResID},'${fistName}','${lastName}','${phone}',
+                                          '${email}','${resDate}','${resTime}:00',${noOfSeats},
+                                          '${tablePicked}','${prefPay}');`
     );
     res.json(newTodo.rows);
 
   } catch (err) {
-    alert(err);
+    //alert(err);
     console.error(err.message);
   }
 });

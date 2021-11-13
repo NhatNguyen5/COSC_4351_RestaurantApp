@@ -14,7 +14,7 @@
         <button class="btn-press" type="button" class="submit-btn">Press</button>
         <button class="btn-contacts" type="button" class="submit-btn">Contacts</button>
         <h1 class="title_name">Le Restäuränt</h1>
-        <form>
+        <form id="reserve_info_form">
             <div class="form-a">
                 <p><label for="fname" class="nameN">Full Name</label> </p>
                 <input type="text" class="firstN" id="firstN" placeholder="First Name" required />
@@ -46,7 +46,7 @@
                     <option value="Invalid_Creditcard">Invalid Creditcard (for testing purposes)</option>
                 </select>
                 <p>
-                    <input id="submit_info" type="submit" class="submit-btn" value="Select Table" onclick="checkCard()">
+                    <input type="button" id="submit_info" type="submit" class="submit-btn" value="Select Table" onclick="checkCard()">
                 </p>
             </div>
         </form>
