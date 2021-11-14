@@ -194,10 +194,27 @@ h1.title_name{
     border-radius: 25px;
 }
 
-h2.login_page{
+h2.login_page1{
     text-align: center;
     text-decoration: underline;
-    margin: 10px auto;
+    /*margin: 10px auto;*/
+    float: right;
+    margin-bottom: 50px;
+    margin-right: 70px;
+    color: #DD7230;
+    font-family: Copperplate;
+    position: relative;
+    border-radius: 25px;
+    width: 80%;
+}
+
+h2.login_page2{
+    text-align: center;
+    text-decoration: underline;
+    /*margin: 10px auto;*/
+    float: left;
+    margin-bottom: 50px;
+    margin-left: 40px;
     color: #DD7230;
     font-family: Copperplate;
     position: relative;
@@ -248,6 +265,7 @@ h2.login_page{
 
 .u_email{
     margin-left: -280px;
+    margin-top: 100px;
 }
 .u_phone{
     margin-left: -280px;
