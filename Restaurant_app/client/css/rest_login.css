@@ -194,6 +194,20 @@ h1.title_name{
     border-radius: 25px;
 }
 
+h2.login_page{
+    text-align: center;
+    text-decoration: underline;
+    margin: 10px auto;
+    float: right;
+    margin-bottom: 20px;
+    margin-right: 70px;
+    color: #DD7230;
+    font-family: Copperplate;
+    position: relative;
+    border-radius: 25px;
+    width: 80%;
+}
+
 h2.login_page1{
     text-align: center;
     text-decoration: underline;
