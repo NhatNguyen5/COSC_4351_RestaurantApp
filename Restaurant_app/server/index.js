@@ -29,7 +29,6 @@ app.get('/checkHoliday/:fac', async (req, res) => {
   res.json(hd.isHoliday(temp));
 });
 
-//Du Code
 app.post("/register", async (req, res) => {
   userid = req.body.userid;
   user = req.body.user;
@@ -140,17 +139,6 @@ app.get('/uid1/:fac', async (req, res) => {
   }
 });
 
-app.get('/orderHist/:fac', async (req, res) => {
-  const { fac } = req.params;
-  console.log("SELECT * FROM fuelquote where userid = ${fac} ORDER BY orderid");
-  try {
-    const allOrder = await pool.query(`SELECT * FROM fuelquote WHERE userid = ${fac} ORDER BY orderid;`);
-    console.log(allOrder.rows);
-    res.json(allOrder.rows);
-  } catch (err) {
-    console.log(err.message);
-  }
-});
 
 app.get('/getTables/:fac', async (req, res) => {
   const { fac } = req.params
@@ -172,183 +160,6 @@ app.get('/getTables/:fac', async (req, res) => {
   } catch (err) {
     console.log(err.message);
   }
-});
-
-app.get('/findadd/:fac', async (req, res) => {
-  const { fac } = req.params;
-  try {
-    console.log(req.body)
-    //search for latest userID
-    const newTodo = await pool.query(
-      `select address from clientinformation where userid = '${fac}' order by address desc limit 1;`
-    );
-    console.log(newTodo.rows);
-    res.json(newTodo.rows);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
-
-app.get('/findgal/:fac', async (req, res) => {
-  const { fac } = req.params;
-  try {
-    console.log(req.body)
-    //search gallon
-    const newTodo = await pool.query(
-      `select count(gallonsreq) from fuelquote where userid = ${fac};`
-    );
-    console.log(newTodo.rows);
-    res.json(newTodo.rows);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
-
-app.get('/findstate/:fac', async (req, res) => {
-  const { fac } = req.params;
-  try {
-    console.log(req.body)
-    //search state
-    const newTodo = await pool.query(
-      `select state from clientinformation where userid = ${fac} limit 1;`
-    );
-    console.log(newTodo.rows);
-    res.json(newTodo.rows);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
-
-app.get('/oid/:fac', async (req, res) => {
-  const { fac } = req.params;
-  try {
-    console.log(req.body)
-    //search for latest orderid
-    const newTodo = await pool.query(
-      `select orderid from fuelquote where userid = ${fac} order by orderid desc limit 1;`
-    );
-    console.log(newTodo.rows);
-    res.json(newTodo.rows);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
-
-app.get('/checkProfile/:fac', async (req, res) => {
-  const { fac } = req.params;
-  try {
-    console.log(req.body)
-    const newTodo = await pool.query(
-      `select count(*) from clientinformation where userid = ${fac};`
-    );
-    console.log(newTodo.rows);
-    res.json(newTodo.rows);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
-
-//William Code
-app.get('/', (request, response) => {
-  response.sendFile(path.join(__dirname + '/fuelform.html'))
-})
-
-app.post('/formData', [
-  check('gallonsreq')
-    .not().isEmpty().withMessage('Name cannot be empty.')
-    .isLength({
-      max: 50
-    }).withMessage('50 numbers max for gallons required.')
-    .trim(),
-
-  check('deliveryadr')
-    .not().isEmpty().withMessage('Delivery address cannot be empty.')
-    .isLength({
-      max: 100
-    }).withMessage('100 characters max for address.'),
-
-  check('ddate')
-    .not().isEmpty().withMessage('Delivery date cannot be empty.'),
-
-], (request, response) => {
-  const errors = validationResult(request);
-
-  if (!errors.isEmpty()) {
-    return response.status(422).json({ errors: errors.array() });
-  }
-  response.status(202).json({
-    success: 'Ok'
-  })
-});
-
-app.post("/fuelform", async (req, res) => {
-  userid = req.body.userid;
-  orderid = req.body.orderid;
-  gallonsrequested = req.body.gallonsreq;
-  deliveryaddress = req.body.deliveryadr;
-  deliverydate = req.body.ddate;
-  sug = req.body.suggested;
-  total = req.body.total;
-  console.log("work?");
-  try {
-    console.log(req.body)
-    console.log(`INSERT INTO FuelQuote VALUES(${userid},${orderid},${gallonsrequested},'${deliveryaddress}','${deliverydate}',${sug},${total}); `)
-    const newTodo = await pool.query(
-      `INSERT INTO FuelQuote VALUES(${userid},${orderid},${gallonsrequested},'${deliveryaddress}','${deliverydate}',${sug},${total}); `
-    );
-    res.json(newTodo.rows);
-
-  } catch (err) {
-    console.error(err.message);
-  }
-});
-
-
-//Duy Code
-app.get('/', (request, response) => {
-  response.sendFile(path.join(__dirname + '/profile_dv.html'))
-});
-
-app.post('/formData', [
-  check('fullname')
-    .not().isEmpty().withMessage('Name cannot be empty.')
-    .isLength({
-      max: 50
-    }).withMessage('50 characters max for full name.')
-    .trim(),
-
-  check('address')
-    .not().isEmpty().withMessage('Address cannot be empty.')
-    .isLength({
-      max: 100
-    }).withMessage('100 characters max for address.'),
-
-  check('address2')
-    .isLength({
-      max: 100
-    }).withMessage('100 characters max for address 2.'),
-
-  check('city')
-    .not().isEmpty().withMessage('City cannot be empty.')
-    .isLength({
-      max: 100
-    }).withMessage('100 characters max for city.'),
-
-  check('zipcode')
-    .isPostalCode('US').withMessage('not a valid US Zipcode.')
-    .isLength({
-      min: 5,
-      max: 9
-    }).withMessage('Minimum of 5 characters and Maximum of 9 characters for Zipcode.')
-], (request, response) => {
-  const errors = validationResult(request);
-
-  if (!errors.isEmpty()) {
-    return response.status(422).json({ errors: errors.array() });
-  }
-  response.status(202).json({
-    success: 'Ok'
-  })
 });
 
 
