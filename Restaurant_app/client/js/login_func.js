@@ -44,6 +44,29 @@ async function insertUserCred() {
     }
 }
 
+async function success_login(){
+    var l_user = document.querySelector('#l_user').value;
+    var l_pass = document.querySelector('#l_pass').value;
+    var fac = l_user + ',' + l_pass;
 
-
-
+    if(l_user.length == 0 || l_pass.length == 0){
+        alert("Please fill all required field.");
+        return false;
+    }
+    try {
+        const response = await fetch(`http://localhost:5000/login/${fac}`);
+        const jsonData = await response.json();
+        let data = [];
+        data = jsonData;
+        if(data[0].count == 1)
+        {
+            const result = await findUID(l_user);
+            window.location.href = 'transition.html';
+        }
+        else{
+            alert("Incorrect Username or Password");
+        }
+    }catch (err) {
+      console.log(err.message);
+    }
+}
