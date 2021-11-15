@@ -70,3 +70,17 @@ async function success_login(){
       console.log(err.message);
     }
 }
+
+async function findUID(l_user){
+    var fac = l_user;
+    try {
+        const response = await fetch(`http://localhost:5000/uid1/${fac}`);
+        const jsonData = await response.json();
+        let data = [];
+        data = jsonData;
+        console.log(data[0].userid);
+        localStorage.curUID = data[0].userid;
+    }catch (err) {
+      console.log(err.message);
+    }
+}
