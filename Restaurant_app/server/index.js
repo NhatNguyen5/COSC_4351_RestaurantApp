@@ -47,7 +47,6 @@ app.post("/register", async (req, res) => {
     res.json(newTodo.rows);
 
   } catch (err) {
-    alert(err);
     console.error(err.message);
   }
 });

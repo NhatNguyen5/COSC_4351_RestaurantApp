@@ -62,8 +62,8 @@ async function insertUserCred() {
     var lastN = document.querySelector('#nameL').value;
     var mailA = document.querySelector('#mailA').value;
     var billA = document.querySelector('#billA').value;
-    var mailE = document.querySelector('mailE').value;
-    var numP = document.querySelector('numP').value;
+    var mailE = document.querySelector('#mailE').value;
+    var numP = document.querySelector('#numP').value;
     var userid = uid;
     try{
         const body = {
