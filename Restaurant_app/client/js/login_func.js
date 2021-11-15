@@ -9,14 +9,14 @@ async function insertUserCred() {
     if(uid == null){
         uid = 0;
     }
-    var user = document.querySelector('#r_user').value;
-    var pass = document.querySelector('#r_pass').value;
-    var firstN = document.querySelector('#nameF').value;
-    var lastN = document.querySelector('#nameL').value;
-    var mailA = document.querySelector('#mailA').value;
-    var billA = document.querySelector('#billA').value;
-    var mailE = document.querySelector('#mailE').value;
-    var numP = document.querySelector('#numP').value;
+    var user = document.querySelector("#r_user").value;
+    var pass = document.querySelector("#r_pass").value;
+    var firstN = document.querySelector("#nameF").value;
+    var lastN = document.querySelector("#nameL").value;
+    var mailA = document.querySelector("#mailA").value;
+    var billA = document.querySelector("#billA").value;
+    var mailE = document.querySelector("#mailE").value;
+    var numP = document.querySelector("#numP").value;
     var userid = uid;
     try{
         const body = {

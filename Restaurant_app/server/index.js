@@ -41,8 +41,10 @@ app.post("/register", async (req, res) => {
   try {
     console.log(req.body)
     //this will encrypt the password once it is made
+    console.log(`INSERT INTO userInfo VALUES(${userid}','${ fullname }','${ phone }','
+      ${ email }','${ mailaddress }','${ billaddress }','${ point }','${ preferpayment }');`)
     const newTodo = await pool.query(
-      `INSERT INTO UserInfo VALUES(${userid},'${user}',crypt('${pass}',gen_salt('bf'))); `
+      `INSERT INTO userInfo VALUES(${userid},'${fullname}','${phone}','${email}','${mailaddress}','${billaddress}','${point}','${preferpayment}');`
     );
     res.json(newTodo.rows);
 
