@@ -1,3 +1,4 @@
+var uid = null;
 
 async function reserveInfo()
 {
@@ -79,8 +80,13 @@ async function findUID(l_user){
         let data = [];
         data = jsonData;
         console.log(data[0].userid);
-        localStorage.curUID = data[0].userid;
+        localStorage.setItem("userID", data[0].userid);
     }catch (err) {
       console.log(err.message);
     }
 }
+
+function copyMailing(){
+    document.getElementById('billA').value = document.getElementById('mailA').value;
+}
+

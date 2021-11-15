@@ -135,6 +135,7 @@ app.get('/uid1/:fac', async (req, res) => {
   try {
     console.log(req.body)
     //search for latest userID
+    console.log(`select userid from usercredentials where loginid = '${fac}' order by userid desc limit 1;`);
     const newTodo = await pool.query(
       `select userid from usercredentials where loginid = '${fac}' order by userid desc limit 1;`
     );
@@ -145,6 +146,27 @@ app.get('/uid1/:fac', async (req, res) => {
   }
 });
 
+app.get('/uid2/:fac', async (req, res) => {
+  const { fac } = req.params;
+  try {
+    console.log(req.body)
+    console.log(
+      `
+      select * from userInfo where userID = ${fac};
+      `
+    )
+    const newTodo = await pool.query(
+      `
+      select * from userInfo where userID = ${fac};
+      `
+    );
+    delete newTodo.rows[0]["userid"];
+    //console.log(newTodo.rows);
+    res.json(newTodo.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
 
 app.get('/getTables/:fac', async (req, res) => {
   const { fac } = req.params

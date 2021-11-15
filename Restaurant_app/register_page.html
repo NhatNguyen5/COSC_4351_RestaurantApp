@@ -34,6 +34,8 @@
 
             <p><label for="maillAdd" class="mailN">Mailing Address</label> </p>
                 <input type="text" name="suggestedp" class = "mail" id="mailA" placeholder = "112 Stoke Dr."  required/>
+
+                <input type="button" name="suggestedp" class = "billing-btn" onclick="copyMailing()"value="My billing address is the same as my mailing address"/>
             
             <p><label for="billAdd" class="billN">Billing Address</label></p>
                 <input type="text" name="totalamt" class = "bill" id="billA" placeholder = "112 Stoke Dr."  />
@@ -42,7 +44,7 @@
                 <input type="text" name="totalamt" class = "pay" id="totalamt" placeholder = 0  required/> -->
 
             <p>
-                    <button onclick="insertUserCred()">Register</button>
+                    <button input type="button" id="submit_info" type="submit" class="submit-btn" onclick="insertUserCred()">Register</button>
             <p>
         </div>
         </form>

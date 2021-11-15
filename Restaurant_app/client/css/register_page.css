@@ -20,6 +20,36 @@
     position: absolute;
 }
 
+.billing-btn{
+    background:#ff9c5f;
+    color:rgb(255, 255, 255);
+    border:none;
+    position:relative;
+    height:35px;
+    font-size:15px;
+    padding:0 20px;
+    cursor:pointer;
+    border: 2px solid #e6884e;
+    margin-left: 150px;
+    margin-bottom: 20px;
+    display:block;
+}
+
+.billing-btn:hover{
+    background:#ffc7a3;
+    color:rgb(48, 48, 48);
+    border:none;
+    position:relative;
+    height:35px;
+    font-size:15px;
+    padding:0 20px;
+    cursor:pointer;
+    border: 2px solid #ff9553;
+    margin-left: 150px;
+    margin-bottom: 20px;
+    display:block;
+}
+
 .btn-welcome{
     padding: 0;
     border: none;
