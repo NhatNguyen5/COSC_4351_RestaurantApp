@@ -83,7 +83,7 @@ UPDATE tableInfo SET reserved = 'yes' WHERE tableCode = 'C3';
 
 INSERT INTO userCredentials
 VALUES
-('0', 'user', 'password');
+(0, 'user', crypt('password',gen_salt('bf')));
 
 INSERT INTO userInfo
 VALUES
