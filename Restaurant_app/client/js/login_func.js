@@ -61,7 +61,7 @@ async function success_login(){
         if(data[0].count == 1)
         {
             const result = await findUID(l_user);
-            window.location.href = 'transition.html';
+            window.location.href = 'profile_page.html';
         }
         else{
             alert("Incorrect Username or Password");

@@ -50,12 +50,17 @@ async function checkHoliday(){
         isHoliday = (jsonData != false) ? true : false;
         whatHoliday = (jsonData != false) ? `It's ${jsonData[0].name}.` : "Not a Holiday.";
         if(!isHoliday){
-            document.getElementById('preferPay').innerHTML = `<option value="Cash">Cash</option>`
-            document.getElementById('preferPay').innerHTML += `<option value="Valid_Creditcard">Valid Creditcard</option>`
-            document.getElementById('preferPay').innerHTML += `<option value="Invalid_Creditcard">Invalid Creditcard (for testing purposes)</option>`
+            document.getElementById('preferPay').innerHTML = `<option value="Cash">Cash</option>`;
+            document.getElementById('preferPay').innerHTML += `<option value="Valid_Creditcard">Valid Creditcard</option>`;
+            document.getElementById('preferPay').innerHTML += `<option value="Invalid_Creditcard">Invalid Creditcard (for testing purposes)</option>`;
+            document.getElementById('$10ConsentCheckbox_div').innerHTML = "";
         } else {
-            document.getElementById('preferPay').innerHTML = `<option value="Valid_Creditcard">Valid Creditcard</option>`
-            document.getElementById('preferPay').innerHTML += `<option value="Invalid_Creditcard">Invalid Creditcard (for testing purposes)</option>`
+            document.getElementById('preferPay').innerHTML = `<option value="Valid_Creditcard">Valid Creditcard</option>`;
+            document.getElementById('preferPay').innerHTML += `<option value="Invalid_Creditcard">Invalid Creditcard (for testing purposes)</option>`;
+            document.getElementById('$10ConsentCheckbox_div').innerHTML =
+            `<p><label class="billN"> It's a busy day! You will be charged $10 if you cancel your reservation.</label></p>
+            <input type="checkbox" class="consentbox" id="$10ConsentCheckbox" name="$10" required>
+            <label class="consentbox_text" for="$10ConsentCheckbox"> I understand and agree to the above statement.</label><br>`;
         }
     } catch (err) {
         console.log(err.message);

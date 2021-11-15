@@ -185,7 +185,7 @@ h1.title_name{
 
 .form-a{
     width: 800px;
-    height: 600px;
+    height: 620px;
     position: relative;
     margin: 8% auto;
     margin-top: -15px;
@@ -196,10 +196,15 @@ h1.title_name{
 }
 
 .consentbox{
-    float: left;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left: 150px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    margin-right: -140px;
+}
+
+.consentbox_text{
+    font-family: 'Courier New', monospace;
+    font-size: 15px;
 }
 
 label{
@@ -240,6 +245,12 @@ input{
     width: 500px;
     margin-left: 150px;
     margin-bottom: 20px;
+}
+.payN{
+    float: left;
+    width: 500px;
+    margin-left: 150px;
+    margin-bottom: 10px;
 }
 
 .submit-btn:enabled{
