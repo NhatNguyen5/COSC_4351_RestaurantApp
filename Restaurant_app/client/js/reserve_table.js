@@ -98,8 +98,12 @@ async function reservedTablePost(){
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
         });
-        alert("Reservation Successful!");
-        window.location.href = 'welcome_page.html';
+        let registerAsk = confirm("Reservation Successful! \n\nCREATE AN ACCOUNT WITH US FOR POINTS AND DISCOUNT?")
+        if(registerAsk){
+            window.location.href = 'register_page.html';
+        } else {
+            window.location.href = 'welcome_page.html';
+        }
     }catch (err) {
         console.log(err.message);
     }

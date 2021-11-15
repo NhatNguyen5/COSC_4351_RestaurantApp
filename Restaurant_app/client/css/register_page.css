@@ -195,6 +195,13 @@ h1.title_name{
     border-radius: 25px;
 }
 
+.consentbox{
+    float: left;
+    margin-top: 20px;
+    margin-left: 150px;
+    margin-bottom: 20px;
+}
+
 label{
     font-size: 20px;
     margin-left: 150px;
