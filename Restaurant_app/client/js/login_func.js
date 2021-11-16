@@ -38,7 +38,7 @@ try {
     body: JSON.stringify(body),
     });
     alert("Registration Successful!");
-    window.location.href = "register_page.html";
+    window.location.href = "rest_login.html";
 } catch (err) {
     console.log(err.message);
 }

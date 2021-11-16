@@ -20,7 +20,7 @@ CREATE TABLE userInfo(
 	email varchar(320) NOT NULL,
 	mailAddress TEXT NOT NULL,
 	billAddress TEXT,
-	point integer NOT NULL,
+	points integer NOT NULL,
 	preferPayment TEXT NOT NULL,
 	CONSTRAINT c_userID_fk FOREIGN KEY (userID) REFERENCES userCredentials(userID) ON DELETE CASCADE
 );

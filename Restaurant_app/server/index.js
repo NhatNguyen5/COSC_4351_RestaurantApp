@@ -160,6 +160,8 @@ app.get('/uid2/:fac', async (req, res) => {
       `
     );
     delete newTodo.rows[0]["userid"];
+    delete newTodo.rows[0]["billaddress"];
+    delete newTodo.rows[0]["mailaddress"];
     //console.log(newTodo.rows);
     res.json(newTodo.rows);
   } catch (err) {
