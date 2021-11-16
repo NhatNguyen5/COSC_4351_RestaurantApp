@@ -1,4 +1,4 @@
-var uid = null;
+var uid = findLastUID();
 
 async function reserveInfo()
 {
@@ -6,45 +6,58 @@ async function reserveInfo()
 }
 
 async function insertUserCred() {
-    // const result = await findUID()
-    if(uid == null){
-        uid = 0;
-    }
-    var user = document.querySelector("#r_user").value;
-    var pass = document.querySelector("#r_pass").value;
-    var firstN = document.querySelector("#nameF").value;
-    var lastN = document.querySelector("#nameL").value;
-    var mailA = document.querySelector("#mailA").value;
-    var billA = document.querySelector("#billA").value;
-    var mailE = document.querySelector("#mailE").value;
-    var numP = document.querySelector("#numP").value;
-    var userid = uid;
-    try{
-        const body = {
-            userid: userid,
-            user: user, 
-            pass: pass,
-            fullname: firstN + ' ' + lastN,
-            phone: numP,
-            email: mailE,
-            mailaddress: mailA,
-            billaddress: billA,
-            point: 0,
-            preferpayment: 'Valid CreditCard'
-            
-        };
-        const response = await fetch(`http://localhost:5000/register`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body)
-        });
-        alert("Registration Successful!");
-        window.location.href = 'register_page.html';
-    }catch (err) {
-        console.log(err.message);
-    }
+const result = await findUID()
+if (uid == null) {
+    uid = 0;
 }
-
+var user = document.querySelector("#r_user").value;
+var pass = document.querySelector("#r_pass").value;
+var firstN = document.querySelector("#nameF").value;
+var lastN = document.querySelector("#nameL").value;
+var mailA = document.querySelector("#mailA").value;
+var billA = document.querySelector("#billA").value;
+var mailE = document.querySelector("#mailE").value;
+var numP = document.querySelector("#numP").value;
+var userid = uid;
+try {
+    const body = {
+    userid: userid,
+    user: user,
+    pass: pass,
+    fullname: firstN + " " + lastN,
+    phone: numP,
+    email: mailE,
+    mailaddress: mailA,
+    billaddress: billA,
+    point: 0,
+    preferpayment: "Valid CreditCard",
+    };
+    const response = await fetch(`http://localhost:5000/register`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+    });
+    alert("Registration Successful!");
+    window.location.href = "register_page.html";
+} catch (err) {
+    console.log(err.message);
+}
+}
+async function findLastUID() {
+try {
+    const response = await fetch(`http://localhost:5000/uid`);
+    const jsonData = await response.json();
+    let data = [];
+    data = jsonData;
+    if (data.length == 0 || data.length == null) {
+    uid = 0;
+    } else {
+    uid = data[0].userid + 1;
+    }
+} catch (err) {
+    console.log(err.message);
+}
+}
 async function success_login(){
     var l_user = document.querySelector('#l_user').value;
     var l_pass = document.querySelector('#l_pass').value;
@@ -68,7 +81,7 @@ async function success_login(){
             alert("Incorrect Username or Password");
         }
     }catch (err) {
-      console.log(err.message);
+    console.log(err.message);
     }
 }
 
@@ -82,7 +95,7 @@ async function findUID(l_user){
         console.log(data[0].userid);
         localStorage.setItem("userID", data[0].userid);
     }catch (err) {
-      console.log(err.message);
+    console.log(err.message);
     }
 }
 
