@@ -283,6 +283,116 @@ input{
     margin-bottom: 10px;
 }
 
+.back-btn:enabled{
+    background:#DD7230;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:35px;
+    font-size:15px;
+    padding:0 110px;
+    cursor:pointer;
+    transition:800ms ease all;
+    margin: auto;
+    outline:none;
+    display:block;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.back-btn:disabled{
+    background:#e2a884;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:35px;
+    font-size:15px;
+    padding:0 110px;
+    transition:800ms ease all;
+    outline:none;
+    margin-left: 250px;
+    margin-top:20px;
+    display:block;
+}
+.back-btn:enabled:hover{
+    background:#fff;
+    color:#DD7230;
+}
+.back-btn:enabled:before,.back-btn:enabled:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #DD7230;
+    transition:400ms ease all;
+}
+.back-btn:enabled:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+}
+.back-btn:enabled:hover:before,.back-btn:enabled:hover:after{
+    width:100%;
+    transition:800ms ease all;
+}
+
+.search-btn:enabled{
+    background:#DD7230;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:35px;
+    font-size:15px;
+    padding:0 110px;
+    cursor:pointer;
+    transition:800ms ease all;
+    margin: auto;
+    outline:none;
+    margin-top:20px;
+    display:block;
+    text-align: center;
+}
+.search-btn:disabled{
+    background:#e2a884;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:35px;
+    font-size:15px;
+    padding:0 110px;
+    transition:800ms ease all;
+    outline:none;
+    margin-left: 250px;
+    margin-top:20px;
+    display:block;
+}
+.search-btn:enabled:hover{
+    background:#fff;
+    color:#DD7230;
+}
+.search-btn:enabled:before,.search-btn:enabled:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #DD7230;
+    transition:400ms ease all;
+}
+.search-btn:enabled:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+}
+.search-btn:enabled:hover:before,.search-btn:enabled:hover:after{
+    width:100%;
+    transition:800ms ease all;
+}
+
 .submit-btn:enabled{
     background:#DD7230;
     color:#fff;
@@ -337,3 +447,8 @@ input{
     transition:800ms ease all;
 }
 
+.resInfo{
+    margin-left: 150px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}

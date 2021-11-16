@@ -1,0 +1,35 @@
+<html>
+
+<head>
+    <title>Reservation_Search</title>
+    <link rel="stylesheet" href="client/css/register_page.css">
+</head>
+
+<body>
+    <div class="bkg">
+        <button class="btn-welcome" type="button" class="submit-btn"
+            onclick="window.location.href='welcome_page.html'">Welcome</button>
+        <button class="btn-menu" type="button" class="submit-btn">Menu</button>
+        <button class="btn-order" type="button" class="submit-btn">Order</button>
+        <button class="btn-press" type="button" class="submit-btn">Press</button>
+        <button class="btn-contacts" type="button" class="submit-btn">Contacts</button>
+        <h1 class="title_name">Le Restäuränt</h1>
+        <form id="search_form">
+            <div class="form-a">
+                <input type="button" class="back-btn" value="Back" onclick="history.back()">
+                <p><label for="ResNumber" class="mailN">Reservation Number</label> </p>
+                <input type="text" class="mail" id="ResID" required />
+                <p><label for="ResNumber" class="mailN">Reservation Info</label> </p>
+                <hr class="resInfo" style="width: 500px;">
+                <p class="resInfo" id="resInfo"></p>
+                <hr class="resInfo" style="width: 500px;">
+                <p>
+                    <input type="button" type="submit" class="search-btn" value="Search For This Reservation Number" onclick="SearchAndShow()">
+                </p>
+            </div>
+        </form>
+    </div>
+</body>
+<script src="client/js/reserve_search.js"></script>
+
+</html>

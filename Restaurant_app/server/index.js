@@ -118,6 +118,22 @@ app.get('/uid', async (req, res) => {
   }
 });
 
+app.get('/searchResID/:fac', async (req, res) => {
+  const { fac } = req.params;
+  try {
+    console.log(req.body)
+    console.log(`select * from reservation where reservationID = '${fac}' and userID = 1;`)
+    //search for latest userID
+    const newTodo = await pool.query(
+      `select * from reservation where reservationID = '${fac}' and userID = 1;`
+    );
+
+    res.json(newTodo.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
 app.get('/resid', async (req, res) => {
 
   try {

@@ -8,6 +8,11 @@ var points;
 
 window.onload = getUserInfo();
 
+async function logOut()
+{
+    location.href = "welcome_page.html";
+}
+
 async function getUserInfo() {
     var fac = localStorage.getItem("userID");
     console.log(fac);

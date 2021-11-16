@@ -5,6 +5,11 @@ async function reserveInfo()
     location.href = "reserve_info.html";
 }
 
+async function reserveSearch()
+{
+    location.href = "reserve_search.html";
+}
+
 async function insertUserCred() {
 const result = await findUID()
 if (uid == null) {
