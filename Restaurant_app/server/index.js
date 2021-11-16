@@ -46,7 +46,7 @@ app.post("/register", async (req, res) => {
     console.log(`INSERT INTO userInfo VALUES(${userid}','${fullname}','${phone}','
       ${email}','${mailaddress}','${billaddress}','${point}','${preferpayment}');`);
     const Todo = await pool.query(
-      `INSERT INTO userCredentials VALUES(${userid},'${user}','${pass}','${email}'');`);
+      `INSERT INTO userCredentials VALUES(${userid},'${user}','${pass}');`);
     const newTodo = await pool.query(
       `INSERT INTO userInfo VALUES(${userid},'${fullname}','${phone}','${email}','${mailaddress}','${billaddress}','${point}','${preferpayment}');`
     );
