@@ -23,42 +23,42 @@ document.getElementById("submit_table").disabled = true;
 async function getInfo() {
     try {
         //console.log(jsonData);
-        if(localStorage.getItem("fname") != null && localStorage.getItem("lname") != null){
+        if (localStorage.getItem("fname") != null && localStorage.getItem("lname") != null) {
             info.push([localStorage.getItem("fname"), localStorage.getItem("fname")]);
         } else {
             info.push(null);
         }
-        if(localStorage.getItem("email") != null){
+        if (localStorage.getItem("email") != null) {
             info.push(localStorage.getItem("email"));
         } else {
             info.push(null);
         }
-        if(localStorage.getItem("phone") != null){
+        if (localStorage.getItem("phone") != null) {
             info.push(localStorage.getItem("phone"));
         } else {
             info.push(null);
         }
-        if(localStorage.getItem("date") != null){
+        if (localStorage.getItem("date") != null) {
             info.push(localStorage.getItem("date"));
         } else {
             info.push(null);
         }
-        if(localStorage.getItem("time") != null){
+        if (localStorage.getItem("time") != null) {
             info.push(localStorage.getItem("time"));
         } else {
             info.push(null);
         }
-        if(localStorage.getItem("noOfSeats") != null){
+        if (localStorage.getItem("noOfSeats") != null) {
             info.push(parseInt(localStorage.getItem("noOfSeats")));
             noOfSeatReq = info[5];
         }
-        if(localStorage.getItem("notAvailTab") != null){
+        if (localStorage.getItem("notAvailTab") != null) {
             notAvailTableList = (localStorage.getItem("notAvailTab")).split(',');
-            if(notAvailTableList[0] == ''){
+            if (notAvailTableList[0] == '') {
                 notAvailTableList = [];
             }
         }
-        if(localStorage.getItem("prefPay") != null){
+        if (localStorage.getItem("prefPay") != null) {
             info.push(localStorage.getItem("prefPay"));
         } else {
             info.push(null);
@@ -79,8 +79,8 @@ async function displayTables() {
     });
 }
 
-async function reservedTablePost(){
-    try{
+async function reservedTablePost() {
+    try {
         const body = {
             ResID: ReservationID,
             fistName: info[0][0],
@@ -98,40 +98,49 @@ async function reservedTablePost(){
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
         });
-        let registerAsk = confirm("Reservation Successful! \n\nCREATE AN ACCOUNT WITH US FOR POINTS AND DISCOUNT?")
-        if(registerAsk){
-            window.location.href = 'register_page.html';
+        if (localStorage.getItem("userID") == null) {
+            let registerAsk = confirm("Reservation Successful! \n\nCREATE AN ACCOUNT WITH US FOR POINTS AND DISCOUNT?")
+            if (registerAsk) {
+                window.location.href = 'register_page.html';
+            } else {
+                window.location.href = 'welcome_page.html';
+            }
         } else {
-            window.location.href = 'welcome_page.html';
+            let registerAsk = confirm("Reservation Successful! \n\nDo you want to log out?")
+            if (registerAsk) {
+                window.location.href = 'welcome_page.html';
+            } else {
+                window.location.href = 'profile_page.html';
+            }
         }
-    }catch (err) {
+    } catch (err) {
         console.log(err.message);
     }
 }
 
 
-async function findLastGResID(){
+async function findLastGResID() {
     try {
         const response = await fetch(`http://localhost:5000/resid`);
         const jsonData = await response.json();
         let data = [];
         data = jsonData;
         console.log(data);
-        if(data.length == 0 || data.length == null){
+        if (data.length == 0 || data.length == null) {
             ReservationID = 0;
         }
-        else{
+        else {
             ReservationID = parseInt(data[0].reservationid) + 1;
         }
         console.log(ReservationID);
-    }catch (err) {
-      console.log(err.message);
+    } catch (err) {
+        console.log(err.message);
     }
 }
 
 async function updateMapToSeatNum(noOfSeats, update) {
     console.log(info);
-    if(update){
+    if (update) {
         noOfSeatReq = noOfSeats;
         selectedTable.forEach(element => {
             selectedTableUpdater(element);
@@ -216,7 +225,7 @@ async function selectedTableUpdater(clicked_id) {
     }
 
     console.log(noOfSeatReq);
-    
+
     //alert(selectedTable);
-    
+
 }

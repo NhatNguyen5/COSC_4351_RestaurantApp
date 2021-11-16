@@ -22,6 +22,9 @@ async function getTableMap() {
         const jsonData = await response.json();
         setTables(jsonData);
         updateMaxSeatNum()
+        if(localStorage.getItem("userID") != null){
+            setupUser();
+        }
     } catch (err) {
         console.log(err.message);
     }
@@ -38,6 +41,13 @@ const setTables = (data) => {
     console.log(tempTable);
     notAvailTableList = tempTable;
     //console.log(notAvailTableList)
+}
+
+function setupUser(){
+    document.getElementById("firstN").value = localStorage.getItem("fname")
+    document.getElementById("lastN").value = localStorage.getItem("lname")
+    document.getElementById("EmailAdd").value = localStorage.getItem("email")
+    document.getElementById("PhoneNum").value = localStorage.getItem("phone")
 }
 
 async function checkHoliday() {

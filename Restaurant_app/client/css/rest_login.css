@@ -239,13 +239,28 @@ h2.login_page2{
 h3.profile_page{
     text-align: center;
     /*margin: 10px auto;*/
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     margin-right: 70px;
     color: #f1660f;
     font-family: Copperplate;
     position: relative;
     border-radius: 25px;
     width: 80%;
+}
+
+h3.profile_page#points{
+    text-align: center;
+    /*margin: 10px auto;*/
+    margin-bottom: -10px;
+    margin-right: 70px;
+    color: #ff9900;
+    font-family: Copperplate;
+    position: relative;
+    border-radius: 25px;
+    font-size: 30px;
+    width: 80%;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    display: inline-block;
 }
 
 .inputs{
@@ -297,7 +312,7 @@ h3.profile_page{
     margin-left: -280px;
 }
 .u_mail{
-    margin-left: -235px;
+    margin-left: -212px;
 }
 .u_pay{
     margin-left: -225px;

@@ -2,6 +2,8 @@ var fname;
 var lname;
 var phone;
 var email;
+var mailA;
+var billA;
 var points;
 
 window.onload = getUserInfo();
@@ -27,12 +29,23 @@ function parseInfo(data) {
     lname = fullname[1]
     document.getElementById("welcome").innerHTML = `Welcome ${fname} ${lname}!`
     phone = data[0].phone
+    document.getElementById("PhoneNum").value = phone
     email = data[0].email
+    document.getElementById("EmailAdd").value = email
     points = data[0].points
-    document.getElementById("points").innerHTML = `Your Loyalty Points: ${points}`
-    console.log(fname, lname, phone, email, points)
+    document.getElementById("points").innerHTML = `${points}`
+    billA = data[0].billaddress
+    document.getElementById("billAdd").value = `${billA}`
+    mailA = data[0].mailaddress
+    document.getElementById("mailAdd").value = `${mailA}`
+    console.log(billA, mailA);
     localStorage.setItem("fname", fname);
     localStorage.setItem("lname", lname);
     localStorage.setItem("email", email);
     localStorage.setItem("phone", phone);
+}
+
+async function reserveInfo()
+{
+    location.href = "reserve_info.html";
 }
