@@ -31,6 +31,8 @@ app.get('/checkHoliday/:fac', async (req, res) => {
 
 app.post("/register", async (req, res) => {
   userid = req.body.userid;
+  user = req.body.user;
+  pass = req.body.pass;
   fullname = req.body.fullname;
   phone = req.body.phone;
   email = req.body.email;
@@ -43,6 +45,8 @@ app.post("/register", async (req, res) => {
     //this will encrypt the password once it is made
     console.log(`INSERT INTO userInfo VALUES(${userid}','${fullname}','${phone}','
       ${email}','${mailaddress}','${billaddress}','${point}','${preferpayment}');`);
+    const Todo = await pool.query(
+      `INSERT INTO userCredentials VALUES(${userid},'${user}','${pass}','${email}'');`);
     const newTodo = await pool.query(
       `INSERT INTO userInfo VALUES(${userid},'${fullname}','${phone}','${email}','${mailaddress}','${billaddress}','${point}','${preferpayment}');`
     );
