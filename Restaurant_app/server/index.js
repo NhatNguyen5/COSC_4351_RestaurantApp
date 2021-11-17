@@ -67,16 +67,18 @@ app.post("/reserveTable", async (req, res) => {
   noOfSeats = req.body.noOfSeats;
   tablePicked = req.body.tablePicked;
   prefPay = req.body.prefPay;
+  isHoliday = req.body.isHoliday;
+  userID = req.body.userID;
   try {
     console.log(req.body)
     //this will encrypt the password once it is made
     console.log(`INSERT INTO Reservation VALUES(${ResID},'${fistName}','${lastName}','${phone}',
                                                     '${email}','${resDate}','${resTime}:00',${noOfSeats},
-                                                    '${tablePicked}','${prefPay}');`)
+                                                    '${tablePicked}','${prefPay}', '${isHoliday}', '${userID}');`)
     const newTodo = await pool.query(
       `INSERT INTO Reservation VALUES(${ResID},'${fistName}','${lastName}','${phone}',
                                           '${email}','${resDate}','${resTime}:00',${noOfSeats},
-                                          '${tablePicked}','${prefPay}');`
+                                          '${tablePicked}','${prefPay}','${isHoliday}','${userID}');`
     );
     res.json(newTodo.rows);
 
@@ -192,7 +194,6 @@ app.get('/uid2/:fac', async (req, res) => {
       select * from userInfo where userID = ${fac};
       `
     );
-    delete newTodo.rows[0]["userid"];
     //console.log(newTodo.rows);
     res.json(newTodo.rows);
   } catch (err) {

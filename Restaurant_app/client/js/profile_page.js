@@ -5,6 +5,7 @@ var email;
 var mailA;
 var billA;
 var points;
+var userID;
 
 window.onload = getUserInfo();
 
@@ -33,6 +34,7 @@ function parseInfo(data) {
     fname = fullname[0]
     lname = fullname[1]
     document.getElementById("welcome").innerHTML = `Welcome ${fname} ${lname}!`
+    userID = data[0].userid
     phone = data[0].phone
     document.getElementById("PhoneNum").value = phone
     email = data[0].email
@@ -44,6 +46,7 @@ function parseInfo(data) {
     mailA = data[0].mailaddress
     document.getElementById("mailAdd").value = `${mailA}`
     console.log(billA, mailA);
+    localStorage.setItem("userID", userID);
     localStorage.setItem("fname", fname);
     localStorage.setItem("lname", lname);
     localStorage.setItem("email", email);

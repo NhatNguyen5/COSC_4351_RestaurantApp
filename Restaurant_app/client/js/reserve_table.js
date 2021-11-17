@@ -91,14 +91,16 @@ async function reservedTablePost() {
             resTime: info[4],
             noOfSeats: info[5],
             tablePicked: selectedTable,
-            prefPay: info[6]
+            prefPay: info[6],
+            isHoliday: localStorage.getItem("isHoliday") != 'false' ? "yes" : "no",
+            userID: localStorage.getItem("userID")
         };
         const response = await fetch(`http://localhost:5000/reserveTable`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
         });
-        if (localStorage.getItem("userID") == null) {
+        if (localStorage.getItem("userID") == '1') {
             let registerAsk = confirm("Reservation Successful! \n\nCREATE AN ACCOUNT WITH US FOR POINTS AND DISCOUNT?")
             if (registerAsk) {
                 window.location.href = 'register_page.html';

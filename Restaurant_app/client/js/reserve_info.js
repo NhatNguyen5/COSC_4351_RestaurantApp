@@ -135,6 +135,10 @@ async function passInfo() {
     localStorage.setItem("noOfSeats", document.getElementById('noOfSeats').value);
     localStorage.setItem("notAvailTab", notAvailTableList);
     localStorage.setItem("prefPay", document.getElementById('preferPay').value);
+    localStorage.setItem("isHoliday", isHoliday);
+    if(localStorage.getItem("userID") == null){
+        localStorage.setItem("userID", 1);
+    }
     console.log("Go to table!");
     window.location.href = 'reserve_table.html';
 }
@@ -222,5 +226,5 @@ function setMinMaxDate() {
 
     console.log("Last date: " + limit);
 
-    document.getElementById('date').max = limit;
+    //document.getElementById('date').max = limit;
 }
