@@ -452,3 +452,72 @@ input{
     margin-bottom: 20px;
     margin-top: 20px;
 }
+
+.resInfo-line{
+    margin-left: 150px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.resInfo_scrollable{
+    margin-left: 150px;
+    margin-right: 150;
+    margin-bottom: 20px;
+    margin-top: -20px;
+    height: 500px;
+    overflow-y: auto;
+}
+
+.submit-btn-scroll:enabled{
+    background:#DD7230;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:35px;
+    font-size:15px;
+    padding:0 10px;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+    margin-top:10px;
+    margin-bottom: 20px;
+    display:block;
+}
+.submit-btn-scroll:disabled{
+    background:#e2a884;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:35px;
+    font-size:15px;
+    padding:0 110px;
+    transition:800ms ease all;
+    outline:none;
+    margin-left: 250px;
+    margin-top:20px;
+    display:block;
+}
+.submit-btn-scroll:enabled:hover{
+    background:#fff;
+    color:#DD7230;
+}
+.submit-btn-scroll:enabled:before,.submit-btn-scroll:enabled:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #DD7230;
+    transition:400ms ease all;
+}
+.submit-btn-scroll:enabled:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+}
+.submit-btn-scroll:enabled:hover:before,.submit-btn-scroll:enabled:hover:after{
+    width:100%;
+    transition:800ms ease all;
+}

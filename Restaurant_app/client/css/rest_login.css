@@ -496,7 +496,46 @@ input{
     transition:800ms ease all;
 }
 
-
+.user_res{
+    background:#DD7230;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:35px;
+    /* width: 200px; */
+    font-size:15px;
+    padding:0 100px;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+    margin-left: 50px;
+    margin-top:70px;
+    display:block;
+}
+.user_res:hover{
+    background:#fff;
+    color:#DD7230;
+}
+.user_res:before,.log:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #DD7230;
+    transition:400ms ease all;
+}
+.user_res:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+}
+.user_res:hover:before,.log:hover:after{
+    width:100%;
+    transition:800ms ease all;
+}
 
 
 

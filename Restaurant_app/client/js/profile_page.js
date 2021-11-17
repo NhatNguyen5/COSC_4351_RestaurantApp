@@ -57,3 +57,8 @@ async function reserveInfo()
 {
     location.href = "reserve_info.html";
 }
+
+async function toYourRes()
+{
+    location.href = "user_reservations.html";
+}

@@ -7,6 +7,7 @@ const { check, validationResult } = require('express-validator');
 var table_cal = require("./table_calculations");
 var Holidays = require('date-holidays');
 const { time } = require("console");
+const { query } = require("express");
 var hd = new Holidays('US');
 
 //middleware
@@ -135,12 +136,20 @@ app.get('/uid', async (req, res) => {
 
 app.get('/searchResID/:fac', async (req, res) => {
   const { fac } = req.params;
+  var resID = fac.split(',')[0]
+  var userID = fac.split(',')[1]
+  var query_line = '';
+  if(resID == '*'){
+    query_line = `select * from reservation where userID = '${userID}';`
+  } else {
+    query_line = `select * from reservation where reservationID = '${resID}' and userID = '1';`
+  }
   try {
     console.log(req.body)
-    console.log(`select * from reservation where reservationID = '${fac}' and userID = 1;`)
+    console.log(query_line)
     //search for latest userID
     const newTodo = await pool.query(
-      `select * from reservation where reservationID = '${fac}' and userID = 1;`
+      query_line
     );
 
     res.json(newTodo.rows);

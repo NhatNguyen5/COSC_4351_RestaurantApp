@@ -1,9 +1,11 @@
+window.onload = SearchAndShow()
+
 var data = []
 
 async function SearchAndShow() {
     if (document.forms.namedItem("search_form").reportValidity()) {
         var fac = [2]
-        fac[0] = document.getElementById("ResID").value;
+        fac[0] = '*';
         fac[1] = localStorage.getItem("userID");
         console.log(fac);
         try {
@@ -17,10 +19,26 @@ async function SearchAndShow() {
         }
     }
 }
-async function cancelRes() {
-    console.log("Hello");
-    console.log("Sup?");
-    var resID = document.querySelector("#ResID").value;
+
+function showRes() {
+    if (data[0] != null) {
+        data.forEach(element => {
+            document.getElementById("resInfo").innerHTML += `<br>Reservation Date: ${new Date(element.reservationdate).toLocaleDateString()}<br><br>`
+            document.getElementById("resInfo").innerHTML += `Reservation Time: ${(element.reservationtime).slice(0, -3)}<br><br>`
+            document.getElementById("resInfo").innerHTML += `Number of Guest(s): ${element.guestnumber}<br><br>`
+            document.getElementById("resInfo").innerHTML += `Table Picked: ${element.tablepicked}<br><br>`
+            document.getElementById("resInfo").innerHTML += `<button input type="button" id="cancel_button" class="submit-btn-scroll"
+            onclick="cancelRes(${element.reservationid})">Cancel Reservation</button>`
+            console.log(data.indexOf(element))
+            if(data.indexOf(element) != data.length-1)
+                document.getElementById("resInfo").innerHTML += `<hr class="resInfo_line" style="width: 450px;">`
+        });
+    } else {
+        document.getElementById("resInfo").innerHTML = `<br>You don't have any reservation.<br><br>`
+    }
+}
+
+async function cancelRes(resID) {
     let cancel = false;
     console.log(data[0].isholiday)
     if (data[0].isholiday == "yes" ? true : false) {
@@ -39,7 +57,7 @@ async function cancelRes() {
         }
     }
 
-    if(cancel){
+    if (cancel) {
         try {
             const body = {
                 resID: resID
@@ -50,26 +68,10 @@ async function cancelRes() {
                 body: JSON.stringify(body),
             });
             alert("Reservation Canceled!");
-            window.location.href = "reserve_search.html";
+            window.location.href = "user_reservations.html";
         } catch (err) {
             console.log(err.message);
         }
     }
 
-}
-
-function showRes() {
-    if (data[0] != null) {
-        document.getElementById("resInfo").innerHTML = `<br>Guest Name: ${data[0].guestfirstname} ${data[0].guestlastname} <br><br>`
-        document.getElementById("resInfo").innerHTML += `Email: ${data[0].email}<br><br>`
-        document.getElementById("resInfo").innerHTML += `Reservation Date: ${new Date(data[0].reservationdate).toLocaleDateString()}<br><br>`
-        document.getElementById("resInfo").innerHTML += `Reservation Time: ${(data[0].reservationtime).slice(0, -3)}<br><br>`
-        document.getElementById("resInfo").innerHTML += `Number of Guest(s): ${data[0].guestnumber}<br><br>`
-        document.getElementById("resInfo").innerHTML += `Table Picked: ${data[0].tablepicked}<br><br>`
-        document.getElementById("cancel_field").innerHTML = `<button input type="button" id="cancel_button" class="submit-btn"
-        onclick="cancelRes()">Cancel Reservation</button>`
-    } else {
-        document.getElementById("cancel_field").innerHTML = '';
-        document.getElementById("resInfo").innerHTML = `<br>No reservation with that ID, try again please. <br><br>`
-    }
 }
