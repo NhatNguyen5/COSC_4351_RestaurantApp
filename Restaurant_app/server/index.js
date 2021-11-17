@@ -38,18 +38,18 @@ app.post("/register", async (req, res) => {
   phone = req.body.phone;
   email = req.body.email;
   mailaddress = req.body.mailaddress;
-  billaddress = req.body.billadress;
+  billaddress = req.body.billaddress;
   point = req.body.point;
   preferpayment = req.body.preferpayment;
   try {
     console.log(req.body);
     //this will encrypt the password once it is made
-    console.log(`INSERT INTO userInfo VALUES(${userid}','${fullname}','${phone}','
-      ${email}','${mailaddress}','${billaddress}','${point}','${preferpayment}');`);
+    console.log(`INSERT INTO userInfo VALUES('${userid}','${fullname}','${phone}','
+      ${email}','${mailaddress}','${billaddress}','${point}');`);
     const Todo = await pool.query(
-      `INSERT INTO userCredentials VALUES(${userid},'${user}','${pass}');`);
+      `INSERT INTO userCredentials VALUES(${userid},'${user}',crypt('${pass}',gen_salt('bf')));`);
     const newTodo = await pool.query(
-      `INSERT INTO userInfo VALUES(${userid},'${fullname}','${phone}','${email}','${mailaddress}','${billaddress}','${point}','${preferpayment}');`
+      `INSERT INTO userInfo VALUES(${userid},'${fullname}','${phone}','${email}','${mailaddress}','${billaddress}','${point}');`
     );
     res.json(newTodo.rows);
   } catch (err) {
