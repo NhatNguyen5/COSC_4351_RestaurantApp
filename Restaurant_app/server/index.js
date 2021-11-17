@@ -109,9 +109,8 @@ app.get('/uid', async (req, res) => {
     console.log(req.body)
     //search for latest userID
     const newTodo = await pool.query(
-      `select userid from usercredentials order by userid desc limit 1;`
+      `SELECTt userid from userInfo ORDER BY userid DESC LIMIT 1;`
     );
-
     res.json(newTodo.rows);
   } catch (err) {
     console.error(err.message);
