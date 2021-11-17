@@ -86,6 +86,20 @@ app.post("/reserveTable", async (req, res) => {
   }
 });
 
+app.post("/cancelRes", async (req, res) => {
+  resID = req.body.resID;
+  try {
+    console.log(req.body);
+    console.log(`DELETE FROM reservation WHERE reservationID = '${resID}'`);
+    const cancel = await pool.query(
+      `DELETE FROM reservation WHERE reservationID = '${resID}'; `
+    );
+    res.json(cancel.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
 app.get('/login/:fac', async (req, res) => {
   const { fac } = req.params;
   var user = fac.split(',')[0];
@@ -109,7 +123,7 @@ app.get('/uid', async (req, res) => {
     console.log(req.body)
     //search for latest userID
     const newTodo = await pool.query(
-      `SELECTt userid from userInfo ORDER BY userid DESC LIMIT 1;`
+      `SELECT userid from userInfo ORDER BY userid DESC LIMIT 1;`
     );
     res.json(newTodo.rows);
   } catch (err) {

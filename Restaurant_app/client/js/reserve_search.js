@@ -14,6 +14,24 @@ async function SearchAndShow() {
         }
     }
 }
+async function cancelRes() {
+    console.log("Hello");
+    var resID = document.querySelector("#ResID").value;
+    try {
+        const body = {
+            resID: resID
+        };
+        const response = await fetch(`http://localhost:5000/cancelRes`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+    });
+    alert("Reservation Canceled!");
+    window.location.href = "reserve_search.html";
+} catch (err) {
+    console.log(err.message);
+}
+}
 
 function showRes(data) {
     if (data[0] != null) {
