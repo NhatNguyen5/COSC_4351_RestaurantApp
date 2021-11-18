@@ -62,7 +62,7 @@ async function cancelRes() {
 function showRes() {
     if (data[0] != null) {
         document.getElementById("resInfo").innerHTML = `<br>Guest Name: ${data[0].guestfirstname} ${data[0].guestlastname} <br><br>`
-        document.getElementById("resInfo").innerHTML += `Email: ${data[0].email}<br><br>`
+        //document.getElementById("resInfo").innerHTML += `Email: ${data[0].email}<br><br>`
         document.getElementById("resInfo").innerHTML += `Reservation Date: ${new Date(data[0].reservationdate).toLocaleDateString()}<br><br>`
         document.getElementById("resInfo").innerHTML += `Reservation Time: ${(data[0].reservationtime).slice(0, -3)}<br><br>`
         document.getElementById("resInfo").innerHTML += `Number of Guest(s): ${data[0].guestnumber}<br><br>`

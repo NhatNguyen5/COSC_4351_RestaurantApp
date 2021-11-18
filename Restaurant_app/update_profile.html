@@ -7,7 +7,7 @@
 
 <body>
     <div class = "bkg">
-        <button class = "btn-welcome" type="button" class="submit-btn" onclick = "window.location.href='welcome_page.html'">Welcome</button>
+        <button class = "btn-welcome" type="button" class="submit-btn" onclick = "window.location.replace('welcome_page.html')">Welcome</button>
         <button class = "btn-menu" type="button" class="submit-btn">Menu</button>
         <button class = "btn-order" type="button" class="submit-btn">Order</button>
         <button class = "btn-press" type="button" class="submit-btn">Press</button>
@@ -15,12 +15,12 @@
         <h1 class="title_name">Le Restäuränt</h1>
         <form id = "register" class = "inputs">
         <div class="form-a">
-
+            <input type="button" class="back-btn" value="Back" onclick="history.back()">
             <p><label class="u_email">Email</label></p>
-            <input type="email" class="mail" id="EmailAdd" size="30" required/>
+            <input type="email" class="mail" id="EmailAdd" maxlength="30" required/>
 
             <p><label class="u_phone">Phone</label></p>
-            <input type="text" class="bill" id="PhoneNum" required/>
+            <input type="text" class="bill" maxlength="10" id="PhoneNum" required/>
 
             <p><label class="u_mail">Mailing Address</label></p>
             <input type="text" name="suggestedp" class="mail" id="mailAdd" required/>

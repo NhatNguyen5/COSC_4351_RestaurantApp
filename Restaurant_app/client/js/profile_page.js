@@ -15,7 +15,7 @@ if(document.URL.includes('profile_page.html')){
 
 async function logOut()
 {
-    location.href = "welcome_page.html";
+    window.location.replace('welcome_page.html');
 }
 
 async function getUserInfo() {
