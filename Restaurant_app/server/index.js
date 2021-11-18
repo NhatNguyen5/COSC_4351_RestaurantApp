@@ -139,10 +139,10 @@ app.get("/searchResID/:fac", async (req, res) => {
   var resID = fac.split(",")[0];
   var userID = fac.split(",")[1];
   var query_line = "";
-  if (resID == "*") {
+  if (userID != "-1") {
     query_line = `select * from reservation where userID = '${userID}';`;
   } else {
-    query_line = `select * from reservation where reservationID = '${resID}';`;
+    query_line = `select * from reservation where reservationID = '${resID}' and userID = '1';`;
   }
   try {
     console.log(req.body);

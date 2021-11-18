@@ -4,7 +4,7 @@ async function SearchAndShow() {
     if (document.forms.namedItem("search_form").reportValidity()) {
         var fac = [2]
         fac[0] = document.getElementById("ResID").value;
-        fac[1] = localStorage.getItem("userID");
+        fac[1] = localStorage.getItem("userID") == null ? -1 : localStorage.getItem("userID");
         console.log(fac);
         try {
             const response = await fetch(`http://localhost:5000/searchResID/${fac}`);
@@ -68,12 +68,10 @@ function showRes() {
         document.getElementById("resInfo").innerHTML += `Number of Guest(s): ${data[0].guestnumber}<br><br>`
         document.getElementById("resInfo").innerHTML += `Table Picked: ${data[0].tablepicked}<br><br>`
         document.getElementById("confirmation").innerHTML = 
-        `
-        <p><label for="ResNumber" class="mailN">Confirm your Email to Cancel Reservation</label></p>
-        <input type="email" class="mail" id="emailID" required />`
+        `<p><label for="ResNumber" class="mailN">Confirm your Email to Cancel Reservation</label></p>
+        <input type="email" class="mail" id="emailID"/>`
         document.getElementById("cancel_field").innerHTML = 
-        `<button type="button" type="submit" id="cancel_button" class="submit-btn" onclick="cancelRes()">Cancel Reservation</button>
-        `
+        `<button type="button" type="submit" id="cancel_button" class="submit-btn" onclick="cancelRes()">Cancel Reservation</button>`
     } else {
         document.getElementById("cancel_field").innerHTML = '';
         document.getElementById("resInfo").innerHTML = `<br>No reservation with that ID, try again please. <br><br>`
