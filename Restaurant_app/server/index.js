@@ -246,7 +246,7 @@ app.post("/updateProfile", async (req, res) => {
     const Todo = await pool.query(
       `UPDATE userInfo SET phone = '${phone}', email = '${email}', mailAddress = '${mailaddress}', billAddress = '${billaddress}' WHERE userID = ${userid}`
     );
-    res.json(newTodo.rows);
+    res.json(Todo.rows);
   } catch (err) {
     console.error(err.message);
   }

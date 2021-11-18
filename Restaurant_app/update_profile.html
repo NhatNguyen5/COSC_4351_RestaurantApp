@@ -20,7 +20,7 @@
             <input type="email" class="mail" id="EmailAdd" maxlength="30" required/>
 
             <p><label class="u_phone">Phone</label></p>
-            <input type="text" class="bill" maxlength="10" id="PhoneNum" required/>
+            <input type="text" class="bill" maxlength="10" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" id="PhoneNum" required/>
 
             <p><label class="u_mail">Mailing Address</label></p>
             <input type="text" name="suggestedp" class="mail" id="mailAdd" required/>
@@ -35,6 +35,6 @@
         </form>
     </div>
 </body>
-<script src="client/js/login_func.js"></script>
+<script src="client/js/profile_page.js"></script>
 
 </html>

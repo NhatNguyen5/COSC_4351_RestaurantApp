@@ -34,7 +34,7 @@ async function getUserInfo() {
     }
 }
 
-function parseInfo(data) {
+async function parseInfo(data) {
     let fullname = (data[0].fullname).split(" ")
     fname = fullname[0]
     lname = fullname[1]
@@ -56,6 +56,8 @@ function parseInfo(data) {
     localStorage.setItem("lname", lname);
     localStorage.setItem("email", email);
     localStorage.setItem("phone", phone);
+    localStorage.setItem("mailA", mailA);
+    localStorage.setItem("billA", billA);
 }
 
 async function reserveInfo()
@@ -69,11 +71,11 @@ async function toYourRes()
 }
 
 async function updateProfile(){
-    if( checkEmpty() == true){
-        new_email = document.querySelector("EmailAdd").value;
-        new_phone = document.querySelector("PhoneNum").value;
-        new_mail = document.querySelector("mailAdd").value;
-        new_bill = document.querySelector("billAdd").value;
+    if(checkUnchanged() == true && document.forms.namedItem("register").reportValidity()){
+        new_email = document.querySelector("#EmailAdd").value;
+        new_phone = document.querySelector("#PhoneNum").value;
+        new_mail = document.querySelector("#mailAdd").value;
+        new_bill = document.querySelector("#billAdd").value;
         try {
             const body = {
                 userID: localStorage.getItem('userID'),
@@ -95,13 +97,16 @@ async function updateProfile(){
     }
 }
 
-function checkEmpty(){
-    new_email = document.querySelector("EmailAdd").value;
-    new_phone = document.querySelector("PhoneNum").value;
-    new_mail = document.querySelector("mailAdd").value;
-    new_bill = document.querySelector("billAdd").value;
-    if(new_email == "" || new_phone == "" || new_mail == "" || new_bill == ""){
-        alert("Please fill in all the require inputs.");
+function checkUnchanged(){
+    new_email = document.querySelector("#EmailAdd").value;
+    new_phone = document.querySelector("#PhoneNum").value;
+    new_mail = document.querySelector("#mailAdd").value;
+    new_bill = document.querySelector("#billAdd").value;
+    if(new_email == localStorage.getItem('email') && 
+        new_phone == localStorage.getItem('phone') && 
+        new_mail == localStorage.getItem('billA') && 
+        new_bill == localStorage.getItem('mailA')){
+        alert("There's no change in this information.");
         return false;
     }
     else{
@@ -112,8 +117,6 @@ function checkEmpty(){
 if(document.URL.includes('update_profile.html')){
     document.getElementById("EmailAdd").value = localStorage.getItem('email')
     document.getElementById("PhoneNum").value = localStorage.getItem('phone')
-    billA = cur_data[0].billaddress;
-    document.getElementById("billAdd").value = `${billA}`
-    mailA = cur_data[0].mailaddress;
-    document.getElementById("mailAdd").value = `${mailA}`
+    document.getElementById("billAdd").value = localStorage.getItem('billA')
+    document.getElementById("mailAdd").value = localStorage.getItem('mailA')
 }

@@ -30,7 +30,7 @@
                 <input type="email" class="mail" id="mailE" maxlength="30" placeholder="JohnSmith@mail.com" required />
 
             <p><label for="PhoneNum" class="billN">Phone Number</label></p>
-                <input type="text" class="bill" id="numP" maxlength="10" placeholder="xxx-xxx-xxxx" />
+                <input type="text" class="bill" id="numP" maxlength="10" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" placeholder="xxx-xxx-xxxx" />
 
             <p><label for="maillAdd" class="mailN">Mailing Address</label> </p>
                 <input type="text" name="suggestedp" class = "mail" id="mailA" placeholder = "112 Stoke Dr."  required/>

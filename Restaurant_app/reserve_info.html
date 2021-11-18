@@ -26,7 +26,7 @@
                 <input type="email" class="mail" id="EmailAdd" maxlength="30" placeholder="JohnSmith@mail.com" required />
 
                 <p><label for="PhoneNum" class="billN">Phone Number</label></p>
-                <input type="text" class="bill" id="PhoneNum" maxlength="10" placeholder="xxx-xxx-xxxx" required/>
+                <input type="text" class="bill" id="PhoneNum" maxlength="10" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" placeholder="xxx-xxx-xxxx" required/>
 
                 <p><label for="date" class="date">Reservation Date</label></p>
                 <input type="date" class="bill" id="date" value="Date" onchange="getTableMap(); checkHoliday();"

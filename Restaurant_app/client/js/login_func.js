@@ -105,4 +105,3 @@ async function findUID(l_user) {
 function copyMailing() {
     document.getElementById('billA').value = document.getElementById('mailA').value;
 }
-
