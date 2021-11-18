@@ -1,28 +1,28 @@
 const express = require("express");
 const app = express();
-const path = require('path');
+const path = require("path");
 const cors = require("cors");
 const pool = require("./db");
-const { check, validationResult } = require('express-validator');
+const { check, validationResult } = require("express-validator");
 var table_cal = require("./table_calculations");
-var Holidays = require('date-holidays');
+var Holidays = require("date-holidays");
 const { time } = require("console");
 const { query } = require("express");
-var hd = new Holidays('US');
+var hd = new Holidays("US");
 
 //middleware
 app.use(cors());
 app.use(express.json()); //req.body
 
-let urlencoded = express.urlencoded({ extended: true })
+let urlencoded = express.urlencoded({ extended: true });
 app.use(express.json());
 app.use(urlencoded);
-app.use(express.static(__dirname + '/'));
+app.use(express.static(__dirname + "/"));
 
-app.get('/checkHoliday/:fac', async (req, res) => {
+app.get("/checkHoliday/:fac", async (req, res) => {
   const { fac } = req.params;
-  var date = fac.split(',')[0];
-  var timeZone = fac.split(',')[1];
+  var date = fac.split(",")[0];
+  var timeZone = fac.split(",")[1];
   hd.isHoliday(fac);
   console.log(fac);
   var temp = new Date(`${date} 00:00:00 ${timeZone}`);
@@ -47,7 +47,8 @@ app.post("/register", async (req, res) => {
     console.log(`INSERT INTO userInfo VALUES('${userid}','${fullname}','${phone}','
       ${email}','${mailaddress}','${billaddress}','${point}');`);
     const Todo = await pool.query(
-      `INSERT INTO userCredentials VALUES(${userid},'${user}',crypt('${pass}',gen_salt('bf')));`);
+      `INSERT INTO userCredentials VALUES(${userid},'${user}',crypt('${pass}',gen_salt('bf')));`
+    );
     const newTodo = await pool.query(
       `INSERT INTO userInfo VALUES(${userid},'${fullname}','${phone}','${email}','${mailaddress}','${billaddress}','${point}');`
     );
@@ -71,18 +72,17 @@ app.post("/reserveTable", async (req, res) => {
   isHoliday = req.body.isHoliday;
   userID = req.body.userID;
   try {
-    console.log(req.body)
+    console.log(req.body);
     //this will encrypt the password once it is made
     console.log(`INSERT INTO Reservation VALUES(${ResID},'${fistName}','${lastName}','${phone}',
                                                     '${email}','${resDate}','${resTime}:00',${noOfSeats},
-                                                    '${tablePicked}','${prefPay}', '${isHoliday}', '${userID}');`)
+                                                    '${tablePicked}','${prefPay}', '${isHoliday}', '${userID}');`);
     const newTodo = await pool.query(
       `INSERT INTO Reservation VALUES(${ResID},'${fistName}','${lastName}','${phone}',
                                           '${email}','${resDate}','${resTime}:00',${noOfSeats},
                                           '${tablePicked}','${prefPay}','${isHoliday}','${userID}');`
     );
     res.json(newTodo.rows);
-
   } catch (err) {
     //alert(err);
     console.error(err.message);
@@ -91,11 +91,12 @@ app.post("/reserveTable", async (req, res) => {
 
 app.post("/cancelRes", async (req, res) => {
   resID = req.body.resID;
+  emailID = req.body.emailID;
   try {
     console.log(req.body);
-    console.log(`DELETE FROM reservation WHERE reservationID = '${resID}'`);
+    console.log(`DELETE FROM reservation WHERE reservation.reservationID = '${resID}' AND reservation.email = '${emailID}'`);
     const cancel = await pool.query(
-      `DELETE FROM reservation WHERE reservationID = '${resID}'; `
+      `DELETE FROM reservation WHERE reservation.reservationID = '${resID}' AND reservation.email = '${emailID}'; `
     );
     res.json(cancel.rows);
   } catch (err) {
@@ -103,12 +104,12 @@ app.post("/cancelRes", async (req, res) => {
   }
 });
 
-app.get('/login/:fac', async (req, res) => {
+app.get("/login/:fac", async (req, res) => {
   const { fac } = req.params;
-  var user = fac.split(',')[0];
-  var pass = fac.split(',')[1];
+  var user = fac.split(",")[0];
+  var pass = fac.split(",")[1];
   try {
-    console.log(req.body)
+    console.log(req.body);
     //find if login info is correct
     const newTodo = await pool.query(
       `select count(userid) from usercredentials where loginid = '${user}' and password = crypt('${pass}',password); `
@@ -120,10 +121,9 @@ app.get('/login/:fac', async (req, res) => {
   }
 });
 
-app.get('/uid', async (req, res) => {
-
+app.get("/uid", async (req, res) => {
   try {
-    console.log(req.body)
+    console.log(req.body);
     //search for latest userID
     const newTodo = await pool.query(
       `SELECT userid from userInfo ORDER BY userid DESC LIMIT 1;`
@@ -134,23 +134,21 @@ app.get('/uid', async (req, res) => {
   }
 });
 
-app.get('/searchResID/:fac', async (req, res) => {
+app.get("/searchResID/:fac", async (req, res) => {
   const { fac } = req.params;
-  var resID = fac.split(',')[0]
-  var userID = fac.split(',')[1]
-  var query_line = '';
-  if(resID == '*'){
-    query_line = `select * from reservation where userID = '${userID}';`
+  var resID = fac.split(",")[0];
+  var userID = fac.split(",")[1];
+  var query_line = "";
+  if (resID == "*") {
+    query_line = `select * from reservation where userID = '${userID}';`;
   } else {
-    query_line = `select * from reservation where reservationID = '${resID}' and userID = '1';`
+    query_line = `select * from reservation where reservationID = '${resID}';`;
   }
   try {
-    console.log(req.body)
-    console.log(query_line)
+    console.log(req.body);
+    console.log(query_line);
     //search for latest userID
-    const newTodo = await pool.query(
-      query_line
-    );
+    const newTodo = await pool.query(query_line);
 
     res.json(newTodo.rows);
   } catch (err) {
@@ -158,10 +156,11 @@ app.get('/searchResID/:fac', async (req, res) => {
   }
 });
 
-app.get('/resid', async (req, res) => {
-
+app.get("/resid", async (req, res) => {
   try {
-    console.log(`SELECT reservationid from Reservation order by reservationid desc limit 1;`)
+    console.log(
+      `SELECT reservationid from Reservation order by reservationid desc limit 1;`
+    );
     //search for latest userID
     const newTodo = await pool.query(
       `SELECT reservationid from Reservation order by reservationid desc limit 1;`
@@ -173,12 +172,14 @@ app.get('/resid', async (req, res) => {
   }
 });
 
-app.get('/uid1/:fac', async (req, res) => {
+app.get("/uid1/:fac", async (req, res) => {
   const { fac } = req.params;
   try {
-    console.log(req.body)
+    console.log(req.body);
     //search for latest userID
-    console.log(`select userid from usercredentials where loginid = '${fac}' order by userid desc limit 1;`);
+    console.log(
+      `select userid from usercredentials where loginid = '${fac}' order by userid desc limit 1;`
+    );
     const newTodo = await pool.query(
       `select userid from usercredentials where loginid = '${fac}' order by userid desc limit 1;`
     );
@@ -189,15 +190,15 @@ app.get('/uid1/:fac', async (req, res) => {
   }
 });
 
-app.get('/uid2/:fac', async (req, res) => {
+app.get("/uid2/:fac", async (req, res) => {
   const { fac } = req.params;
   try {
-    console.log(req.body)
+    console.log(req.body);
     console.log(
       `
       select * from userInfo where userID = ${fac};
       `
-    )
+    );
     const newTodo = await pool.query(
       `
       select * from userInfo where userID = ${fac};
@@ -210,23 +211,22 @@ app.get('/uid2/:fac', async (req, res) => {
   }
 });
 
-app.get('/getTables/:fac', async (req, res) => {
-  const { fac } = req.params
+app.get("/getTables/:fac", async (req, res) => {
+  const { fac } = req.params;
 
   const date = req.params.fac.split(",")[0];
-  const time = req.params.fac.split(",")[1] + ':00';
+  const time = req.params.fac.split(",")[1] + ":00";
   console.log(date + " " + time);
   console.log(
-  `select reservation.tablepicked from reservation
+    `select reservation.tablepicked from reservation
   where reservation.reservationdate = '${date}' and reservation.reservationtime = '${time}'`
   );
   try {
     const reservedTableList = await pool.query(`
     select reservation.tablepicked from reservation
-    where reservation.reservationdate = '${date}' and reservation.reservationtime = '${time}'`
-    );
+    where reservation.reservationdate = '${date}' and reservation.reservationtime = '${time}'`);
     console.log(reservedTableList.rows);
-    res.json(reservedTableList.rows)
+    res.json(reservedTableList.rows);
   } catch (err) {
     console.log(err.message);
   }
@@ -240,15 +240,17 @@ app.post("/updateProfile", async (req, res) => {
   billaddress = req.body.billaddress;
   try {
     console.log(req.body);
-    console.log(`UPDATE userInfo SET phone = '${phone}', email = '${email}', mailAddress = '${mailaddress}', billAddress = '${billaddress}' WHERE userID = ${userid}`);
+    console.log(
+      `UPDATE userInfo SET phone = '${phone}', email = '${email}', mailAddress = '${mailaddress}', billAddress = '${billaddress}' WHERE userID = ${userid}`
+    );
     const Todo = await pool.query(
-      `UPDATE userInfo SET phone = '${phone}', email = '${email}', mailAddress = '${mailaddress}', billAddress = '${billaddress}' WHERE userID = ${userid}`);
+      `UPDATE userInfo SET phone = '${phone}', email = '${email}', mailAddress = '${mailaddress}', billAddress = '${billaddress}' WHERE userID = ${userid}`
+    );
     res.json(newTodo.rows);
   } catch (err) {
     console.error(err.message);
   }
 });
-
 
 //ROUTES//
 app.post("/profile", async (req, res) => {
@@ -261,8 +263,10 @@ app.post("/profile", async (req, res) => {
   zipcode = req.body.zip;
   console.log("work?");
   try {
-    console.log(req.body)
-    console.log(`INSERT INTO ClientInformation VALUES(${userid},'${fullname}','${address}','${address2}','${city}','${state}','${zipcode}'); `)
+    console.log(req.body);
+    console.log(
+      `INSERT INTO ClientInformation VALUES(${userid},'${fullname}','${address}','${address2}','${city}','${state}','${zipcode}'); `
+    );
     const newTodo = await pool.query(
       `INSERT INTO ClientInformation VALUES(${userid},'${fullname}','${address}','${address2}','${city}','${state}','${zipcode}'); `
     );

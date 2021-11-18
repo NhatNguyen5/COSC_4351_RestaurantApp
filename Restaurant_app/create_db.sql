@@ -29,7 +29,7 @@ CREATE TABLE reservation(
 	guestFirstName TEXT NOT NULL,
 	guestLastName TEXT NOT NULL,
 	phone varchar(10) NOT NULL,
-	email varchar(320) NOT NULL,
+	email varchar NOT NULL,
 	reservationDate DATE NOT NULL,
 	reservationTime TIME NOT NULL,
 	guestNumber integer NOT NULL,

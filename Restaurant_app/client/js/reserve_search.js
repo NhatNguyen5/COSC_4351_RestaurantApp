@@ -21,6 +21,7 @@ async function cancelRes() {
     console.log("Hello");
     console.log("Sup?");
     var resID = document.querySelector("#ResID").value;
+    var emailID = document.querySelector("#emailID").value;
     let cancel = false;
     console.log(data[0].isholiday)
     if (data[0].isholiday == "yes" ? true : false) {
@@ -38,11 +39,11 @@ async function cancelRes() {
             cancel = false
         }
     }
-
     if(cancel){
         try {
             const body = {
-                resID: resID
+                resID: resID,
+                emailID: emailID
             };
             const response = await fetch(`http://localhost:5000/cancelRes`, {
                 method: "POST",
@@ -66,6 +67,8 @@ function showRes() {
         document.getElementById("resInfo").innerHTML += `Reservation Time: ${(data[0].reservationtime).slice(0, -3)}<br><br>`
         document.getElementById("resInfo").innerHTML += `Number of Guest(s): ${data[0].guestnumber}<br><br>`
         document.getElementById("resInfo").innerHTML += `Table Picked: ${data[0].tablepicked}<br><br>`
+        document.getElementById("confirmation").innerHTML = `<p><label for="ResNumber" class="mailN">Confirm your Email to Cancel Reservation</label></p>
+                <input type="email" class="mail" id="emailID" required />`
         document.getElementById("cancel_field").innerHTML = `<button input type="button" id="cancel_button" class="submit-btn"
         onclick="cancelRes()">Cancel Reservation</button>`
     } else {
