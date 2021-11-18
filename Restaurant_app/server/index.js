@@ -104,6 +104,20 @@ app.post("/cancelRes", async (req, res) => {
   }
 });
 
+app.post("/cancelUserRes", async (req, res) => {
+  resID = req.body.resID;
+  try {
+    console.log(req.body);
+    console.log(`DELETE FROM reservation WHERE reservation.reservationID = '${resID}'`);
+    const cancel = await pool.query(
+      `DELETE FROM reservation WHERE reservation.reservationID = '${resID}'; `
+    );
+    res.json(cancel.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
 app.get("/login/:fac", async (req, res) => {
   const { fac } = req.params;
   var user = fac.split(",")[0];

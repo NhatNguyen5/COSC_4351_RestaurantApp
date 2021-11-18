@@ -28,8 +28,8 @@ function showRes() {
             document.getElementById("resInfo").innerHTML += `Number of Guest(s): ${element.guestnumber}<br><br>`
             document.getElementById("resInfo").innerHTML += `Table Picked: ${element.tablepicked}<br><br>`
             document.getElementById("resInfo").innerHTML += `<button input type="button" id="cancel_button" class="submit-btn-scroll"
-            onclick="cancelRes(${element.reservationid})">Cancel Reservation</button>`
-            console.log(data.indexOf(element))
+            onclick="cancelRes(${data.indexOf(element)})">Cancel Reservation</button>`
+            //console.log(data.indexOf(element))
             if(data.indexOf(element) != data.length-1)
                 document.getElementById("resInfo").innerHTML += `<hr class="resInfo_line" style="width: 450px;">`
         });
@@ -38,10 +38,10 @@ function showRes() {
     }
 }
 
-async function cancelRes(resID) {
+async function cancelRes(resDataIndex) {
     let cancel = false;
-    console.log(data[0].isholiday)
-    if (data[0].isholiday == "yes" ? true : false) {
+    console.log(data[resDataIndex].isholiday)
+    if (data[resDataIndex].isholiday == "yes" ? true : false) {
         let holiday_cancel_confirm = confirm("YOU WILL BE CHARGE $10! Are you sure you want to cancel?")
         if (holiday_cancel_confirm) {
             cancel = true
@@ -60,9 +60,9 @@ async function cancelRes(resID) {
     if (cancel) {
         try {
             const body = {
-                resID: resID
+                resID: data[resDataIndex].reservationid
             };
-            const response = await fetch(`http://localhost:5000/cancelRes`, {
+            const response = await fetch(`http://localhost:5000/cancelUserRes`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body),

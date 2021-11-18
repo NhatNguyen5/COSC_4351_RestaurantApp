@@ -24,7 +24,7 @@ async function getInfo() {
     try {
         //console.log(jsonData);
         if (localStorage.getItem("fname") != null && localStorage.getItem("lname") != null) {
-            info.push([localStorage.getItem("fname"), localStorage.getItem("fname")]);
+            info.push([localStorage.getItem("fname"), localStorage.getItem("lname")]);
         } else {
             info.push(null);
         }
