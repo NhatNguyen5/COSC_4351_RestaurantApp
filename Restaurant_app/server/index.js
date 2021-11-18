@@ -232,6 +232,23 @@ app.get('/getTables/:fac', async (req, res) => {
   }
 });
 
+app.post("/updateProfile", async (req, res) => {
+  userid = req.body.userID;
+  phone = req.body.phone;
+  email = req.body.email;
+  mailaddress = req.body.mailaddress;
+  billaddress = req.body.billaddress;
+  try {
+    console.log(req.body);
+    console.log(`UPDATE userInfo SET phone = '${phone}', email = '${email}', mailAddress = '${mailaddress}', billAddress = '${billaddress}' WHERE userID = ${userid}`);
+    const Todo = await pool.query(
+      `UPDATE userInfo SET phone = '${phone}', email = '${email}', mailAddress = '${mailaddress}', billAddress = '${billaddress}' WHERE userID = ${userid}`);
+    res.json(newTodo.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
 
 //ROUTES//
 app.post("/profile", async (req, res) => {

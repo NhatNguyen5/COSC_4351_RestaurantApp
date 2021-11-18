@@ -319,7 +319,7 @@ h3.profile_page#points{
 }
 
 input{
-    margin-left: 10px;
+    margin-left: -20px;
     margin-bottom: 15px;
     padding: 5px;
     width: 300px;
@@ -468,7 +468,7 @@ input{
     transition:800ms ease all;
     outline:none;
     margin-left: 50px;
-    margin-top:70px;
+    margin-top:50px;
     display:block;
 }
 .log:hover{
@@ -504,19 +504,19 @@ input{
     height:35px;
     /* width: 200px; */
     font-size:15px;
-    padding:0 100px;
+    padding:0 98px;
     cursor:pointer;
     transition:800ms ease all;
     outline:none;
     margin-left: 50px;
-    margin-top:70px;
+    margin-top:50px;
     display:block;
 }
 .user_res:hover{
     background:#fff;
     color:#DD7230;
 }
-.user_res:before,.log:after{
+.user_res:before,.user_res:after{
     content:'';
     position:absolute;
     top:0;
@@ -532,11 +532,51 @@ input{
     left:0;
     bottom:0;
 }
-.user_res:hover:before,.log:hover:after{
+.user_res:hover:before,.user_res:hover:after{
     width:100%;
     transition:800ms ease all;
 }
 
+.update_pro{
+    background:#DD7230;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:35px;
+    /* width: 200px; */
+    font-size:15px;
+    padding:0 110px;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+    margin-left: 50px;
+    margin-top:50px;
+    display:block;
+}
+.update_pro:hover{
+    background:#fff;
+    color:#DD7230;
+}
+.update_pro:before,.update_pro:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #DD7230;
+    transition:400ms ease all;
+}
+.update_pro:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+}
+.update_pro:hover:before,.update_pro:hover:after{
+    width:100%;
+    transition:800ms ease all;
+}
 
 
 
