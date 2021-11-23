@@ -1,4 +1,7 @@
+const { info } = require("console");
+
 var data = []
+var emailCon = [];
 
 async function SearchAndShow() {
     if (document.forms.namedItem("search_form").reportValidity()) {
@@ -39,26 +42,35 @@ async function cancelRes() {
             cancel = false
         }
     }
-    if(cancel && data[0].email == emailID){
+    if (cancel) {
+        var emailData = [2]
+        emailData[0] = document.getElementById("ResID").value;
+        emailData[1] = document.getElementById("emailID").value;
         try {
             const body = {
                 resID: resID,
                 emailID: emailID
             };
-            const response = await fetch(`http://localhost:5000/cancelRes`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(body),
-            });
-            alert("Reservation Canceled!");
-            window.location.href = "reserve_search.html";
+            const confirm = await fetch(`http://localhost:5000/checkEmail/${emailData}`);
+            const emailCred = await confirm.json();
+            emailCon = emailCred;
+            if (emailCon[0] != null) {
+                const response = await fetch(`http://localhost:5000/cancelRes`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(body),
+                });
+                alert("Reservation Canceled!");
+                window.location.href = "reserve_search.html";
+                
+            }
+            else
+            {
+                alert("Wrong Credentials");
+            }
         } catch (err) {
             console.log(err.message);
         }
-    }
-    else
-    {
-        alert("Wrong Credentials");
     }
 
 }

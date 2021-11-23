@@ -94,7 +94,9 @@ app.post("/cancelRes", async (req, res) => {
   emailID = req.body.emailID;
   try {
     console.log(req.body);
-    console.log(`DELETE FROM reservation WHERE reservation.reservationID = '${resID}' AND reservation.email = '${emailID}'`);
+    console.log(
+      `DELETE FROM reservation WHERE reservation.reservationID = '${resID}' AND reservation.email = '${emailID}'`
+    );
     const cancel = await pool.query(
       `DELETE FROM reservation WHERE reservation.reservationID = '${resID}' AND reservation.email = '${emailID}'; `
     );
@@ -108,7 +110,9 @@ app.post("/cancelUserRes", async (req, res) => {
   resID = req.body.resID;
   try {
     console.log(req.body);
-    console.log(`DELETE FROM reservation WHERE reservation.reservationID = '${resID}'`);
+    console.log(
+      `DELETE FROM reservation WHERE reservation.reservationID = '${resID}'`
+    );
     const cancel = await pool.query(
       `DELETE FROM reservation WHERE reservation.reservationID = '${resID}'; `
     );
@@ -148,6 +152,25 @@ app.get("/uid", async (req, res) => {
   }
 });
 
+app.get("/checkEmail/:emailData", async (req, res) => {
+  const { emailData } = req.params;
+  var resID = emailData.split(",")[0];
+  var emailID = emailData.split(",")[1];
+  try {
+    console.log(req.body);
+    console.log(
+      `select * from reservation where reservationID = '${resID}' and email = '${emailID}';`
+    );
+    //search for latest userID
+    const newTodo = await pool.query(
+      `select * from reservation where reservationID = '${resID}' and email = '${emailID}';`
+    );
+    res.json(newTodo.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
 app.get("/searchResID/:fac", async (req, res) => {
   const { fac } = req.params;
   var resID = fac.split(",")[0];
@@ -167,7 +190,8 @@ app.get("/searchResID/:fac", async (req, res) => {
       {
         delete newTodo.rows[0]["email"];
         delete newTodo.rows[0]["phone"];
-    }}
+      }
+    }
     res.json(newTodo.rows);
   } catch (err) {
     console.error(err.message);
