@@ -32,14 +32,14 @@ async function cancelRes() {
             cancel = false
         }
     } else {
-        let holiday_cancel_confirm = confirm("Cancel reservation?")
-        if (holiday_cancel_confirm) {
+        let holiday_cancel_confirm = prompt("Are you sure you want to cancel your reservation? \n Yes or No")
+        if (holiday_cancel_confirm.toLowerCase() == "yes") {
             cancel = true
         } else {
             cancel = false
         }
     }
-    if(cancel){
+    if(cancel && data[0].email == emailID){
         try {
             const body = {
                 resID: resID,
@@ -55,6 +55,10 @@ async function cancelRes() {
         } catch (err) {
             console.log(err.message);
         }
+    }
+    else
+    {
+        alert("Wrong Credentials");
     }
 
 }
