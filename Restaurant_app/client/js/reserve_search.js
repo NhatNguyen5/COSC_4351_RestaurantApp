@@ -1,4 +1,3 @@
-const { info } = require("console");
 
 var data = []
 var emailCon = [];

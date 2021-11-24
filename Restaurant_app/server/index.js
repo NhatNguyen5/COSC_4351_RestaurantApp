@@ -187,9 +187,11 @@ app.get("/searchResID/:fac", async (req, res) => {
     //search for latest userID
     const newTodo = await pool.query(query_line);
     if (userID == "-1") {
-      {
-        delete newTodo.rows[0]["email"];
-        delete newTodo.rows[0]["phone"];
+      if (newTodo.rows[0] != null) {
+        {
+          delete newTodo.rows[0]["email"];
+          delete newTodo.rows[0]["phone"];
+        }
       }
     }
     res.json(newTodo.rows);
