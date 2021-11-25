@@ -1,11 +1,23 @@
 var uid = findLastUID();
 
+if (document.URL.includes('register_page.html')) {
+    window.onload = prepFromReservation();
+}
 async function reserveInfo() {
     location.href = "reserve_info.html";
 }
 
 async function reserveSearch() {
     location.href = "reserve_search.html";
+}
+
+async function prepFromReservation() {
+    if (localStorage.getItem("fname") != null) {
+        document.querySelector("#nameF").value = localStorage.getItem("fname");
+        document.querySelector("#nameL").value = localStorage.getItem("lname");
+        document.querySelector("#mailE").value = localStorage.getItem("email");
+        document.querySelector("#numP").value = localStorage.getItem("phone");
+    }
 }
 
 async function insertUserCred() {
@@ -40,13 +52,48 @@ async function insertUserCred() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body),
             });
-            alert("Registration Successful!");
-            window.location.href = "rest_login.html";
         } catch (err) {
             console.log(err.message);
         }
+        if (localStorage.getItem("fname") != null) {
+            alert("Registration Successful!");
+            reservationAfterReg();
+        } else {
+            alert("Registration Successful!");
+            window.location.href = 'welcome_page.html';
+        }
     }
 }
+
+async function reservationAfterReg() {
+    try {
+        const body = {
+            ResID: localStorage.getItem("resID"),
+            fistName: document.querySelector("#nameF").value,
+            lastName: document.querySelector("#nameL").value,
+            email: document.querySelector("#mailE").value,
+            phone: document.querySelector("#numP").value,
+            resDate: localStorage.getItem("date"),
+            resTime: localStorage.getItem("time"),
+            noOfSeats: parseInt(localStorage.getItem("noOfSeats")),
+            tablePicked: localStorage.getItem("PickedTable"),
+            prefPay: localStorage.getItem("prefPay"),
+            isHoliday: localStorage.getItem("isHoliday") != 'false' ? "yes" : "no",
+            userID: uid
+        };
+        const response = await fetch(`http://localhost:5000/reserveTable`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        });
+        alert("Reservation has been put under new user account.");
+        window.location.href = 'welcome_page.html';
+    }
+    catch (err) {
+        console.log(err.message);
+    }
+}
+
 async function findLastUID() {
     try {
         const response = await fetch(`http://localhost:5000/uid`);

@@ -81,33 +81,54 @@ async function displayTables() {
 
 async function reservedTablePost() {
     try {
-        const body = {
-            ResID: ReservationID,
-            fistName: info[0][0],
-            lastName: info[0][1],
-            email: info[1],
-            phone: info[2],
-            resDate: info[3],
-            resTime: info[4],
-            noOfSeats: info[5],
-            tablePicked: selectedTable,
-            prefPay: info[6],
-            isHoliday: localStorage.getItem("isHoliday") != 'false' ? "yes" : "no",
-            userID: localStorage.getItem("userID")
-        };
-        const response = await fetch(`http://localhost:5000/reserveTable`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body)
-        });
         if (localStorage.getItem("userID") == '1') {
             let registerAsk = confirm("Reservation Successful! \n\nCREATE AN ACCOUNT WITH US FOR POINTS AND DISCOUNT?")
             if (registerAsk) {
+                localStorage.setItem("PickedTable", selectedTable);
+                localStorage.setItem("resID", ReservationID);
                 window.location.href = 'register_page.html';
             } else {
+                const body = {
+                    ResID: ReservationID,
+                    fistName: info[0][0],
+                    lastName: info[0][1],
+                    email: info[1],
+                    phone: info[2],
+                    resDate: info[3],
+                    resTime: info[4],
+                    noOfSeats: info[5],
+                    tablePicked: selectedTable,
+                    prefPay: info[6],
+                    isHoliday: localStorage.getItem("isHoliday") != 'false' ? "yes" : "no",
+                    userID: localStorage.getItem("userID")
+                };
+                const response = await fetch(`http://localhost:5000/reserveTable`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(body)
+                });
                 window.location.href = 'welcome_page.html';
             }
         } else {
+            const body = {
+                ResID: ReservationID,
+                fistName: info[0][0],
+                lastName: info[0][1],
+                email: info[1],
+                phone: info[2],
+                resDate: info[3],
+                resTime: info[4],
+                noOfSeats: info[5],
+                tablePicked: selectedTable,
+                prefPay: info[6],
+                isHoliday: localStorage.getItem("isHoliday") != 'false' ? "yes" : "no",
+                userID: localStorage.getItem("userID")
+            };
+            const response = await fetch(`http://localhost:5000/reserveTable`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            });
             let registerAsk = confirm("Reservation Successful! \n\nDo you want to log out?")
             if (registerAsk) {
                 window.location.href = 'welcome_page.html';

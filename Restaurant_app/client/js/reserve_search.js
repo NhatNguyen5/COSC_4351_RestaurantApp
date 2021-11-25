@@ -61,7 +61,6 @@ async function cancelRes() {
                 });
                 alert("Reservation Canceled!");
                 window.location.href = "reserve_search.html";
-                
             }
             else
             {
