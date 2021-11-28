@@ -1,3 +1,6 @@
+// const { default: swal } = require("sweetalert");
+
+
 window.onload = SearchAndShow()
 
 var data = []
@@ -42,36 +45,92 @@ async function cancelRes(resDataIndex) {
     let cancel = false;
     console.log(data[resDataIndex].isholiday)
     if (data[resDataIndex].isholiday == "yes" ? true : false) {
-        let holiday_cancel_confirm = confirm("YOU WILL BE CHARGE $10! Are you sure you want to cancel?")
-        if (holiday_cancel_confirm) {
-            cancel = true
-        } else {
-            cancel = false
-        }
+        swal("YOU WILL BE CHARGE $10! Are you sure you want to cancel?", {
+            buttons: {
+                yes: "Yes",
+                no: "No",
+            },
+        })
+        .then((value) => {
+            switch (value) {          
+                case "yes":
+                    cancel = true;
+                    doThis(resDataIndex);
+                    break;
+           
+                case "no":
+                    cancel = false;
+                    break;
+            }
+        });
     } else {
-        let holiday_cancel_confirm = confirm("Cancel reservation?")
-        if (holiday_cancel_confirm) {
-            cancel = true
-        } else {
-            cancel = false
-        }
+        swal("Are you sure you want to cancel your reservation?", {
+            buttons: {
+                yes: "Yes",
+                no: "No",
+            },
+        })
+        .then((value) => {
+            switch (value) {
+                case "yes":
+                    doThis(resDataIndex);
+                    swal("Reservation Canceled!","","success",{
+                        buttons:{
+                            ok: "Ok"
+                        },
+                    }).then((value) =>{
+                        switch(value){
+                            case "ok":
+                                window.location.reload();
+                                break;
+                            default:
+                                window.location.reload();
+                                break;
+                        }
+                    });
+                    break;
+           
+                case "no":
+                    break;
+            }
+        });
     }
 
-    if (cancel) {
-        try {
-            const body = {
-                resID: data[resDataIndex].reservationid
-            };
-            const response = await fetch(`http://localhost:5000/cancelUserRes`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(body),
-            });
-            alert("Reservation Canceled!");
-            window.location.href = "user_reservations.html";
-        } catch (err) {
-            console.log(err.message);
-        }
-    }
+    // if (cancel) {
+    //     try {
+    //         const body = {
+    //             resID: data[resDataIndex].reservationid
+    //         };
+    //         const response = await fetch(`http://localhost:5000/cancelUserRes`, {
+    //             method: "POST",
+    //             headers: { "Content-Type": "application/json" },
+    //             body: JSON.stringify(body),
+    //         });
+    //         // alert("Reservation Canceled!");
+    //         swal("Reservation Canceled!","","success");
+    //         window.location.href = "user_reservations.html";
+    //     } catch (err) {
+    //         console.log(err.message);
+    //     }
+    // }
 
+}
+
+async function doThis(resDataIndex){
+    try {
+        const body = {
+            resID: data[resDataIndex].reservationid
+        };
+        const response = await fetch(`http://localhost:5000/cancelUserRes`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+        });
+        // alert("Reservation Canceled!");
+        // swal("Reservation Canceled!","","success");
+        // window.location.href = "user_reservations.html";
+        // window.location.reload()
+    } catch (err) {
+        console.log(err.message);
+    }
 }

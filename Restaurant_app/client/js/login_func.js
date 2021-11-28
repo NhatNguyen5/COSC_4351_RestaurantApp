@@ -56,10 +56,12 @@ async function insertUserCred() {
             console.log(err.message);
         }
         if (localStorage.getItem("fname") != null) {
-            alert("Registration Successful!");
+            // alert("Registration Successful!");
+            swal("Success!", "Thank you for registering!", "success");
             reservationAfterReg();
         } else {
-            alert("Registration Successful!");
+            // alert("Registration Successful!");
+            swal("Success!", "Thank you for registering!", "success");
             window.location.href = 'welcome_page.html';
         }
     }
@@ -86,7 +88,7 @@ async function reservationAfterReg() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
         });
-        alert("Reservation has been put under new user account.");
+        // alert("Reservation has been put under new user account.");
         window.location.href = 'welcome_page.html';
     }
     catch (err) {
@@ -115,7 +117,8 @@ async function success_login() {
     var fac = l_user + ',' + l_pass;
 
     if (l_user.length == 0 || l_pass.length == 0) {
-        alert("Please fill all required field.");
+        // alert("Please fill all required field.");
+        swal("Please fill all the required field");
         return false;
     }
     try {
@@ -128,7 +131,8 @@ async function success_login() {
             window.location.href = 'profile_page.html';
         }
         else {
-            alert("Incorrect Username or Password");
+            // alert("Incorrect Username or Password");
+            swal("Incorrect Username or Password","","error");
         }
     } catch (err) {
         console.log(err.message);

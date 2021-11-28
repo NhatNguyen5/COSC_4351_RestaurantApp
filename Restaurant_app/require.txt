@@ -1,8 +1,9 @@
 npm install
 npm install express --save
 npm install express-validator
-npm install --save-dev jest
+//npm install --save-dev jest (only for unit testing/code coverage)
 npm install cors
 npm install pg
 npm install date-holidays
 npm audit fix
+npm install sweetalert --save

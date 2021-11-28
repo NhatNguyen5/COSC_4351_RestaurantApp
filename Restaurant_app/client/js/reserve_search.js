@@ -22,55 +22,83 @@ async function SearchAndShow() {
 async function cancelRes() {
     console.log("Hello");
     console.log("Sup?");
-    var resID = document.querySelector("#ResID").value;
-    var emailID = document.querySelector("#emailID").value;
-    let cancel = false;
     console.log(data[0].isholiday)
     if ((data[0].isholiday == "yes" ? true : false)) {
-        let holiday_cancel_confirm = confirm("YOU WILL BE CHARGE $10! Are you sure you want to cancel?")
-        if (holiday_cancel_confirm) {
-            cancel = true
-        } else {
-            cancel = false
-        }
+        swal("YOU WILL BE CHARGE $10! Are you sure you want to cancel?", {
+            buttons: {
+                yes: "Yes",
+                no: "No",
+            },
+        })
+        .then((value) => {
+            switch (value) {          
+                case "yes":
+                    cancel = true;
+                    doThis();
+                    break;
+           
+                case "no":
+                    cancel = false;
+                    break;
+            }
+        });
     } else {
-        let holiday_cancel_confirm = prompt("Are you sure you want to cancel your reservation? \n Yes or No")
-        if (holiday_cancel_confirm.toLowerCase() == "yes") {
-            cancel = true
-        } else {
-            cancel = false
-        }
-    }
-    if (cancel) {
-        var emailData = [2]
-        emailData[0] = document.getElementById("ResID").value;
-        emailData[1] = document.getElementById("emailID").value;
-        try {
-            const body = {
-                resID: resID,
-                emailID: emailID
-            };
-            const confirm = await fetch(`http://localhost:5000/checkEmail/${emailData}`);
-            const emailCred = await confirm.json();
-            emailCon = emailCred;
-            if (emailCon[0] != null) {
-                const response = await fetch(`http://localhost:5000/cancelRes`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(body),
-                });
-                alert("Reservation Canceled!");
-                window.location.href = "reserve_search.html";
+        swal("Are you sure you want to cancel your reservation?", {
+            buttons: {
+                yes: "Yes",
+                no: "No",
+            },
+        })
+        .then((value) => {
+            switch (value) {
+                case "yes":
+                    cancel = true;
+                    doThis();
+                    break;
+           
+                case "no":
+                    cancel = false;
+                    break;
             }
-            else
-            {
-                alert("Wrong Credentials");
-            }
-        } catch (err) {
-            console.log(err.message);
-        }
+        });
     }
 
+}
+
+async function doThis(){
+    var resID = document.querySelector("#ResID").value;
+    var emailID = document.querySelector("#emailID").value;
+
+    var emailData = [2]
+    emailData[0] = document.getElementById("ResID").value;
+    emailData[1] = document.getElementById("emailID").value;
+    try {
+        const body = {
+            resID: resID,
+            emailID: emailID
+        };
+        const confirm = await fetch(`http://localhost:5000/checkEmail/${emailData}`);
+        const emailCred = await confirm.json();
+        emailCon = emailCred;
+        if (emailCon[0] != null) {
+            const response = await fetch(`http://localhost:5000/cancelRes`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body),
+            });
+            swal("Reservation Canceled!")
+            // alert("Reservation Canceled!");
+            window.location.href = "reserve_search.html";
+                
+        }
+        else
+        {
+            swal("Wrong Credentials","","error");
+            // alert("Wrong Credentials");
+        }
+    } catch (err) {
+        console.log(err.message);
+    }
 }
 
 function showRes() {

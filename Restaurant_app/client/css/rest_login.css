@@ -603,3 +603,11 @@ hr.vertical {
     width:0;
     border:1px solid #DD7230;
 }
+
+.swal-modal {
+    border: 5px solid #DD7230;
+}
+
+.swal-footer {
+    text-align: center;
+}

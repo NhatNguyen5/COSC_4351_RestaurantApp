@@ -521,3 +521,13 @@ input{
     width:100%;
     transition:800ms ease all;
 }
+
+
+
+.swal-modal {
+    border: 5px solid #DD7230;
+}
+
+.swal-footer {
+    text-align: center;
+}

@@ -1,3 +1,5 @@
+// const { default: swal } = require("sweetalert");
+
 /*
 Sources:
 Holiday checker: https://stackoverflow.com/questions/58511847/calculating-holidays-in-javascript
@@ -117,7 +119,8 @@ async function checkCard() {
             if (document.getElementById('preferPay').value == "Valid_Creditcard") {
                 passInfo();
             } else {
-                alert("Card is invalid! Please try a different one!");
+                // alert("Card is invalid! Please try a different one!");
+                swal("Card is invalid! Please try a different one!")
             }
         } else {
             passInfo();

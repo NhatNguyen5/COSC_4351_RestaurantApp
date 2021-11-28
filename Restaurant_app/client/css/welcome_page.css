@@ -365,3 +365,11 @@ h1.title_name{
     padding: 5px;
     transform: scale(1.2);
 }
+
+.swal-modal {
+    border: 5px solid #DD7230;
+}
+
+.swal-footer {
+    text-align: center;
+}

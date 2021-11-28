@@ -1,3 +1,5 @@
+// const { default: swal } = require("sweetalert");
+
 var fname;
 var lname;
 var phone;
@@ -89,7 +91,8 @@ async function updateProfile(){
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body),
             });
-            alert("User profile updated!");
+            // alert("User profile updated!");
+            swal("User profile updated!")
             window.location.href = "profile_page.html";
         } catch (err) {
             console.log(err.message);
@@ -106,7 +109,8 @@ function checkUnchanged(){
         new_phone == localStorage.getItem('phone') && 
         new_mail == localStorage.getItem('billA') && 
         new_bill == localStorage.getItem('mailA')){
-        alert("There's no change in this information.");
+        // alert("There's no change in this information.");
+        swal("There's no change in this information.")
         return false;
     }
     else{
