@@ -33,12 +33,10 @@ async function cancelRes() {
         .then((value) => {
             switch (value) {          
                 case "yes":
-                    cancel = true;
                     doThis();
                     break;
            
                 case "no":
-                    cancel = false;
                     break;
             }
         });
@@ -52,12 +50,10 @@ async function cancelRes() {
         .then((value) => {
             switch (value) {
                 case "yes":
-                    cancel = true;
-                    doThis();
+                    doThis();    
                     break;
            
                 case "no":
-                    cancel = false;
                     break;
             }
         });
@@ -86,9 +82,22 @@ async function doThis(){
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body),
             });
-            swal("Reservation Canceled!")
+            swal("Reservation Canceled!","","success",{
+                buttons:{
+                    ok: "Ok"
+                },
+            }).then((value) =>{
+                switch(value){
+                    case "ok":
+                        window.location.reload();
+                        break;
+                    default:
+                        window.location.reload();
+                        break;
+                }
+            });
             // alert("Reservation Canceled!");
-            window.location.href = "reserve_search.html";
+            // window.location.href = "reserve_search.html";
                 
         }
         else
