@@ -84,7 +84,7 @@ async function reservedTablePost() {
         if (localStorage.getItem("userID") == '1') {
             // let registerAsk = confirm("Reservation Successful! \n\nCREATE AN ACCOUNT WITH US FOR POINTS AND DISCOUNT?")
             swal("???", {
-                title: "Reservation Successful!",
+                title: "Hello valuable customer!",
                 text: "CREATE AN ACCOUNT WITH US FOR POINTS AND DISCOUNT?",
                 buttons: {
                     yes: "Yes",
@@ -203,7 +203,21 @@ async function tryThis(){
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
     });
-    window.location.href = 'welcome_page.html';
+    swal("???", {
+        title: "Reservation Successful!",
+        text: `Your reservation number is: ${ReservationID}\n(Store this number for reservation look up)\n`,
+        buttons: {
+            yes: "Confirm",
+        },
+        closeOnClickOutside: false
+    })
+    .then((value) => {
+        switch (value) {          
+            case "yes":
+                window.location.href = 'welcome_page.html';
+                break;
+        }
+    });
 }
 
 async function findLastGResID() {

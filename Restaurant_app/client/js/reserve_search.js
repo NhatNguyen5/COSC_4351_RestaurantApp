@@ -88,6 +88,7 @@ async function doThis(){
                 buttons:{
                     ok: "Ok"
                 },
+                closeOnClickOutside: false
             }).then((value) =>{
                 switch(value){
                     case "ok":

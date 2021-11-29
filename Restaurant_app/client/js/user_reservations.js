@@ -82,6 +82,7 @@ async function cancelRes(resDataIndex) {
                         buttons:{
                             ok: "Ok"
                         },
+                        closeOnClickOutside: false
                     }).then((value) =>{
                         switch(value){
                             case "ok":

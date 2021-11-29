@@ -92,8 +92,18 @@ async function updateProfile(){
                 body: JSON.stringify(body),
             });
             // alert("User profile updated!");
-            swal("User profile updated!")
-            window.location.href = "profile_page.html";
+            swal("User profile updated!","","success", {
+                buttons: {
+                    yes: "Confirm"
+                },
+                closeOnClickOutside: false
+            }).then((value) => {
+                switch (value) {          
+                    case "yes":
+                        window.location.href = "profile_page.html";
+                        break;
+                }
+            });
         } catch (err) {
             console.log(err.message);
         }
