@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 var uid = findLastUID();
 
 if (document.URL.includes('register_page.html')) {
@@ -52,17 +54,48 @@ async function insertUserCred() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body),
             });
+            const jsonData = await response.json();
+            var data = [];
+            data = jsonData;
+            console.log(data);
         } catch (err) {
             console.log(err.message);
         }
-        if (localStorage.getItem("fname") != null) {
-            // alert("Registration Successful!");
-            swal("Success!", "Thank you for registering!", "success");
-            reservationAfterReg();
+        if(data == 0){
+            var resAReg = true;
+            if (localStorage.getItem("fname") != null) {
+                // alert("Registration Successful!");
+                swal("Success!", "Thank you for registering!", "success", {
+                    buttons: {
+                        yes: "Confirm"
+                    },
+                })
+                .then((value) => {
+                    switch (value) {          
+                        case "yes":
+                            resAReg = false;
+                            reservationAfterReg();
+                            break;
+                    }
+                }); 
+            } 
+            if(resAReg) {
+                // alert("Registration Successful!");
+                swal("Success!", "Thank you for registering!", "success", {
+                    buttons: {
+                        yes: "Confirm"
+                    },
+                })
+                .then((value) => {
+                    switch (value) {          
+                        case "yes":
+                            window.location.href = 'welcome_page.html';
+                            break;
+                    }
+                }); 
+            }
         } else {
-            // alert("Registration Successful!");
-            swal("Success!", "Thank you for registering!", "success");
-            window.location.href = 'welcome_page.html';
+            swal("Username already exist! Please choose a different one.")
         }
     }
 }

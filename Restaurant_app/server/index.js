@@ -46,13 +46,23 @@ app.post("/register", async (req, res) => {
     //this will encrypt the password once it is made
     console.log(`INSERT INTO userInfo VALUES('${userid}','${fullname}','${phone}','
       ${email}','${mailaddress}','${billaddress}','${point}');`);
-    const Todo = await pool.query(
-      `INSERT INTO userCredentials VALUES(${userid},'${user}',crypt('${pass}',gen_salt('bf')));`
-    );
-    const newTodo = await pool.query(
-      `INSERT INTO userInfo VALUES(${userid},'${fullname}','${phone}','${email}','${mailaddress}','${billaddress}','${point}');`
-    );
-    res.json(newTodo.rows);
+    const CheckExist = await pool.query(
+        `SELECT * FROM userCredentials WHERE loginID = '${user}';`
+      );
+    if(CheckExist.rows == null){
+      const Todo = await pool.query(
+        `INSERT INTO userCredentials VALUES(${userid},'${user}',crypt('${pass}',gen_salt('bf')));`
+      );
+      const newTodo = await pool.query(
+        `INSERT INTO userInfo VALUES(${userid},'${fullname}','${phone}','${email}','${mailaddress}','${billaddress}','${point}');`
+      );
+      
+      res.json(newTodo.rows);
+    } else {
+      console.log(CheckExist.rowCount);
+      res.json(CheckExist.rowCount);
+    }
+    
   } catch (err) {
     console.error(err.message);
   }
