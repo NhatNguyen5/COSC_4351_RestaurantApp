@@ -60,29 +60,29 @@ async function insertUserCred() {
             console.log(err.message);
         }
         if(data == 0){
-            var resAReg = true;
             if (localStorage.getItem("fname") != null) {
-                // alert("Registration Successful!");
-                swal("Success!", "Thank you for registering!", "success", {
-                    buttons: {
-                        yes: "Confirm"
-                    },
-                })
-                .then((value) => {
-                    switch (value) {          
-                        case "yes":
-                            resAReg = false;
-                            reservationAfterReg();
-                            break;
-                    }
-                }); 
-            } 
-            if(resAReg) {
                 // alert("Registration Successful!");
                 swal("Success!", "Thank you for registering!\nReservation has been put under new user account.", "success", {
                     buttons: {
                         yes: "Confirm"
                     },
+                    closeOnClickOutside: false
+                })
+                .then((value) => {
+                    switch (value) {          
+                        case "yes":
+                            reservationAfterReg();
+                            break;
+                    }
+                }); 
+            } 
+            if(localStorage.getItem("fname") == null) {
+                // alert("Registration Successful!");
+                swal("Success!", "Thank you for registering!", "success", {
+                    buttons: {
+                        yes: "Confirm"
+                    },
+                    closeOnClickOutside: false
                 })
                 .then((value) => {
                     switch (value) {          

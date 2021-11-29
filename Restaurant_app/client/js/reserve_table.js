@@ -83,13 +83,14 @@ async function reservedTablePost() {
     try {
         if (localStorage.getItem("userID") == '1') {
             // let registerAsk = confirm("Reservation Successful! \n\nCREATE AN ACCOUNT WITH US FOR POINTS AND DISCOUNT?")
-            swal("YOU WILL BE CHARGE $10! Are you sure you want to cancel?", {
+            swal("???", {
                 title: "Reservation Successful!",
                 text: "CREATE AN ACCOUNT WITH US FOR POINTS AND DISCOUNT?",
                 buttons: {
                     yes: "Yes",
                     no: "No",
                 },
+                closeOnClickOutside: false
             })
             .then((value) => {
                 switch (value) {          
@@ -156,13 +157,14 @@ async function reservedTablePost() {
             // } else {
             //     window.location.href = 'profile_page.html';
             // }
-            swal("YOU WILL BE CHARGE $10! Are you sure you want to cancel?", {
+            swal("???", {
                 title:"Reservation Successful!",
                 text:"Do you want to log out?",
                 buttons: {
                     yes: "Yes",
                     no: "No",
                 },
+                closeOnClickOutside: false
             })
             .then((value) => {
                 switch (value) {          

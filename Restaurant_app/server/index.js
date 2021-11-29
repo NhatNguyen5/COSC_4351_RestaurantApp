@@ -105,10 +105,10 @@ app.post("/cancelRes", async (req, res) => {
   try {
     console.log(req.body);
     console.log(
-      `DELETE FROM reservation WHERE reservation.reservationID = '${resID}' AND reservation.email = '${emailID}'`
+      `DELETE FROM reservation WHERE reservationID = '${resID}' AND email = '${emailID}'`
     );
     const cancel = await pool.query(
-      `DELETE FROM reservation WHERE reservation.reservationID = '${resID}' AND reservation.email = '${emailID}'; `
+      `DELETE FROM reservation WHERE reservationID = '${resID}' AND email = '${emailID}'; `
     );
     res.json(cancel.rows);
   } catch (err) {
@@ -121,10 +121,10 @@ app.post("/cancelUserRes", async (req, res) => {
   try {
     console.log(req.body);
     console.log(
-      `DELETE FROM reservation WHERE reservation.reservationID = '${resID}'`
+      `DELETE FROM reservation WHERE reservationID = '${resID}'`
     );
     const cancel = await pool.query(
-      `DELETE FROM reservation WHERE reservation.reservationID = '${resID}'; `
+      `DELETE FROM reservation WHERE reservationID = '${resID}'; `
     );
     res.json(cancel.rows);
   } catch (err) {

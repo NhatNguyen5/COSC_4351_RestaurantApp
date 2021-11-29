@@ -50,6 +50,8 @@ async function cancelRes(resDataIndex) {
                 yes: "Yes",
                 no: "No",
             },
+            closeOnClickOutside: false
+
         })
         .then((value) => {
             switch (value) {          
@@ -69,6 +71,8 @@ async function cancelRes(resDataIndex) {
                 yes: "Yes",
                 no: "No",
             },
+            closeOnClickOutside: false
+
         })
         .then((value) => {
             switch (value) {
