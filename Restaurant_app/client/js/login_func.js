@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 var uid = findLastUID();
 
 if (document.URL.includes('register_page.html')) {
@@ -81,7 +79,7 @@ async function insertUserCred() {
             } 
             if(resAReg) {
                 // alert("Registration Successful!");
-                swal("Success!", "Thank you for registering!", "success", {
+                swal("Success!", "Thank you for registering!\nReservation has been put under new user account.", "success", {
                     buttons: {
                         yes: "Confirm"
                     },

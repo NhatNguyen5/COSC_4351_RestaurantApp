@@ -49,7 +49,7 @@ app.post("/register", async (req, res) => {
     const CheckExist = await pool.query(
         `SELECT * FROM userCredentials WHERE loginID = '${user}';`
       );
-    if(CheckExist.rows == null){
+    if(CheckExist.rowCount == 0){
       const Todo = await pool.query(
         `INSERT INTO userCredentials VALUES(${userid},'${user}',crypt('${pass}',gen_salt('bf')));`
       );
